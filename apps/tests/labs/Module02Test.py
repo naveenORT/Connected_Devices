@@ -1,41 +1,30 @@
 import unittest
+from labs.module02.TempSensorEmulatorTask import temperaturegen
+from labs.module02.SmtpClientConnector import smtpconnect
+import random
+from labs.common.SensorData import SensorData
+from sre_compile import isstring
 
-
-"""
-Test class for all requisite Module02 functionality.
-
-Instructions:
-1) Rename 'testSomething()' method such that 'Something' is specific to your needs; add others as needed, beginning each method with 'test...()'.
-2) Add the '@Test' annotation to each new 'test...()' method you add.
-3) Import the relevant modules and classes to support your tests.
-4) Run this class as unit test app.
-5) Include a screen shot of the report when you submit your assignment.
-
-Please note: While some example test cases may be provided, you must write your own for the class.
-"""
 class Module02Test(unittest.TestCase):
-
-	"""
-	Use this to setup your tests. This is where you may want to load configuration
-	information (if needed), initialize class-scoped variables, create class-scoped
-	instances of complex objects, initialize any requisite connections, etc.
-	"""
-	def setUp(self):
-		pass
-
-	"""
-	Use this to tear down any allocated resources after your tests are complete. This
-	is where you may want to release connections, zero out any long-term data, etc.
-	"""
-	def tearDown(self):
-		pass
+	smtp_object = smtpconnect()    
+	data_object = SensorData()
 	
-	"""
-	Place your comments describing the test here.
-	"""
-	def testSomething(self):
-		pass
+	def setUp(self):	
+		x = temperaturegen.getSensorData(self)
+		self.data_object.addValue(x)
+	
+	def testgeneratedtemperature(self):
+		self.assertTrue(temperaturegen.getSensorData(self) >= 0.0 and temperaturegen.getSensorData(self) <= 30.0  , "Not in RANGE")
+		self.assertTrue(isinstance(temperaturegen.getSensorData(self), int), "Its not a Integer ")
+
+	def testsendmail(self):
+		message = ("Current Value:", self.data_object.getcurvalue(),
+           			"Average Value:", self.data_object.getavgvalue() ,
+             				"Samples:", self.data_object.getsamplecount() ,
+           	   							"Min:", self.data_object.getminvalue() ,
+           	      								"Max:", self.data_object.getcurvalue())
+		y = str(message)
+		self.assertTrue(isstring(y))
 
 if __name__ == "__main__":
-	#import sys;sys.argv = ['', 'Test.testName']
-	unittest.main()
+	unittest.main()  
