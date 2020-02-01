@@ -4,10 +4,11 @@ Created on Jan 23, 2020
 '''
 from datetime import datetime 
 import logging
+
   
 class SensorData():
     
-    timeStamp = None
+    timeStamp = None  # Initializing the parameters
     name = 'Not set'
     curValue = 0
     avgValue = 0
@@ -17,7 +18,7 @@ class SensorData():
     sampleCount = 0
      
     def __init__(self):
-        self.timeStamp = str(datetime.now())
+        self.timeStamp = str(datetime.now())  # Constructor
     
     def addValue(self, newVal):
         self.sampleCount += 1
@@ -25,16 +26,16 @@ class SensorData():
         self.curValue = newVal
         self.totValue += newVal
     
-        if (self.curValue < self.minValue):
+        if (self.curValue < self.minValue):  # Assign Minimum Temperature Value
             self.minValue = self.curValue
         
-        if (self.curValue > self.maxValue):
+        if (self.curValue > self.maxValue):  # Assign Maximum Temperature Value
             self.maxValue = self.curValue
         
-        if (self.totValue != 0 and self.sampleCount > 0):
+        if (self.totValue != 0 and self.sampleCount > 0):  # Computing Average Value
             self.avgValue = self.totValue / self.sampleCount
 
-        curValue = "curValue = " + str(self.curValue) 
+        curValue = "curValue = " + str(self.curValue)  # converting all parameters to string type 
         avgValue = "avgValue = " + str(self.avgValue)
         minValue = "minValue =" + str(self.minValue)
         maxValue = "maxValue =" + str(self.maxValue)
@@ -42,6 +43,7 @@ class SensorData():
         sampleCount = "sample count =" + str(self.sampleCount)
         
         logging.info('\n')
+        logging
         logging.info(curValue)        
         logging.info(avgValue)
         logging.info(minValue)
@@ -66,3 +68,6 @@ class SensorData():
     
     def getsamplecount(self):
         return self.sampleCount
+    
+    def gettimestamp(self):
+        return self.timeStamp

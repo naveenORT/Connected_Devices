@@ -9,30 +9,25 @@ import time
 import threading
 import logging
 
+
 class temperaturegen(threading.Thread):
    
     data_object = SensorData()
     
     def __init__(self, max_sample, alertDiff):
-        threading.Thread.__init__(self)
+        threading.Thread.__init__(self)  # Invoking Thread Function
         self.setDaemon(True)
         self.max_sample = max_sample
         self.alertDiff = alertDiff
     
     def getSensorData(self):
-        return random.randrange(0, 30, 1)
+        return random.randrange(0, 30, 1)  # Generating Temperature Values with frequency of 1
 
-    def sendNotification(self):
+    def sendNotification(self):  # Function to Publish Alerts As Mail
         
         smtp_object = smtpconnect()    
-        message = ("Current Value:", self.data_object.getcurvalue(),  
-                   "Average Value:", self.data_object.getavgvalue() , 
-                   "Samples:",       self.data_object.getsamplecount() ,  
-                   "Min:",           self.data_object.getminvalue() , 
-                   "Max:",           self.data_object.getcurvalue())
-        
-        smtp_object.publishMessage("Temperature Alert:", message)
-        
+        message = "\n Time Recorded : " + (str)((self.data_object.gettimestamp())) + "\n Current : " + (str)(self.data_object.getcurvalue()) + "\n Average : " + (str)(self.data_object.getavgvalue()) + "\n Samples : " + (str)(self.data_object.getsamplecount()) + "\n Minimum : " + (str)(self.data_object.getminvalue()) + "\n Maximum : " + (str)(self.data_object.getcurvalue())
+        smtp_object.publishMessage("Temperature Alert", message)
     
     def run(self):
         
@@ -41,7 +36,7 @@ class temperaturegen(threading.Thread):
             emulated_temperature = self.getSensorData() 
             self.data_object.addValue(emulated_temperature)
             
-            if (abs(self.data_object.curValue - self.data_object.avgValue) >= self.alertDiff):
+            if (abs(self.data_object.curValue - self.data_object.avgValue) >= self.alertDiff): #Checking for Deviation
                 logging.info('\n Current temp exceeds average by > ' + str(self.alertDiff) + '. Triggering alert...')
                 self.sendNotification()
             time.sleep(3)
