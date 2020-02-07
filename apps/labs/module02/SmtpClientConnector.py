@@ -18,7 +18,7 @@ class smtpconnect():
 
     def __init__(self):               
         self.config = ConfigUtil(r"C:\Users\Naveen Rajendran\Desktop\MS COURSE\CSYE-6530 CONNECTED DEVICES WORKSPACE\iot-device\apps\labs\common\ConnectedDevicesConfig.props")
-        logging.info('Configuration data...\n' + str(self.config.config.sections()))  # Constructor loading config properties from the file
+        logging.info('Configuration data...\n' + '\n' +str(self.config.config.sections()))  # Constructor loading config properties from the file
     
     def publishMessage(self, topic, data):  # Publishing Mail Via SMTP
         self.host = self.config.getValues("smtp.cloud", "host")
@@ -34,15 +34,16 @@ class smtpconnect():
         self.msgBody = " Present Status!!! " + str(data)
         msg.attach(MIMEText(self.msgBody, "plain"))
       
-        logging.info(self.host)      
+              
         # send e-mail notification
         smtpServer = smtplib.SMTP_SSL(self.host, port)  # Creating SMTP server
         smtpServer.ehlo()
         smtpServer.login(self.fromAddr, authToken)  # Authentication
         msgText = msg.as_string()  # Converting to String
         smtpServer.sendmail(self.fromAddr, self.toAddr, msgText)  # Send Mail
+        logging.info("\n Successfully mailed alert from address " + self.fromAddr)
         smtpServer.close()
-     
+        
     def getfromAddr(self):       
          return self.fromAddr
 
