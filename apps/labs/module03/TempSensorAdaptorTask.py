@@ -22,7 +22,7 @@ class TempSensorAdaptorTask(threading.Thread):
     
     def getSensorData(self):
         
-        t_f_humidity = self.sense_hat.get_temperature_from_humidity()
+        t_f_humidity = sense_hat.get_temperature_from_humidity()
         cpu = self.get_cpu_temp()
         pres = sense_hat.get_pressure()
         hum = sense_hat.get_humidity()
@@ -41,7 +41,7 @@ class TempSensorAdaptorTask(threading.Thread):
     
     def run(self):    
         while TempSensorAdaptorTask.isDaemon(self):    
-            environment_temperature = self.getdata()
+            environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)
             time.sleep(2)
             self.max_sample -= 1        
