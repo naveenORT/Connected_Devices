@@ -25,7 +25,7 @@ class ConfigUtil:
     def loadConfig(self, path):  # Function to load config properties from the file
         try:
             if self.hasConfig():
-                self.config.read(path)
+                self.config.read(path, encoding = None)
             else:    
                 self.config.read(self.default_dir)
         except:
