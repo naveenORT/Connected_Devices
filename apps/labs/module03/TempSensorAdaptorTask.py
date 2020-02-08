@@ -30,9 +30,9 @@ class TempSensorAdaptorTask(threading.Thread):
     
     def run(self):    
         while TempSensorAdaptorTask.isDaemon(self):    
-            environment_temperature = self.getSensorData
+            environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)
-            time.sleep(2)
+            time.sleep(5)
             self.max_sample -= 1        
             
             if self.max_sample == 0:

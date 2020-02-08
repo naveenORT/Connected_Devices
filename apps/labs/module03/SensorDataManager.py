@@ -14,7 +14,7 @@ class SensorDataManager(threading.Thread):
         SensorDataManager.setDaemon(self,True)
     
     def trigger_notification(self):
-        if (abs(data_object.getcurvalue() - data_object.getavgvalue()) > 5):        
+        if (data_object.getavgvalue() >= 20):        
             self.sendNotification() 
 
     def sendNotification(self):  # Function to Publish Alerts As Mail
@@ -26,4 +26,4 @@ class SensorDataManager(threading.Thread):
         while SensorDataManager.is_alive(self):
             self.trigger_notification()
             #TempActuatorAdaptor(data_object)                
-            time.sleep(2)
+            time.sleep(1)
