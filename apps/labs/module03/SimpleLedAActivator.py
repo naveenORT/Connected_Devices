@@ -13,7 +13,7 @@ class SimpleLedActivator():
     led_glow = SenseHat()
     rate_in_sec =''
     on_led = ''
-        
+    count = 2    
     def __init__(self,time):
         self.rate_in_sec = time
         self.on_led = True
@@ -36,9 +36,9 @@ class SimpleLedActivator():
             ]
             
             # Display these colours on the LED matrix
-            self.led_glow.set_pixels(creeper_pixels)        
-            self.rate_in_sec =- 1
+            self.led_glow.clear()        
             sleep(self.rate_in_sec)
+            self.rate_in_sec =- 1
             if self.rate_in_sec == 0:
                 self.led_glow.clear()
                 self.on_led = False    
@@ -61,10 +61,10 @@ class SimpleLedActivator():
             ]
             
             # Display these colours on the LED matrix
-            self.led_glow.set_pixels(creeper_pixels)        
-            self.rate_in_sec =- 1
+            self.led_glow.clear()        
             sleep(self.rate_in_sec)
-            if self.rate_in_sec == 0:
+            count =- 1
+            if count == 0:
                 self.led_glow.clear()
                 self.on_led = False
 

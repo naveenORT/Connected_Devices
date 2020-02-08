@@ -43,7 +43,6 @@ class SensorData():
         sampleCount = "sample count =" + str(self.sampleCount)
         
         logging.info('\n')
-        logging
         logging.info(curValue)        
         logging.info(avgValue)
         logging.info(minValue)
