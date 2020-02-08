@@ -8,6 +8,7 @@ import threading
 import logging
 import time
 import random
+import os
 
 data_object = SensorData()
 sense_hat = SenseHat()   
@@ -22,7 +23,7 @@ class TempSensorAdaptorTask(threading.Thread):
     def getSensorData(self):
         
         t_f_humidity = self.sense_hat.get_temperature_from_humidity()
-        cpu = sense_hat.get_cpu_temp()
+        cpu = self.get_cpu_temp()
         pres = sense_hat.get_pressure()
         hum = sense_hat.get_humidity()
         # calculates the real temperature compensating CPU heating
@@ -30,6 +31,11 @@ class TempSensorAdaptorTask(threading.Thread):
         print("t_f_humidity=%.1f  cpu=%.1f  correct_temp=%.1f  hum=%d  pres=%d" % (t_f_humidity, cpu, correct_temp, round(hum), round(pres)))
         return  correct_temp    # Generating Temperature Values with frequency of 1
 
+    def get_cpu_temp(self):
+        res = os.popen("vcgencmd measure_temp").readline()
+        t = float(res.replace("temp=","").replace("'C\n",""))
+        return(t)
+    
     def getdata(self):
         return random.randrange(0, 30, 1)  # Generating Temperature Values with frequency of 1
     
