@@ -25,5 +25,5 @@ class SensorDataManager(threading.Thread):
     def run(self):
         while SensorDataManager.is_alive(self):
             self.trigger_notification()
-            #TempActuatorAdaptor(data_object)                
+            TempActuatorAdaptor(data_object)                
             time.sleep(1)

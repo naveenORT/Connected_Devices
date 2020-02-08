@@ -14,14 +14,14 @@ class TempActuatorAdaptor():
     
     def trigger_actuation(self,data_object):        
         
-        if  (data_object.getcurvalue() < data_object.getavgvalue()):   
+        if  (data_object.getcurvalue() < 20):   
             self.actuator_status = ActuatorData("Increase Temperature",data_object.getcurvalue)
             x = self.actuator_status.get_current_actuator_status();
             logging.info(x)
             high = SimpleLedActivator(3)
-            high.setRED()
+            high.setBLUE()
         
-        if  (data_object.getcurvalue() > data_object.getavgvalue()):
+        if  (data_object.getcurvalue() > 20):
             self.actuator_status = ActuatorData("Decrease Temperature",data_object.getcurvalue)
             y = self.actuator_status.get_current_actuator_status();
             logging.info(y)
