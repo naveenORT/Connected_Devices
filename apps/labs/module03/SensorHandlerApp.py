@@ -8,12 +8,11 @@ from labs.module03.SensorDataManager import SensorDataManager
 
 def main():    
     
-  
-    alarm_trigger = SensorDataManager()  
-    alarm_trigger.start()
-    
     temp_sensor_object = TempSensorAdaptor()    
     temp_sensor_object.start()
+    
+    alarm_trigger = SensorDataManager()  
+    alarm_trigger.start()
     
     while True:
         pass

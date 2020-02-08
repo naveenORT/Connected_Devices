@@ -10,7 +10,7 @@ from sense_hat import SenseHat
 
 class SimpleLedActivator():
     
-    led_glow =SenseHat()
+    led_glow = SenseHat()
     rate_in_sec =''
     on_led = ''
         
