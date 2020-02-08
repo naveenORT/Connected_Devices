@@ -1,6 +1,6 @@
 '''
 Created on Feb 6, 2020
-@author: Naveen Rajendran
+@author: Naveen Rajendra
 '''
 import threading
 import time 
