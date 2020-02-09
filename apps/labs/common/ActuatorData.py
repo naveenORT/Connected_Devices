@@ -9,18 +9,16 @@ import logging
 
 class ActuatorData():
     
-    def __init__(self, input_command, input_value):
+    def __init__(self, input_command, sensor_value):
         
-        self.timeStamp = str(datetime.now())  # Constructor
-    
-        self.value = input_value
-            
+        timeStamp = str(datetime.now())  # Constructor    
+        self.value = sensor_value
         self.set_command(input_command)
-        
         self.set_current_actuator_status(input_command)
         
-        logging.info("\n Current Value is=" + str(self.value) + "\n Command is=" + str(self.get_command()) + "\n Current Status" 
-                     +str(self.get_current_actuator_status()))
+        logging.info("Current Value is =" + str(self.getValue()))
+        logging.info("Input Command ="+self.get_command()) 
+                 
     
     def get_command(self):
         return self.command
@@ -43,8 +41,9 @@ class ActuatorData():
     def set_current_actuator_status(self, command):
         
         if command == "Increase Temperature":
-            self.status = self.set_current_actuator_status("RED")
+            self.status = "RED"
         
         if command == "Decrease Temperature":    
-            self.status = self.set_current_actuator_status("BLUE")
-    
+            self.status = "BLUE"
+        
+        logging.info( "Current actuator Status = " + str(self.get_current_actuator_status()))

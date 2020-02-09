@@ -9,7 +9,6 @@ import logging
 import time
 import random
 
-
 data_object = SensorData()
 sense_hat = SenseHat()   
 
@@ -31,7 +30,7 @@ class TempSensorAdaptorTask(threading.Thread):
         while TempSensorAdaptorTask.isDaemon(self):    
             environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)
-            time.sleep(5)
+            time.sleep(3)
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return

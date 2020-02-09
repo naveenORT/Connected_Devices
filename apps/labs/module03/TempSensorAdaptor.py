@@ -16,5 +16,4 @@ class TempSensorAdaptor(threading.Thread):
         threading.Thread.__init__(self)
         sensor_object = TempSensorAdaptorTask(20)
         sensor_object.start()                      #Starting Threaded Class Object
-        while True:
-            pass
+        
