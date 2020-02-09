@@ -1,19 +1,19 @@
 '''
 Created on Feb 6, 2020
-
 @author: Naveen Rajendran
 '''
 from labs.common.ActuatorData import ActuatorData
 from labs.module03.SimpleLedAActivator import SimpleLedActivator
 import logging
-
 from labs.module03.TempSensorAdaptorTask import data_object
 
 class TempActuatorAdaptor():
     
     def __init__(self):
         logging.info("Actuation")     
-        if  (10 < data_object.getcurvalue() < 20):
+	x=SimpleLedActivator()
+	x.default_led()
+        if  (data_object.getcurvalue() < 20):
             self.actuator_status = ActuatorData("Increase Temperature",data_object.getcurvalue())
             high = SimpleLedActivator(3)
             high.setBLUE()
