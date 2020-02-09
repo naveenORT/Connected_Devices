@@ -15,7 +15,6 @@ class ActuatorData():
         self.value = sensor_value
         self.set_command(input_command)
         self.set_current_actuator_status(input_command)
-        
         logging.info("Current Value is =" + str(self.getValue()))
         logging.info("Input Command ="+self.get_command()) 
                  

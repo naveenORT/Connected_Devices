@@ -21,7 +21,7 @@ class SimpleLedActivator():
     
     def setRED(self):
         
-        time.sleep(1.5)
+        
         r = (255, 0, 0)  # rreen
         b = (0, 0, 0)  # Black    
         # Set up where each colour will display
@@ -42,7 +42,7 @@ class SimpleLedActivator():
         
     def setBLUE(self):    
                     
-        bl = (0, 0, 255)  # rreen
+        bl = (0, 0, 255)  # green
         b = (0, 0, 0)  # Black
         # Set up where each colour will display
         creeper_pixels = [
