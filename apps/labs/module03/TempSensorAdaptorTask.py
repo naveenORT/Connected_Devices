@@ -20,7 +20,7 @@ class TempSensorAdaptorTask(threading.Thread):
         self.max_sample = max_sample
     
     def getSensorData(self):
-        correct_temp = sense_hat.get_temperature_from_pressure()
+        correct_temp = sense_hat.get_temperature_from_humidity()
         return  correct_temp    # Generating Temperature Values with frequency of 1
 
     def getdata(self):
