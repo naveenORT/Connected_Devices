@@ -11,7 +11,7 @@ class TempActuatorAdaptor():
     
     def __init__(self):
         logging.info("Actuation")     
-        x = SimpleLedActivator()
+        x = SimpleLedActivator(3)
         x.default_led()
         if  (data_object.getcurvalue() < 20):
             self.actuator_status = ActuatorData("Increase Temperature",data_object.getcurvalue())
