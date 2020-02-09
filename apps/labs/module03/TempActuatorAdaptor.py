@@ -14,14 +14,14 @@ class TempActuatorAdaptor():
         if  (data_object.getcurvalue() < 20):
             self.actuator_status = ActuatorData("Increase Temperature",data_object.getcurvalue())
             high = SimpleLedActivator(3)
-            high.setBLUE()
+            high.setRED(                        )
             high.default_led()
             return
         if  (data_object.getcurvalue() > 20):
             self.actuator_status = ActuatorData("Decrease Temperature",data_object.getcurvalue())
             y = self.actuator_status.get_current_actuator_status();
             low = SimpleLedActivator(3)
-            low.setRED()
+            low.setBLUE()
             low.default_led()
             return
         else:

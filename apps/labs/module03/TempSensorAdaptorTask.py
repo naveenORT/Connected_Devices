@@ -24,7 +24,7 @@ class TempSensorAdaptorTask(threading.Thread):
         t2 = sense_hat.get_temperature_from_pressure()
     
         # calculates the real temperature compesating CPU heating
-        t = ((t1 + t2))/ 2
+        t = ((t1))/ 2
         return  t  # Generating Temperature Values with frequency of 1
 
     def getdata(self):
