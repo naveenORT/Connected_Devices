@@ -60,6 +60,6 @@ class SimpleLedActivator():
         return
 
     def default_led(self):
-        self.led_glow.clear((0, 0, 0))
+        self.led_glow.clear((255, 255, 255))
         return
 
