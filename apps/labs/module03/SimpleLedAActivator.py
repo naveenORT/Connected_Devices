@@ -9,6 +9,7 @@ from sense_hat import SenseHat
 import logging
 import time
 
+
 class SimpleLedActivator():
     rate_in_sec = ''
     on_led = ''
@@ -17,11 +18,10 @@ class SimpleLedActivator():
     def __init__(self, time):
         self.rate_in_sec = time
         self.on_led = True
-        self.led_glow = SenseHat()
-    
+        self.led_glow = SenseHat()           
+      
     def setRED(self):
-        
-        
+       
         r = (255, 0, 0)  # rreen
         b = (0, 0, 0)  # Black    
         # Set up where each colour will display
@@ -61,5 +61,6 @@ class SimpleLedActivator():
         return
 
     def default_led(self):
-        self.led_glow.clear((0,0,0))
+        self.led_glow.clear((0, 0, 0))
         return
+
