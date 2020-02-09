@@ -7,6 +7,7 @@ import time
 from labs.module02.SmtpClientConnector import smtpconnect
 from labs.module03.TempSensorAdaptorTask import data_object
 from labs.module03.TempActuatorAdaptor import TempActuatorAdaptor
+
 class SensorDataManager(threading.Thread):
     
     def __init__(self):

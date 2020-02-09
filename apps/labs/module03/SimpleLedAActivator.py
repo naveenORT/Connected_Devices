@@ -9,7 +9,6 @@ from sense_hat import SenseHat
 import logging
 import time
 
-
 class SimpleLedActivator():
     rate_in_sec = ''
     on_led = ''
@@ -37,7 +36,7 @@ class SimpleLedActivator():
         ]
         # Display these colours on the LED matrix
         self.led_glow.set_pixels(creeper_pixels)         
-        time.sleep(1.5)
+        time.sleep(0.5)
         return
         
     def setBLUE(self):    
@@ -57,7 +56,7 @@ class SimpleLedActivator():
         ]
         # Display these colours on the LED matrix
         self.led_glow.set_pixels(creeper_pixels)                                           
-        time.sleep(1.5)
+        time.sleep(0.5)
         return
 
     def default_led(self):
