@@ -6,43 +6,87 @@ Created on Feb 6, 2020
 from datetime import datetime 
 import logging
 
+"""
+* This python class module records or logs condition of Actuator as per the input command given by user at origin
+* This class gets updated whenever a new value from sensor is obtained
+"""
+
 
 class ActuatorData():
     
-    def __init__(self, input_command, sensor_value):
-        
-        timeStamp = str(datetime.now())  # Constructor    
-        self.value = sensor_value
-        self.set_command(input_command)
-        self.set_current_actuator_status(input_command)
-        logging.info("Current Value is =" + str(self.getValue()))
-        logging.info("Input Command ="+self.get_command()) 
-                 
+    """
+    Default Constructor of ActuatorData class, notifies user via log message before an actuation is done
+    """
+
+    def __init__(self):
+        logging.info("Going to Perform an Actuation")  # log status to notify actuation
     
+    """
+    This class function receives the input_command, sensor_value and sensor_name & sets the state of actuator based on input_command
+    given by user
+    """
+
+    def addData(self, input_command, sensor_value, sensor_name):
+        
+        self.value = sensor_value  # Store Sensor Value
+        self.setName(sensor_name)  # Store Sensor Name
+        self.set_command(input_command)  # Setting input command
+        self.set_current_actuator_status(input_command)  # Setting actuator status
+        logging.info("Current Value is =" + str(self.getValue()))
+        logging.info("Input Command =" + self.get_command()) 
+                   
+    """               
+    Standard getter function for command
+    """
+
     def get_command(self):
         return self.command
    
+    """               
+    Standard getter function for sensor_name
+    """
+
     def getName(self):
         return self.sensor_name
     
+    """               
+    Standard getter function for sensor_value
+    """
+
     def getValue(self):
         return self.value
     
+    """               
+    Standard getter function for sensor_value
+    """
+
     def get_current_actuator_status(self):
         return self.status
      
+    """               
+    Standard setter function for sensor_name
+    """
+
     def setName(self, name):   
         self.sensor_name = name
         
+    """               
+    Standard setter function for input_command
+    """
+
     def set_command(self, input_command):
         self.command = input_command
     
+    """               
+    Standard setter function for actuator_status
+    """
+
     def set_current_actuator_status(self, command):
         
         if command == "Increase Temperature":
-            self.status = "RED"
+            self.status = "RED"  # Set Status to RED
         
         if command == "Decrease Temperature":    
-            self.status = "BLUE"
+            self.status = "BLUE"  # Set Status to BLUE
         
-        logging.info( "Current actuator Status = " + str(self.get_current_actuator_status()))
+        logging.info("Current actuator Status = " + str(self.get_current_actuator_status()))

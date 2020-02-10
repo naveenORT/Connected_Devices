@@ -22,11 +22,9 @@ class TempSensorAdaptorTask(threading.Thread):
     def getSensorData(self):
         t1 = sense_hat.get_temperature_from_humidity()
         t2 = sense_hat.get_temperature_from_pressure()
+        c_temperature = ((t1 + t2)) / 2
+        return  c_temperature  
     
-        # calculates the real temperature compesating CPU heating
-        t = ((t1))/ 2
-        return  t  # Generating Temperature Values with frequency of 1
-
     def getdata(self):
         return random.randrange(0, 30, 1)  # Generating Temperature Values with frequency of 1
     
@@ -34,9 +32,8 @@ class TempSensorAdaptorTask(threading.Thread):
         while TempSensorAdaptorTask.isDaemon(self):    
             environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)
-            time.sleep(5)
+            time.sleep(4)
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
-
     

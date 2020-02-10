@@ -25,7 +25,7 @@ class ConfigUtilTest(unittest.TestCase):
 	
 	def testGetIntegerProperty(self):  # Test Function to check integer property
 		self.assertTrue(isinstance((int)(self.configobj.getValues("smtp.cloud", "port")), int), "Its not a float ")
-	
+		self.assertTrue(isinstance((int)(self.configobj.getValues("device", "nominalTemp")), int), "Its not a float ")
 	def testgetProperty(self):
 		self.assertTrue(self.configobj.getValues("smtp.cloud", "host"), "value does not exist")  # Test Function to Get Property
 		self.assertTrue(self.configobj.getValues("smtp.cloud", "port"), "value does not exist")
@@ -36,7 +36,8 @@ class ConfigUtilTest(unittest.TestCase):
 		self.assertTrue(self.configobj.getValues("smtp.cloud", "AuthToken"), "value does not exist")
 		self.assertTrue(self.configobj.getValues("smtp.cloud", "enableAuth"), "value does not exist")
 		self.assertTrue(self.configobj.getValues("smtp.cloud", "enableCrypt"), "value does not exist")
-	
+		self.assertTrue(self.configobj.getValues("device", "nominalTemp"), "value does not exist")
+
 	def testhasProperty(self):
 		self.assertTrue(self.hasproperty("port"), "property does not exist")  # Test function to check file has properties/not           
 		self.assertTrue(self.hasproperty("host"), "property does not exist")

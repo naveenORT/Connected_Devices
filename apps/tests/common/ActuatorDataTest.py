@@ -1,41 +1,48 @@
 import unittest
-
-
+from labs.common.ActuatorData import ActuatorData
+from labs.module03.TempSensorAdaptor import TempSensorAdaptor
+from labs.module03.SensorDataManager import SensorDataManager
+   
+from labs.module03.TempActuatorAdaptor import TempActuatorAdaptor
 """
-Test class for all requisite ActuatorData functionality.
-
-Instructions:
-1) Rename 'testSomething()' method such that 'Something' is specific to your needs; add others as needed, beginning each method with 'test...()'.
-2) Add the '@Test' annotation to each new 'test...()' method you add.
-3) Import the relevant modules and classes to support your tests.
-4) Run this class as unit test app.
-5) Include a screen shot of the report when you submit your assignment.
-
-Please note: While some example test cases may be provided, you must write your own for the class.
+*******************Module Description***************************************************************************
+This class checks for any errors in value processed or logged by ActuatorData class, which logs the actuator data.
+Inputs checked here includes command, sensor_name & actuator_status
+****************************************************************************************************************
 """
 class ActuatorDataTest(unittest.TestCase):
 
-	"""
-	Use this to setup your tests. This is where you may want to load configuration
-	information (if needed), initialize class-scoped variables, create class-scoped
-	instances of complex objects, initialize any requisite connections, etc.
-	"""
-	def setUp(self):
-		pass
-
-	"""
-	Use this to tear down any allocated resources after your tests are complete. This
-	is where you may want to release connections, zero out any long-term data, etc.
-	"""
-	def tearDown(self):
-		pass
+	'''
+	* Setting up the required classes for test, 
+	1.)TempSensorAdaptor - Senses the temperature value from environment
+	2.)SensorDataManager - Triggers mail_notification & Triggers Actuation
+	3.)TempActuatorAdaptor - Creates instance of ActuatorData class used to log actuator status 
+	'''
 	
-	"""
-	Place your comments describing the test here.
-	"""
-	def testSomething(self):
-		pass
+	def setUp(self):
+		self.temp_sensor_object = TempSensorAdaptor()
+		self.alarm_trigger = SensorDataManager() 
+		self.x = TempActuatorAdaptor()
+		self.y = self.x.getActuator_obj()
+	
+	'''
+	Gets the input of sensor name given by user & checks whether its string or not 
+	'''
+	def testSensorName(self):
+		self.assertTrue(isinstance(self.y.getName(), str), "Not a String") # Function to check sensor name is string or not
+	
+	'''
+	Gets the status_of_actuator from ActuatorData class & checks whether its string or not 
+	'''
+	def testActuatorStatus(self):
+		self.assertTrue(isinstance(self.y.get_current_actuator_status(), str), "Not a String") # Function to check actuator_status is string or not
+	
+	'''
+	Gets input command  from ActuatorData class & checks whether its string or not 
+	'''
+	def testCommand(self):	
+		self.assertTrue(isinstance(self.y.get_command(), str), "Not a String") # Function to check command is string or not
+
 
 if __name__ == "__main__":
-	#import sys;sys.argv = ['', 'Test.testName']
 	unittest.main()

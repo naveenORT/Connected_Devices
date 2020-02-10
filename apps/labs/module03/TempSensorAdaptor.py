@@ -8,12 +8,15 @@ import logging
 import threading
 import time
 
+
 class TempSensorAdaptor(threading.Thread):
    
     def __init__(self):
-        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',level=logging.INFO,datefmt='%Y-%m-%d %H:%M:%S')
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         logging.info("started logging")
         threading.Thread.__init__(self)
-        sensor_object = TempSensorAdaptorTask(20)
-        sensor_object.start()                      #Starting Threaded Class Object
+        self.sensor_object = TempSensorAdaptorTask(20)
+        self.sensor_object.start()  # Starting Threaded Class Object
         
+    def getSensorobj(self):
+        return self.sensor_object

@@ -11,7 +11,7 @@ class ConfigUtil:
     config = ConfigParser()
     default_dir = r"C:\Users\Naveen Rajendran\Desktop\MS COURSE\CSYE-6530 CONNECTED DEVICES WORKSPACE\iot-device\apps\labs\common\ConnectedDevicesConfig.prop"
 
-    def __init__(self, path):   #Constructor
+    def __init__(self, path):  # Constructor
         self.path = path
         self.loadConfig(path)
     
@@ -21,11 +21,11 @@ class ConfigUtil:
     def hasSection(self, sec_name):  # Function to check the existence of section
         if self.config.has_section(sec_name):
             return 1
-    
+        
     def loadConfig(self, path):  # Function to load config properties from the file
         try:
             if self.hasConfig():
-                self.config.read(path, encoding = None)
+                self.config.read(path, encoding=None)
             else:    
                 self.config.read(self.default_dir)
         except:

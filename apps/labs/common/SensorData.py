@@ -12,7 +12,7 @@ class SensorData():
     name = 'Not set'
     curValue = 0
     avgValue = 0
-    minValue = 0
+    minValue = 0 
     maxValue = 0
     totValue = 0
     sampleCount = 0
@@ -25,8 +25,11 @@ class SensorData():
         self.timeStamp = str(datetime.now())
         self.curValue = newVal
         self.totValue += newVal
-    
-        if (self.curValue < self.minValue):  # Assign Minimum Temperature Value
+        
+        if(self.sampleCount == 1):
+            self.minValue = self.curValue
+        
+        elif (self.curValue < self.minValue):  # Assign Minimum Temperature Value
             self.minValue = self.curValue
         
         if (self.curValue > self.maxValue):  # Assign Maximum Temperature Value
