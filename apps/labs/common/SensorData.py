@@ -10,11 +10,11 @@ class SensorData():
     
     timeStamp = None  # Initializing the parameters
     name = 'Not set'
-    curValue = 0
-    avgValue = 0
-    minValue = 0 
-    maxValue = 0
-    totValue = 0
+    curValue = 0.0
+    avgValue = 0.0
+    minValue = 0.0 
+    maxValue = 0.0
+    totValue = 0.0
     sampleCount = 0
      
     def __init__(self):
