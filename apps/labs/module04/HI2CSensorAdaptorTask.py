@@ -6,7 +6,7 @@ from labs.common.SensorData import SensorData
 from sense_hat import SenseHat
 import threading
 import time
-import smbus
+import smbus2
 import numpy as np
 import logging
 
@@ -16,7 +16,7 @@ class HI2CSensorAdaptorTask(threading.Thread):
     * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
     """       
     i2c_data_object = SensorData()
-    i2cBus = smbus.SMBus(1)    
+    i2cBus = smbus2.SMBus(1)    
     pressAddr = 0x5C  # address for pressure sensor
     humidAddr = 0x5F  # address for humidity sensor
     

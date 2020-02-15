@@ -47,7 +47,7 @@ class HumiditySensorAdaptorTask(threading.Thread):
             api_humidity = self.getSensorData()
             print(api_humidity)
             self.humidity_data_object.addValue(api_humidity)  # Logging sensor data
-            time.sleep(4)
+            time.sleep(3)
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
