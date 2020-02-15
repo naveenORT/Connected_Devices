@@ -6,12 +6,13 @@ from labs.module03.TempSensorAdaptorTask import TempSensorAdaptorTask
 from labs.module03.TempSensorAdaptorTask import data_object  
 import logging
 import threading
-"""
+'''
 ****************************************************Module Description**************************************************************
 * This module helps to start the thread of TempSensorAdaptorTask () class. Once TempSensorAdaptor object is created, a thread is 
    executed which helps in sensing environment temperature
 ************************************************************************************************************************************
-"""
+'''
+
 
 class TempSensorAdaptor(threading.Thread):
    
@@ -21,8 +22,10 @@ class TempSensorAdaptor(threading.Thread):
         threading.Thread.__init__(self)
         self.sensor_object = TempSensorAdaptorTask(20)
         self.sensor_object.start()  # Starting Threaded Class Object
-    """    
+
+    '''    
     Standard getter function to return the instance of TempSensorAdaptor
-    """
+    '''
+
     def getSensorobj(self):
         return self.sensor_object
