@@ -38,7 +38,7 @@ class SimpleLedActivator():
         text_colour = [0, 0, 0]
         back_colour = [255, 255, 255]
         text_string = "I2C VALUE" + i2c_humidity_value 
-        self.led_glow.show_message(text_string, 0.1, text_colour, back_colour)    
+        self.led_glow.show_letter(i2c_humidity_value, text_colour, back_colour)
     '''
     Public function to make Sense Hat LED'S glow BLUE colour
     '''    
@@ -47,8 +47,7 @@ class SimpleLedActivator():
         text_colour = [0, 0, 0]
         back_colour = [255, 0, 0]
         text_string = "API VALUE" + str(api_humidity_value) 
-        self.led_glow.show_message(text_string, 0.1, text_colour, back_colour)    
-
+        self.led_glow.show_letter(api_humidity_value, text_colour, back_colour)
     '''
     Default_LED colour (Pale White) when setBLUE or setRED function is not called
     '''
