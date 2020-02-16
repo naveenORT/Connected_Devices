@@ -34,12 +34,12 @@ class ActuatorData():
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
         
-        if(sensor_name == "Humidity api_Sensor"):
+        if(sensor_name == "Humidity_API"):
             self.set_current_actuator_status(input_command)
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
         
-        if(sensor_name == "Humidity i2c_Sensor"):
+        if(sensor_name == "Humidity_I2C"):
             self.set_current_actuator_status(input_command)
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
