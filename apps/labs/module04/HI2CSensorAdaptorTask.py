@@ -80,7 +80,7 @@ class HI2CSensorAdaptorTask(threading.Thread):
             time.sleep(4.5)
             i2c_humidity = self.getSensorData()
             i2c_data_object.addValue(i2c_humidity)  # Logging sensor data
-            print("Humidity value measured via i2c bus:" + i2c_humidity)
+            print("Humidity value measured via i2c bus:" + str(i2c_humidity))
             self.displayHumidityData()
             
             self.max_sample -= 1                    
