@@ -17,12 +17,15 @@ import random
 *************************************************************************************************************************************
 '''
 
+humidity_data_object = SensorData()  # class object
+
 
 class HumiditySensorAdaptorTask(threading.Thread):
     '''      
     * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
     '''       
-    humidity_data_object = SensorData()  # class object
+    
+    humidity_data_object.set_sensor_name("Humidity_API")
     sense_hat = SenseHat()  # class object
 
     def __init__(self, max_sample):
@@ -44,13 +47,13 @@ class HumiditySensorAdaptorTask(threading.Thread):
 
     def run(self):    
         while HumiditySensorAdaptorTask.isDaemon(self):    
+            time.sleep(5)
             api_humidity = self.getSensorData()
-            print(api_humidity)
-            self.humidity_data_object.addValue(api_humidity)  # Logging sensor data
-            time.sleep(3)
+            print ("Humidity Value from sense hat API:" , api_humidity) 
+            humidity_data_object.addValue(api_humidity)  # Logging sensor data
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
     
     def getApiSensorDataObject(self):               
-        return self.humidity_data_object
+        return humidity_data_object

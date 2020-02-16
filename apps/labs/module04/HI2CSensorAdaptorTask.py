@@ -10,12 +10,15 @@ import smbus2
 import numpy as np
 import logging
 
+i2c_data_object = SensorData()
+
 
 class HI2CSensorAdaptorTask(threading.Thread):
     """      
     * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
     """       
-    i2c_data_object = SensorData()
+    
+    i2c_data_object.set_sensor_name("Humidity_I2C")
     i2cBus = smbus2.SMBus(1)    
     pressAddr = 0x5C  # address for pressure sensor
     humidAddr = 0x5F  # address for humidity sensor
@@ -72,11 +75,10 @@ class HI2CSensorAdaptorTask(threading.Thread):
         o = [q, w, e, r, t, y, u, i]
         print("HUMIDITY BLOCK DATA ", o)
     
-    
     def run(self):    
         while HI2CSensorAdaptorTask.isDaemon(self):    
             i2c_humidity = self.getSensorData()
-            self.i2c_data_object.addValue(i2c_humidity)  # Logging sensor data
+            i2c_data_object.addValue(i2c_humidity)  # Logging sensor data
             print(i2c_humidity)
             self.displayHumidityData()
             time.sleep(4)
@@ -84,3 +86,5 @@ class HI2CSensorAdaptorTask(threading.Thread):
             if self.max_sample == 0:
                 return
     
+    def getI2Csensordataobject(self):
+        return i2c_data_object
