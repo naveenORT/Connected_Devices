@@ -47,7 +47,7 @@ class HumiditySensorAdaptorTask(threading.Thread):
 
     def run(self):    
         while HumiditySensorAdaptorTask.isDaemon(self):    
-            time.sleep(5)
+            time.sleep(4)
             api_humidity = self.getSensorData()
             print ("Humidity Value from sense hat API:" , api_humidity) 
             humidity_data_object.addValue(api_humidity)  # Logging sensor data
