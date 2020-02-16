@@ -44,8 +44,8 @@ class SimpleLedActivator():
     '''    
 
     def show_api_LED(self, api_humidity_value):    
-        text_colour = [0, 0, 0]
-        back_colour = [255, 0, 0]
+        text_colour = [0,0,255]
+        back_colour = [0,0,0]
         y = str(api_humidity_value)
         self.led_glow.show_message(y, 0.1, text_colour, back_colour)
     '''

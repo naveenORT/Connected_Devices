@@ -40,7 +40,7 @@ class MultiActuatorAdaptor():
         if  (i2c_data_object.getActuationStae() is True):
                 i2c_actuator_status = ActuatorData()
                 i2c_actuator_status.addData("i2c_inbound", i2c_data_object.getcurvalue(), "Humidity_I2C")  # logging actuator data
-                i2c_message = SimpleLedActivator()
+                i2c_message = SimpleLedActivator(10)
                 i2c_message.show_i2c_LED(i2c_data_object.getcurvalue())
                 return
             

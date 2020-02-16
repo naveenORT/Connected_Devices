@@ -5,7 +5,7 @@ Created on Feb 6, 2020
 from labs.module04.TempSensorAdaptorTask import TempSensorAdaptorTask
 from labs.module04.TempSensorAdaptorTask import data_object  
 from labs.module04.HumiditySensorAdaptorTask import HumiditySensorAdaptorTask
-# from labs.module04.HI2CSensorAdaptorTask import HI2CSensorAdaptorTask
+from labs.module04.HI2CSensorAdaptorTask import HI2CSensorAdaptorTask
 import logging
 import threading
 import time
@@ -21,12 +21,12 @@ class MultiSensorAdaptor(threading.Thread):
     
     def run(self):    
          
-        temp_sensor_object = TempSensorAdaptorTask(20)
-        temp_sensor_object.start()  # Starting Threaded Class Object
+        #temp_sensor_object = TempSensorAdaptorTask(20)
+        #temp_sensor_object.start()  # Starting Threaded Class Object
         humi_sensorAPI_object = HumiditySensorAdaptorTask(20)
         humi_sensorAPI_object.start()  # Starting Threaded Class Object
-        # humi_sensori2c_object = HI2CSensorAdaptorTask(20)
-        # humi_sensori2c_object.start()  # Starting Threaded Class Object
+        humi_sensori2c_object = HI2CSensorAdaptorTask(20)
+        humi_sensori2c_object.start()  # Starting Threaded Class Object
         time.sleep(10)
 
     def getSensorobj(self):
