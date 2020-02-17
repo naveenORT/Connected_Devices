@@ -3,7 +3,7 @@ from labs.module04.MultiSensorAdaptor import MultiSensorAdaptor
 from labs.module04.SensorDataManager import SensorDataManager
 from labs.module04.HI2CSensorAdaptorTask import i2c_data_object
 from labs.module04.HumiditySensorAdaptorTask import humidity_data_object
-
+import time
 
 class Module04Test(unittest.TestCase):
 
@@ -12,7 +12,7 @@ class Module04Test(unittest.TestCase):
 		self.msa.start()
 		self.sdm = SensorDataManager()
 		self.sdm.start()
-	
+		time.sleep(7)
 	def test_I2Csensordata(self):
 		self.assertTrue(isinstance(self.msa.geti2cobject().getSensorData(), float), "Not a float")
 
