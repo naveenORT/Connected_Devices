@@ -19,6 +19,7 @@ import random
 
 data_object = SensorData()  # class object
 sense_hat = SenseHat()  # class object
+
 class TempSensorAdaptorTask(threading.Thread):
     '''      
     * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
@@ -47,6 +48,7 @@ class TempSensorAdaptorTask(threading.Thread):
         while TempSensorAdaptorTask.isDaemon(self):    
             environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)  # Logging sensor data
+            data_object.set_sensor_name("Temperature Sensor")
             time.sleep(4)
             self.max_sample -= 1                    
             if self.max_sample == 0:
