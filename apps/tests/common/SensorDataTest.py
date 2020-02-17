@@ -21,7 +21,7 @@ class SensorDataTest(unittest.TestCase):
             msa.start()
             manager_object = SensorDataManager()
             manager_object.start()
-            time.sleep(6)
+            time.sleep(10)
             self.api_sensor_object = msa.getAPIobject().getApiSensorDataObject()   
             self.i2c_sensor_object = msa.geti2cobject().getI2Csensordataobject()
 
