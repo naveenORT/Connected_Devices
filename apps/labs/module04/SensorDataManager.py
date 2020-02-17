@@ -20,8 +20,9 @@ class SensorDataManager(threading.Thread):
         threading.Thread.__init__(self)    
     
     def run(self):    
+        time.sleep(4)
         while SensorDataManager.is_alive(self):
-            time.sleep(6)
+            time.sleep(3)
             self.trigger_actuation()            
             
 
