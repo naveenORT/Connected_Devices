@@ -26,10 +26,10 @@ class SensorDataManager(threading.Thread):
             self.trigger_actuation()            
     
     def trigger_actuation(self):
-            self.haa = MultiActuatorAdaptor()        
+            self.maa = MultiActuatorAdaptor()        
 
     def get_maaadaptor(self):   
-            return self.haa 
+            return self.maa 
         
     def handle_sensordata(self,SensorData):
         self.x = SensorData

@@ -35,4 +35,4 @@ class MultiSensorAdaptor(threading.Thread):
         return self.humi_sensori2c_object
     
     def getAPIobject(self):
-        return self.getAPIobject()
+        return self.humi_sensorAPI_object
