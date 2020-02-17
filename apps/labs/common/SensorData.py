@@ -41,22 +41,22 @@ class SensorData():
         if (self.totValue != 0 and self.sampleCount > 0):  # Computing Average Value
             self.avgValue = self.totValue / self.sampleCount
 
-        curValue = "curValue = " + str(self.curValue)  # converting all parameters to string type 
-        avgValue = "avgValue = " + str(self.avgValue)
-        minValue = "minValue =" + str(self.minValue)
-        maxValue = "maxValue =" + str(self.maxValue)
-        totValue = "totValue =" + str(self.totValue)
+        curValue = "curValue = " + str(round(self.curValue,2))  # converting all parameters to string type 
+        avgValue = "avgValue = " + str(round(self.avgValue,2))
+        minValue = "minValue =" + str(round(self.minValue,2))
+        maxValue = "maxValue =" + str(round(self.maxValue,2))
+        totValue = "totValue =" + str(round(self.totValue,2))
         sampleCount = "sample count =" + str(self.sampleCount)
         
         logging.info('\n')
         logging.info("-----------------------------------Values From =" + self.get_sensor_name()+ "---------------------------")
-        logging.info(round(curValue,2))        
-        logging.info(round(avgValue,2))
-        logging.info(round(minValue,2))
-        logging.info(round(maxValue,2))
-        logging.info(round(totValue,2))
+        logging.info(curValue)        
+        logging.info(avgValue)
+        logging.info(minValue)
+        logging.info(maxValue)
+        logging.info(totValue)
         logging.info(sampleCount)
-        logging.info("____________________________________________________________________________________________________")
+        logging.info("_____________________________________________________________________________________________")
     
         
    
