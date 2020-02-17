@@ -1,41 +1,35 @@
 import unittest
+from labs.module04.MultiSensorAdaptor import MultiSensorAdaptor
+from labs.module04.SensorDataManager import SensorDataManager
+from labs.module04.HI2CSensorAdaptorTask import i2c_data_object
+from labs.module04.HumiditySensorAdaptorTask import humidity_data_object
 
 
-"""
-Test class for all requisite Module04 functionality.
-
-Instructions:
-1) Rename 'testSomething()' method such that 'Something' is specific to your needs; add others as needed, beginning each method with 'test...()'.
-2) Add the '@Test' annotation to each new 'test...()' method you add.
-3) Import the relevant modules and classes to support your tests.
-4) Run this class as unit test app.
-5) Include a screen shot of the report when you submit your assignment.
-
-Please note: While some example test cases may be provided, you must write your own for the class.
-"""
 class Module04Test(unittest.TestCase):
 
-	"""
-	Use this to setup your tests. This is where you may want to load configuration
-	information (if needed), initialize class-scoped variables, create class-scoped
-	instances of complex objects, initialize any requisite connections, etc.
-	"""
 	def setUp(self):
-		pass
+		self.msa = MultiSensorAdaptor()
+		self.msa.start()
+		self.sdm = SensorDataManager()
+		self.sdm.start()
+	
+	def test_I2Csensordata(self):
+		self.assertTrue(isinstance(self.msa.geti2cobject().getSensorData(), float), "Not a float")
 
-	"""
-	Use this to tear down any allocated resources after your tests are complete. This
-	is where you may want to release connections, zero out any long-term data, etc.
-	"""
-	def tearDown(self):
-		pass
+	def test_APIsensordata(self):	
+		self.assertTrue(isinstance(self.msa.getAPIobject().getSensorData(), float), "Not a float")
 
-	"""
-	Place your comments describing the test here.
-	"""
-	def testSomething(self):
-		pass
+	def test_sensor_data_handler(self):
+		y = self.sdm.handle_sensordata(i2c_data_object)
+		z = self.sdm.handle_sensordata(humidity_data_object)
+		self.assertTrue(isinstance(y, bool), "Not a Boolean")
+		self.assertTrue(isinstance(z, bool), "Not a Boolean")
+
+	def test_update_actuator(self):
+		x = self.sdm.get_maaadaptor()
+		self.assertTrue(isinstance(x.update_Actuator(x.getapi_actobj()), bool), "Not Boolean")
+		self.assertTrue(isinstance(x.update_Actuator(x.geti2c_actobj()), bool), "Not Boolean")
+
 
 if __name__ == "__main__":
-	#import sys;sys.argv = ['', 'Test.testName']
 	unittest.main()
