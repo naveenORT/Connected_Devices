@@ -35,7 +35,7 @@ class ActuatorDataTest(unittest.TestCase):
 	'''
 
 	def testSensorName(self):
-		time.sleep(5)
+	
 		self.assertTrue(isinstance(self.x.getName(), str), "Not a String")  # Function to check sensor name is string or not
 		self.assertTrue(isinstance(self.y.getName(), str), "Not a String")  # Function to check sensor name is string or not
 
