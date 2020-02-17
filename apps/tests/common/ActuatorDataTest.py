@@ -34,7 +34,7 @@ class ActuatorDataTest(unittest.TestCase):
 	'''
 
 	def testSensorName(self):
-		time.sleep(3)
+		time.sleep(5)
 		self.assertTrue(isinstance(self.x.getName(), str), "Not a String")  # Function to check sensor name is string or not
 		self.assertTrue(isinstance(self.y.getName(), str), "Not a String")  # Function to check sensor name is string or not
 
@@ -43,7 +43,7 @@ class ActuatorDataTest(unittest.TestCase):
 	'''
 
 	def testActuatorStatus(self):
-		time.sleep(3)
+		time.sleep(5)
 		self.assertTrue(isinstance(self.x.get_current_actuator_status(), str), "Not a String")  # Function to check actuator_status is string or not
 		self.assertTrue(isinstance(self.y.get_current_actuator_status(), str), "Not a String")
 	'''
@@ -51,7 +51,7 @@ class ActuatorDataTest(unittest.TestCase):
 	'''
 
 	def testCommand(self):	
-		time.sleep(3)
+		time.sleep(5)
 		self.assertTrue(isinstance(self.x.get_command(), str), "Not a String")  # Function to check command is string or not
 		self.assertTrue(isinstance(self.y.get_command(), str), "Not a String")
 
