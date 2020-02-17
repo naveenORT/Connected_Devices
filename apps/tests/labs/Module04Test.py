@@ -27,6 +27,7 @@ class Module04Test(unittest.TestCase):
 		self.assertTrue(isinstance(z, bool), "Not a Boolean")
 
 	def test_update_actuator(self):
+		time.sleep(8)
 		x = self.sdm.get_maaadaptor()
 		self.assertTrue(isinstance(x.update_Actuator(x.getapi_actobj()), bool), "Not Boolean")
 		self.assertTrue(isinstance(x.update_Actuator(x.geti2c_actobj()), bool), "Not Boolean")
