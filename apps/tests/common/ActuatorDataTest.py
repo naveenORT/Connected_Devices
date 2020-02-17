@@ -23,9 +23,9 @@ class ActuatorDataTest(unittest.TestCase):
 	def setUp(self):
 		self.msa = MultiSensorAdaptor()
 		self.msa.start()
+		time.sleep(2)
 		self.manager_object = SensorDataManager()
 		self.manager_object.start()
-		time.sleep(10)
 		self.x = self.manager_object.get_maaadaptor().getapi_actobj()
 		self.y = self.manager_object.get_maaadaptor().getapi_actobj()
 
@@ -43,7 +43,6 @@ class ActuatorDataTest(unittest.TestCase):
 	'''
 
 	def testActuatorStatus(self):
-		time.sleep(5)
 		self.assertTrue(isinstance(self.x.get_current_actuator_status(), str), "Not a String")  # Function to check actuator_status is string or not
 		self.assertTrue(isinstance(self.y.get_current_actuator_status(), str), "Not a String")
 	'''
@@ -51,7 +50,6 @@ class ActuatorDataTest(unittest.TestCase):
 	'''
 
 	def testCommand(self):	
-		time.sleep(5)
 		self.assertTrue(isinstance(self.x.get_command(), str), "Not a String")  # Function to check command is string or not
 		self.assertTrue(isinstance(self.y.get_command(), str), "Not a String")
 
