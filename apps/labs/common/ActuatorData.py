@@ -28,7 +28,7 @@ class ActuatorData():
 
     def addData(self, input_command, sensor_value, sensor_name):
         
-        if(sensor_name == "Temp Sensor"):
+        if(sensor_name == "Temperature Sensor"):
             self.sensor_name = sensor_name
             self.set_current_actuator_status(input_command)  # Setting actuator status
             self.value = sensor_value  # Store Sensor Value
