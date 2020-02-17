@@ -51,7 +51,7 @@ class ActuatorData():
         self.state = in_value
     
     def getActuation_state(self):
-        return self.state
+        return True
 
     '''               
     Standard getter function for command
