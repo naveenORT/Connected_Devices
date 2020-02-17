@@ -37,7 +37,7 @@ class SimpleLedActivator():
     def show_i2c_LED(self, i2c_humidity_value):
         text_colour = [0, 255, 0]
         back_colour = [0, 0, 0]
-        x = float(i2c_humidity_value)
+        x = round(i2c_humidity_value,1)
         
         self.led_glow.show_message(str(x), 0.05, text_colour, back_colour)
     '''
@@ -47,7 +47,7 @@ class SimpleLedActivator():
     def show_api_LED(self, api_humidity_value):    
         text_colour = [0,0,255]
         back_colour = [0,0,0]
-        y = float(api_humidity_value)
+        y = round(api_humidity_value,1)
         self.led_glow.show_message(str(y), 0.05, text_colour, back_colour)
     '''
     Default_LED colour (Pale White) when setBLUE or setRED function is not called
