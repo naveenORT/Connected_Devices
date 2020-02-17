@@ -18,8 +18,8 @@ class MultiActuatorAdaptor():
     def __init__(self):
         logging.info("Going to Performing Actuation")     
         # self.temp_act()
-        api_actuator_status = ActuatorData()
-        i2c_actuator_status = ActuatorData()
+        self.api_actuator_status = ActuatorData()
+        self.i2c_actuator_status = ActuatorData()
         self.humidity_api_act()
         self.humidity_i2c_act()
 
