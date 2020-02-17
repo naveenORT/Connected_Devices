@@ -22,8 +22,8 @@ class SensorDataTest(unittest.TestCase):
             manager_object = SensorDataManager()
             manager_object.start()
             time.sleep(6)
-            self.api_sensor_object = msa.getAPIobject()   
-            self.i2c_sensor_object = msa.geti2cobject()
+            self.api_sensor_object = msa.getAPIobject().getApiSensorDataObject()   
+            self.i2c_sensor_object = msa.geti2cobject().getI2Csensordataobject()
 
 	""" 
 	* This function gets current temperature value recorded by Sensordata class and checks for its type associated & range 
