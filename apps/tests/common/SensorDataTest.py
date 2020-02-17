@@ -81,7 +81,7 @@ class SensorDataTest(unittest.TestCase):
 
 	def testtotalvalue(self):
             self.assertTrue(self.api_sensor_object.gettotvalue() >= 0.0 and self.api_sensor_object.gettotvalue() <= 1000.0  , "Not in RANGE")
-            self.assertTrue(isinstance(self.sensor_object.gettotvalue(), float), "Its not a float ")  # Checking total value is float
+            self.assertTrue(isinstance(self.api_sensor_object.gettotvalue(), float), "Its not a float ")  # Checking total value is float
             self.assertTrue(self.i2c_sensor_object.gettotvalue() >= 0.0 and self.i2c_sensor_object.gettotvalue() <= 1000.0  , "Not in RANGE")
             self.assertTrue(isinstance(self.i2c_sensor_object.gettotvalue(), float), "Its not a float ")  # Checking total value is float
 
