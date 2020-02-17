@@ -12,7 +12,8 @@ class Module04Test(unittest.TestCase):
 		self.msa.start()
 		self.sdm = SensorDataManager()
 		self.sdm.start()
-		time.sleep(7)
+		time.sleep(3)
+	
 	def test_I2Csensordata(self):
 		self.assertTrue(isinstance(self.msa.geti2cobject().getSensorData(), float), "Not a float")
 
