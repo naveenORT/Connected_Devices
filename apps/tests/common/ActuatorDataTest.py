@@ -23,9 +23,10 @@ class ActuatorDataTest(unittest.TestCase):
 	def setUp(self):
 		self.msa = MultiSensorAdaptor()
 		self.msa.start()
-		time.sleep(2)
+		time.sleep(1)
 		self.manager_object = SensorDataManager()
 		self.manager_object.start()
+		time.sleep(10)
 		self.x = self.manager_object.get_maaadaptor().getapi_actobj()
 		self.y = self.manager_object.get_maaadaptor().getapi_actobj()
 
@@ -34,7 +35,6 @@ class ActuatorDataTest(unittest.TestCase):
 	'''
 
 	def testSensorName(self):
-		time.sleep(5)
 		self.assertTrue(isinstance(self.x.getName(), str), "Not a String")  # Function to check sensor name is string or not
 		self.assertTrue(isinstance(self.y.getName(), str), "Not a String")  # Function to check sensor name is string or not
 
