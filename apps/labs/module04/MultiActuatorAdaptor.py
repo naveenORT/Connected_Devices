@@ -14,6 +14,9 @@ import time
 
 class MultiActuatorAdaptor():
     
+    api_actuator_status = ActuatorData()
+    i2c_actuator_status = ActuatorData()
+    
     def __init__(self):
         logging.info("Going to Performing Actuation")     
         # self.temp_act()
@@ -30,7 +33,6 @@ class MultiActuatorAdaptor():
         
     def humidity_api_act(self):    
         if (humidity_data_object.getActuationStae() is True):
-                self.api_actuator_status = ActuatorData()
                 self.api_actuator_status.addData("api_inbound", humidity_data_object.getcurvalue(), "Humidity_API")  # logging actuator data
                 self.humi_api_message = SimpleLedActivator(10)
                 self.humi_api_message.show_api_LED(humidity_data_object.getcurvalue())
@@ -40,12 +42,12 @@ class MultiActuatorAdaptor():
     
     def humidity_i2c_act(self):    
         if  (i2c_data_object.getActuationStae() is True):
-                self.i2c_actuator_status = ActuatorData()
+    
                 self.i2c_actuator_status.addData("i2c_inbound", i2c_data_object.getcurvalue(), "Humidity_I2C")  # logging actuator data
-                i2c_message = SimpleLedActivator(10)
-                i2c_message.show_i2c_LED(i2c_data_object.getcurvalue())
-                if(self.humi_api_message.get_actuation_completion() is True):
-                    self.api_actuator_status.setActuation_state(True)
+                self.i2c_message = SimpleLedActivator(10)
+                self.i2c_message.show_i2c_LED(i2c_data_object.getcurvalue())
+                if(self.i2c_message.get_actuation_completion() is True):
+                    self.i2c_actuator_status.setActuation_state(True)
                 return
     
     def update_Actuator(self,invalue):   
