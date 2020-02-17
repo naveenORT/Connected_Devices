@@ -1,7 +1,6 @@
 import unittest
-from labs.common.SensorData import SensorData
-from labs.module03.TempSensorAdaptor import TempSensorAdaptor
-from labs.module03.TempSensorAdaptor import data_object
+from labs.module04.SensorDataManager import SensorDataManager
+from labs.module04.MultiSensorAdaptor import MultiSensorAdaptor  
 
 """
 ******************************************************Module Description************************************************************
@@ -18,8 +17,11 @@ class SensorDataTest(unittest.TestCase):
 	""" 
 
 	def setUp(self):
-		adaptor_object = TempSensorAdaptor()
-		self.sensor_object = data_object
+            self.msa = MultiSensorAdaptor()
+            self.msa.start()
+            self.manager_object = SensorDataManager()
+            self.manager_object.start()
+
 	
 	""" 
 	* This function gets current temperature value recorded by Sensordata class and checks for its type associated & range 
