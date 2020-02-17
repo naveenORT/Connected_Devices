@@ -14,12 +14,12 @@ import time
 
 class MultiActuatorAdaptor():
     
-    api_actuator_status = ActuatorData()
-    i2c_actuator_status = ActuatorData()
     
     def __init__(self):
         logging.info("Going to Performing Actuation")     
         # self.temp_act()
+        api_actuator_status = ActuatorData()
+        i2c_actuator_status = ActuatorData()
         self.humidity_api_act()
         self.humidity_i2c_act()
 
