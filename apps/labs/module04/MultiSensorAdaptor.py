@@ -20,15 +20,19 @@ class MultiSensorAdaptor(threading.Thread):
         logging.info("started logging")
     
     def run(self):    
-         
-        #temp_sensor_object = TempSensorAdaptorTask(20)
-        #temp_sensor_object.start()  # Starting Threaded Class Object
-        humi_sensorAPI_object = HumiditySensorAdaptorTask(20)
-        humi_sensorAPI_object.start()  # Starting Threaded Class Object
-        humi_sensori2c_object = HI2CSensorAdaptorTask(20)
-        humi_sensori2c_object.start()  # Starting Threaded Class Object
+        # temp_sensor_object = TempSensorAdaptorTask(20)
+        # temp_sensor_object.start()  # Starting Threaded Class Object
+        self.humi_sensorAPI_object = HumiditySensorAdaptorTask(20)
+        self.humi_sensorAPI_object.start()  # Starting Threaded Class Object
+        self.humi_sensori2c_object = HI2CSensorAdaptorTask(20)
+        self.humi_sensori2c_object.start()  # Starting Threaded Class Object
         time.sleep(10)
 
     def getSensorobj(self):
         return self.temp_sensor_object
 
+    def geti2cobject(self): 
+        return self.humi_sensori2c_object
+    
+    def getAPIobject(self):
+        return self.getAPIobject()

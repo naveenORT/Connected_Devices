@@ -24,23 +24,16 @@ class SensorDataManager(threading.Thread):
         while SensorDataManager.is_alive(self):
             time.sleep(3)
             self.trigger_actuation()            
-            
-
+    
     def trigger_actuation(self):
-            haa = MultiActuatorAdaptor()        
+            self.haa = MultiActuatorAdaptor()        
 
-    def handleActuatorData(self):   
+    def get_maaadaptor(self):   
+            return self.haa 
         
-        if(humidity_data_object.getActuationStae() is  True):
-            return True
-
-        if(i2c_data_object.getActuationStae() is  True):
-            return True
-
-        else:
+    def handle_sensordata(self,SensorData):
+        self.x = SensorData
+        if(self.x.getActuationStae() is True):
+            return True    
+        if(self.x.getActuationStae() is False):
             return False
-        '''
-        if(i2c_data_object.getActuationStae() is  True):
-            return True
-        '''
-        

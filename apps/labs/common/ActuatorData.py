@@ -28,34 +28,31 @@ class ActuatorData():
 
     def addData(self, input_command, sensor_value, sensor_name):
         
-        
         if(sensor_name == "Temp Sensor"):
             self.set_current_actuator_status(input_command)  # Setting actuator status
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
-            self.setActuation_state(True)
         
         if(sensor_name == "Humidity_API"):
             self.set_current_actuator_status(input_command)
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
-            self.setActuation_state(True)
-        
+            
         if(sensor_name == "Humidity_I2C"):
             self.set_current_actuator_status(input_command)
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
-
+            
         logging.info("Current Value is =" + str(self.getValue()))
         logging.info("Input Command =" + self.get_command()) 
         logging.info("Current Actuator Status =" + self.get_current_actuator_status())            
-        logging.info("Successfully Actuated")
     
-    def setActuation_state(self,in_value):
+    def setActuation_state(self, in_value):
         self.state = in_value
     
     def getActuation_state(self):
         return self.state
+
     '''               
     Standard getter function for command
     '''
@@ -105,18 +102,17 @@ class ActuatorData():
     def set_current_actuator_status(self, command):
         
         if command == "Increase Temperature":
-            self.status = "RED"  # Set Status to RED
+            self.status = "Glowing RED"  # Set Status to RED
         
         if command == "Decrease Temperature":    
-            self.status = "BLUE"  # Set Status to BLUE
+            self.status = "Glowing BLUE"  # Set Status to BLUE
         
         if command == "i2c_inbound":
             self.status = "green text message"
         
         if command == "api_inbound":
-            self.status = "blue api humidity"
+            self.status = "blue text message"
                 
         if command == "temp_inbound":
             self.status = "showing api temp"
-
        
