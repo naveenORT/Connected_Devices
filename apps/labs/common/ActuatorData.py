@@ -33,11 +33,13 @@ class ActuatorData():
             self.set_current_actuator_status(input_command)  # Setting actuator status
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
+            self.setActuation_state(True)
         
         if(sensor_name == "Humidity_API"):
             self.set_current_actuator_status(input_command)
             self.value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
+            self.setActuation_state(True)
         
         if(sensor_name == "Humidity_I2C"):
             self.set_current_actuator_status(input_command)
@@ -49,7 +51,11 @@ class ActuatorData():
         logging.info("Current Actuator Status =" + self.get_current_actuator_status())            
         logging.info("Successfully Actuated")
     
+    def setActuation_state(self,in_value):
+        self.state = in_value
     
+    def getActuation_state(self):
+        return self.state
     '''               
     Standard getter function for command
     '''
@@ -105,10 +111,10 @@ class ActuatorData():
             self.status = "BLUE"  # Set Status to BLUE
         
         if command == "i2c_inbound":
-            self.status = "showing i2c humidity"
+            self.status = "green text message"
         
         if command == "api_inbound":
-            self.status = "showing api humidity"
+            self.status = "blue api humidity"
                 
         if command == "temp_inbound":
             self.status = "showing api temp"

@@ -50,13 +50,13 @@ class SensorData():
         
         logging.info('\n')
         logging.info("-----------------------------------Values From =" + self.get_sensor_name()+ "---------------------------")
-        logging.info(curValue)        
-        logging.info(avgValue)
-        logging.info(minValue)
-        logging.info(maxValue)
-        logging.info(totValue)
+        logging.info(round(curValue,2))        
+        logging.info(round(avgValue,2))
+        logging.info(round(minValue,2))
+        logging.info(round(maxValue,2))
+        logging.info(round(totValue,2))
         logging.info(sampleCount)
-        logging.info("_____________________________________________________________________________________________")
+        logging.info("____________________________________________________________________________________________________")
     
         
    
