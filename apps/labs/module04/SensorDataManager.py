@@ -31,8 +31,8 @@ class SensorDataManager(threading.Thread):
     def get_maaadaptor(self):   
             return self.maa 
         
-    def handle_sensordata(self,SensorData):
-        self.x = SensorData
+    def handle_sensordata(self,invalue):
+        self.x = invalue
         if(self.x.getActuationStae() is True):
             return True    
         if(self.x.getActuationStae() is False):

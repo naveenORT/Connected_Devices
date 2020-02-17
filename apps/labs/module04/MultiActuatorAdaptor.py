@@ -48,8 +48,8 @@ class MultiActuatorAdaptor():
                     self.api_actuator_status.setActuation_state(True)
                 return
     
-    def update_Actuator(self,ActuatorData):   
-        self.obj = ActuatorData
+    def update_Actuator(self,invalue):   
+        self.obj = invalue
         if(self.obj.getActuation_state() is True):    
             return True
         else:
