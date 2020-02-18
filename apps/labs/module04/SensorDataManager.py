@@ -24,8 +24,9 @@ class SensorDataManager(threading.Thread):
     * Runnable thread,to perform actuation
     '''
     def run(self):    
+        time.sleep(1)
         while SensorDataManager.is_alive(self):
-            time.sleep(6)
+            time.sleep(5)
             self.trigger_actuation()            
     '''
     * Function to create instance of MultiActuatorAdaptor class 
