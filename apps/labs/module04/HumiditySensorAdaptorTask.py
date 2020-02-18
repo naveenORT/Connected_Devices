@@ -50,8 +50,9 @@ class HumiditySensorAdaptorTask(threading.Thread):
         while HumiditySensorAdaptorTask.isDaemon(self):    
             time.sleep(6.5)
             api_humidity = self.getSensorData()
+            print ("Humidity Value from sense hat API:" , api_humidity)
             humidity_data_object.addValue(api_humidity)  # Logging sensor data
-            print ('\n' + "Humidity Value from sense hat API:" , api_humidity)
+           
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
