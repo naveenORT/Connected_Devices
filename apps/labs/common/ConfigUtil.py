@@ -9,7 +9,7 @@ import logging
 class ConfigUtil:
        
     config = ConfigParser()
-    default_dir = r"C:\Users\Naveen Rajendran\Desktop\MS COURSE\CSYE-6530 CONNECTED DEVICES WORKSPACE\iot-device\apps\labs\common\ConnectedDevicesConfig.prop"
+    default_dir = r"home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props"
 
     def __init__(self, path):  # Constructor
         self.path = path
