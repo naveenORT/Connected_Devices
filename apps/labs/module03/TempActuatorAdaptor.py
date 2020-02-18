@@ -28,7 +28,7 @@ class TempActuatorAdaptor():
             self.actuator_status = ActuatorData()
             self.actuator_status.addData("Increase Temperature", data_object.getcurvalue(), "Temperature Sensor")  # logging actuator data
             high = SimpleLedActivator(3)
-            high.setBLUE()
+            high.setRED()
             #high.default_led()
             return
         
@@ -36,7 +36,7 @@ class TempActuatorAdaptor():
             self.actuator_status = ActuatorData()
             self.actuator_status.addData("Decrease Temperature", data_object.getcurvalue(), "Temperature Sensor")  # logging actuator data
             low = SimpleLedActivator(3)
-            low.setRED()
+            low.setBLUE()
             #low.default_led()
             return
         else:
