@@ -46,7 +46,6 @@ class ActuatorData():
             self.set_command(input_command)  # Setting input command
             
         logging.info("Sensor Name = " + str(self.getName()))
-        logging.info("Current Value is =" + str(self.getValue()))
         logging.info("Input Command =" + self.get_command()) 
         logging.info("Current Actuator Status =" + self.get_current_actuator_status())            
     
