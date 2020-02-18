@@ -26,7 +26,7 @@ class SensorDataManager(threading.Thread):
     def run(self):    
         time.sleep(1)
         while SensorDataManager.is_alive(self):
-            time.sleep(5.5)
+            time.sleep(5)
             self.trigger_actuation()            
     '''
     * Function to create instance of MultiActuatorAdaptor class 
