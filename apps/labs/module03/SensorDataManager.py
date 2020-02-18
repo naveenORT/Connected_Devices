@@ -21,7 +21,7 @@ class SensorDataManager(threading.Thread):
     def __init__(self):  # Constructor
         threading.Thread.__init__(self)
         SensorDataManager.setDaemon(self, True)
-        self.nominal_temp = ConfigUtil(r"C:\Users\Naveen Rajendran\Desktop\MS COURSE\CSYE-6530 CONNECTED DEVICES WORKSPACE\iot-device\apps\labs\common\ConnectedDevicesConfig.props")
+        self.nominal_temp = ConfigUtil(r"/home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
         self.temp_set_point = self.nominal_temp.getValues("device", "nominalTemp")  # loading nominal temperature value from config file
         self.message = ''        
 
