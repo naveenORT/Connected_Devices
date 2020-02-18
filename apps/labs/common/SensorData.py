@@ -5,8 +5,12 @@ Created on Jan 23, 2020
 from datetime import datetime 
 from labs.common.ActuatorData import ActuatorData
 import logging
+'''
+* This class logs value from sensor continuously, whenever addValue function is passed with sensor values  
 
-  
+'''
+
+
 class SensorData():
     
     timeStamp = None  # Initializing the parameters
@@ -19,9 +23,18 @@ class SensorData():
     sampleCount = 0
     Actuation_State = False
     
+    '''
+    * Default Constructor which records time stamp
+    '''
+
     def __init__(self):
         self.timeStamp = str(datetime.now())  # Constructor
-    
+
+    '''
+    * Function used for storing or logging sensor values in continuous stream
+    * Input : Sensor Values (float)
+    '''
+
     def addValue(self, newVal):
         self.sampleCount += 1
         self.timeStamp = str(datetime.now())
@@ -58,35 +71,70 @@ class SensorData():
         logging.info(sampleCount)
         logging.info("_____________________________________________________________________________________________")
    
+    '''
+    * Standard getter function
+      Output: curValue(Float)
+    '''   
     def getcurvalue(self):
         return self.curValue
-    
+    '''
+    * Standard getter function
+      Output: avgValue(Float)
+    '''   
     def getavgvalue(self):
         return self.avgValue
-    
+    '''
+    * Standard getter function
+      Output: minValue(Float)
+    '''   
     def getminvalue(self):
         return self.minValue
-    
+    '''
+    * Standard getter function
+      Output: maxValue(Float)
+    '''   
     def getmaxvalue(self):
         return self.maxValue
-    
+    '''
+    * Standard getter function
+      Output: totvalue(Float)
+    '''   
     def gettotvalue(self):
         return self.totValue
-    
+    '''
+    * Standard getter function
+      Output: samplecount(Int)
+    '''   
     def getsamplecount(self):
         return self.sampleCount
     
+    '''
+    * Standard getter function
+      Output: timestamp(Date-Time)
+    '''   
     def gettimestamp(self):
         return self.timeStamp
-    
+    '''
+    * Standard setter function
+      Input: Sensor_Name(String)
+    '''
     def set_sensor_name(self, sensor_name):
         self.name = sensor_name
-    
+    '''
+    * Standard getter function
+      output: Sensor_Name(String)
+    '''
     def get_sensor_name(self):    
         return self.name
-    
+    '''
+    * Standard setter function
+      Input: True or False (Boolean)
+    '''
     def setAcutationState(self, in_value):    
         self.Actuation_State = in_value
-        
+    '''
+    * Standard getter function
+      Output: True or Flase (Boolean)
+    '''    
     def getActuationStae(self):    
         return self.Actuation_State

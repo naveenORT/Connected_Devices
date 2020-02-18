@@ -9,24 +9,23 @@ import time
 import random
 
 '''
-***********************************Module Description********************************************************************************
-* In this module sense hat library function is imported for sensing temperature prevailing in external environment
-* It is a threaded class which gets instantiated whenever the instance of TempSensorAdaptorClass gets created
-* Functions get_temperature_from_pressure & get_temperature_from_humidity, helps to obtain read outs from GPIO pins
-* Readed temperature value is passed on to instance of SensorData class & temperature values from sense hat are stored 
-*************************************************************************************************************************************
+* In this module sense hat library function is imported for sensing humidity prevailing in external environment. 
+* It is a threaded class which gets instantiated whenever the instance of MultiSensorAdaptorTask gets created. 
+* Function getSensorData () helps to obtain read outs from GPIO pins using SenseHat library. 
+* Sensed humidity value is passed on to instance of SensorData class & humidity values from sense hat are stored 
 '''
 
 humidity_data_object = SensorData()  # class object
 
 
 class HumiditySensorAdaptorTask(threading.Thread):
-    '''      
-    * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
-    '''       
     
     humidity_data_object.set_sensor_name("Humidity_API")
     sense_hat = SenseHat()  # class object
+    
+    '''      
+    * Constructor function which sets daemon of HumiditySensorAdaptorTask thread to true 
+    '''       
 
     def __init__(self, max_sample):
         threading.Thread.__init__(self)  # Invoking Thread Function
@@ -35,6 +34,7 @@ class HumiditySensorAdaptorTask(threading.Thread):
     
     '''      
     * This function uses sensehat function to extract temperature data and returns
+      Output: Relative Humidity(float)
     '''       
 
     def getSensorData(self):
@@ -54,6 +54,11 @@ class HumiditySensorAdaptorTask(threading.Thread):
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
-    
+
+    '''
+    * Standard getter function for humidit_data_object
+      Output : humidity_data_object(SensorData)
+    '''
+
     def getApiSensorDataObject(self):               
         return humidity_data_object

@@ -10,10 +10,8 @@ import logging
 import time
 
 '''
-************************************************ Module Description********************************************************
-* When an actuation is triggered by TempActuatorAdaptor class module, this class creates an instance of SenseHat library
-* It has separate functions to turn on Red LED & Blue LED which uses .clear() function of sense hat library
-***************************************************************************************************************************
+* When an actuation is triggered by MultiActuatorAdaptor class module, this class creates an instance of SenseHat library
+* It has separate functions to turn on Blue LED message for humidity_api_sensor_data  & Green LED message for humidity_i2c_sensor_data 
 '''
 
 
@@ -31,7 +29,7 @@ class SimpleLedActivator():
         self.led_glow = SenseHat()  # Creating sense_hat object
 
     '''
-    Public function to make Sense Hat LED'S glow RED colour
+    Public function to make Sense Hat LED'S show i2c humidity value in green colour
     '''
 
     def show_i2c_LED(self, i2c_humidity_value):
@@ -43,7 +41,7 @@ class SimpleLedActivator():
         logging.info("Successfully Actuated")
         
     '''
-    Public function to make Sense Hat LED'S glow BLUE colour
+    Public function to make Sense Hat LED'S show api humidity value in blue colour
     '''    
 
     def show_api_LED(self, api_humidity_value):    
@@ -55,11 +53,17 @@ class SimpleLedActivator():
         logging.info("Successfully Actuated")
 
     '''
-    Default_LED colour (Pale White) when setBLUE or setRED function is not called
+    Standard setter function to set actuation_status
+    Input: True or False (Boolean)
     '''
 
     def set_actuation_completion(self, invalue):
         self.status_of_actuation = invalue
+
+    '''
+    Standard getter function to get status_of_actuation
+    Output: True or False (Boolean)
+    '''
 
     def get_actuation_completion(self):
         return self.status_of_actuation

@@ -27,7 +27,6 @@ class ActuatorData():
     '''
 
     def addData(self, input_command, sensor_value, sensor_name):
-        
         if(sensor_name == "Temperature Sensor"):
             self.sensor_name = sensor_name
             self.set_current_actuator_status(input_command)  # Setting actuator status
@@ -51,14 +50,25 @@ class ActuatorData():
         logging.info("Input Command =" + self.get_command()) 
         logging.info("Current Actuator Status =" + self.get_current_actuator_status())            
     
+    '''
+    Standard setter function for actuation state 
+    Output: True or False (Boolean)
+    '''
+
     def setActuation_state(self, in_value):
         self.state = in_value
     
+    '''
+    Standard getter function for actuation state
+    Output: True or False (Boolean)
+    '''
+
     def getActuation_state(self):
         return self.state
 
     '''               
     Standard getter function for command
+    Output: command (String)
     '''
 
     def get_command(self):
@@ -66,6 +76,7 @@ class ActuatorData():
    
     '''               
     Standard getter function for sensor_name
+    Output: sensor_name(String)
     '''
 
     def getName(self):
@@ -73,6 +84,7 @@ class ActuatorData():
     
     '''               
     Standard getter function for sensor_value
+    Output: Float
     '''
 
     def getValue(self):
@@ -80,6 +92,7 @@ class ActuatorData():
     
     '''               
     Standard getter function for sensor_value
+    Output: True or False (Boolean)
     '''
 
     def get_current_actuator_status(self):
@@ -87,6 +100,7 @@ class ActuatorData():
      
     '''               
     Standard setter function for sensor_name
+    Input: input_command(sensor_name) 
     '''
 
     def setName(self, name):   
@@ -94,6 +108,7 @@ class ActuatorData():
         
     '''               
     Standard setter function for input_command
+    Input: input_command(String) 
     '''
 
     def set_command(self, input_command):
@@ -101,6 +116,7 @@ class ActuatorData():
     
     '''               
     Standard setter function for actuator_status
+    Input: command (String)
     '''
 
     def set_current_actuator_status(self, command):

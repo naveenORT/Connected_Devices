@@ -10,28 +10,29 @@ import smbus
 import numpy as np
 import logging
 
-i2c_data_object = SensorData()
+i2c_data_object = SensorData() # Sensor_Data Object
 
 
 class HI2CSensorAdaptorTask(threading.Thread):
-    """      
-    * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
-    """       
-    
+     
     i2c_data_object.set_sensor_name("Humidity_I2C")
     i2cBus = smbus.SMBus(1)    
     pressAddr = 0x5C  # address for pressure sensor
     humidAddr = 0x5F  # address for humidity sensor
-    
+    '''     
+    * Constructor function which sets daemon of HI2CSensorAdaptorTask thread to true & it initializes i2c registers with zero 
+    '''       
+ 
     def __init__(self, max_sample):
         threading.Thread.__init__(self)  # Invoking Thread Function
         HI2CSensorAdaptorTask.setDaemon(self, True)
         self.max_sample = max_sample
         self.initI2CBus()
 
-    """      
-    * This function uses sensehat function to extract temperature data and returns
-    """       
+    '''      
+    * This function uses smbus library to extract humidity data from i2c bus
+      Output: Relative-Humidity (float)
+    '''       
 
     def getSensorData(self):
         
@@ -54,14 +55,18 @@ class HI2CSensorAdaptorTask(threading.Thread):
         
         return RH
 
+    '''
+    * This function refreshes old value in registers, before recording current value from environment
+    '''
+
     def initI2CBus(self):
         logging.info("Initializing I2C bus and enabling I2C addresses...")
         self.i2cBus.write_byte_data(self.pressAddr, 0, 0)
         self.i2cBus.write_byte_data(self.humidAddr, 0, 0)
 
-    """      
-    * Runnable thread function which uses function of SensorData to record values
-    """       
+    '''      
+    * Function prints block data associated with different registers
+    '''       
 
     def displayHumidityData(self):
         q = self.i2cBus.read_byte_data(0x5f, 0x28)
@@ -74,7 +79,11 @@ class HI2CSensorAdaptorTask(threading.Thread):
         i = self.i2cBus.read_byte_data(0x5f, 0x3B)
         o = [q, w, e, r, t, y, u, i]
         print("HUMIDITY BLOCK DATA ", o)
-    
+
+    '''      
+    * Runnable function which passes sensor value to sensor data object
+    '''       
+
     def run(self):    
         while HI2CSensorAdaptorTask.isDaemon(self):    
             time.sleep(6)
@@ -85,6 +94,9 @@ class HI2CSensorAdaptorTask(threading.Thread):
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
-    
+    '''
+    * standard getter function to get i2csensordata_object
+      Output: i2c_data_object (SensorData)  
+    '''
     def getI2Csensordataobject(self):
         return i2c_data_object
