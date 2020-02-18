@@ -20,7 +20,7 @@ humidity_data_object = SensorData()  # class object
 
 class HumiditySensorAdaptorTask(threading.Thread):
     
-    humidity_data_object.set_sensor_name("Humidity_API")
+    humidity_data_object.set_sensor_name("Humidity_APIs")
     sense_hat = SenseHat()  # class object
     
     '''      
