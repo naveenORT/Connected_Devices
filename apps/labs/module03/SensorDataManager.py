@@ -32,7 +32,7 @@ class SensorDataManager(threading.Thread):
     '''
 
     def trigger_notification(self):
-        if (data_object.getcurvalue() >= float(self.temp_set_point)):  # comparing current value with nominal value       
+        if (data_object.getcurvalue() >= self.temp_set_point):  # comparing current value with nominal value       
             self.sendNotification() 
         else: 
             return 
