@@ -86,7 +86,6 @@ class HI2CSensorAdaptorTask(threading.Thread):
     '''       
 
     def run(self):    
-        
         while HI2CSensorAdaptorTask.isDaemon(self):    
             time.sleep(6.5)
             i2c_humidity = self.getSensorData()
