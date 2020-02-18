@@ -45,7 +45,8 @@ class HumiditySensorAdaptorTask(threading.Thread):
     * Runnable thread function which uses function of SensorData to record values
     '''       
 
-    def run(self):    
+    def run(self):
+        time.sleep(0.5)    
         while HumiditySensorAdaptorTask.isDaemon(self):    
             time.sleep(5)
             api_humidity = self.getSensorData()
