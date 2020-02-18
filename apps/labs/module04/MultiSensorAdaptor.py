@@ -40,7 +40,7 @@ class MultiSensorAdaptor(threading.Thread):
         self.humi_sensorAPI_object.start()  # Starting Threaded Class Object
         self.humi_sensori2c_object = HI2CSensorAdaptorTask(20)
         self.humi_sensori2c_object.start()  # Starting Threaded Class Object
-        time.sleep(10)
+        time.sleep(100)
 
     '''
     * Standard getter function for temp_sensor_object
