@@ -46,9 +46,9 @@ class SensorDataManager(threading.Thread):
         smtp_object = smtpconnect()    
         self.message = "\n Time Recorded : " + (str)((data_object.gettimestamp())) + "\n Current : " + (str)(data_object.getcurvalue()) + "\n Average : " + (str)(data_object.getavgvalue()) + "\n Samples : " + (str)(data_object.getsamplecount()) + "\n Minimum : " + (str)(data_object.getminvalue()) + "\n Maximum : " + (str)(data_object.getcurvalue())
         if(data_object.getcurvalue() < float(self.temp_set_point)):
-            logging.info("Current temperature is " + float(self.temp_set_point) - data_object.getcurvalue() + "C lesser than nomainal temp ")
+            logging.info("Current temperature is " + str(float(self.temp_set_point) - data_object.getcurvalue()) + "C lesser than nomainal temp ")
         if(data_object.getcurvalue() > float(self.temp_set_point)):
-            logging.info("Current temperature is " + data_object.getcurvalue() - float(self.temp_set_point) + "C greater than nomainal temp ")
+            logging.info("Current temperature is " + str(data_object.getcurvalue() - float(self.temp_set_point)) + "C greater than nomainal temp ")
         
         smtp_object.publishMessage("Temperature Alert", self.message)
 
