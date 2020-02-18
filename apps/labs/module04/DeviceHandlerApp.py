@@ -6,7 +6,7 @@ from labs.module04.SensorDataManager import SensorDataManager
 from labs.module04.MultiSensorAdaptor import MultiSensorAdaptor    
 '''
 * This module forms the main node of this application. It invokes two threads, one for polling humidity values from sensor & another 
-thread for actuating led’s based on sensor thread values. 
+thread for actuating led's based on sensor thread values. 
 * These threads will be ran at specific intervals so that there can be a productive exchange of information
 '''
 

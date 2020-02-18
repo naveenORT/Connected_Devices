@@ -10,8 +10,9 @@ import random
 
 data_object = SensorData()  # class object
 sense_hat = SenseHat()  # class object
-
-  
+'''
+* This class polls temperature sensor data from sense hat via its API  
+'''
 class TempSensorAdaptorTask(threading.Thread):
     '''      
     * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 

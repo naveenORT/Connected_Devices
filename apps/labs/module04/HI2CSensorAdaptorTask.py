@@ -11,8 +11,9 @@ import numpy as np
 import logging
 
 i2c_data_object = SensorData() # Sensor_Data Object
-
-
+'''
+* This class polls humidity sensor data from i2c bus
+'''
 class HI2CSensorAdaptorTask(threading.Thread):
      
     i2c_data_object.set_sensor_name("Humidity_I2C")
