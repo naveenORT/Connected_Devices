@@ -22,7 +22,7 @@ class SensorDataManager(threading.Thread):
         threading.Thread.__init__(self)
         SensorDataManager.setDaemon(self, True)
         self.nominal_temp = ConfigUtil(r"home/pi/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
-        self.temp_set_point = self.nominal_temp.getValues("device", "nominalTemp")  # loading nominal temperature value from config file
+        self.temp_set_point = float(self.nominal_temp.getValues("device", "nominalTemp"))  # loading nominal temperature value from config file
         self.message = ''        
 
     '''
@@ -32,7 +32,7 @@ class SensorDataManager(threading.Thread):
     '''
 
     def trigger_notification(self):
-        if (data_object.getcurvalue() >= float(self.temp_set_point)):  # comparing current value with nominal value       
+        if (data_object.getcurvalue() >= self.temp_set_point):  # comparing current value with nominal value       
             self.sendNotification() 
         else: 
             return 
