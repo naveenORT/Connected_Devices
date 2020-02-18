@@ -5,6 +5,7 @@ Created on Feb 6, 2020
 
 import threading
 import time 
+import logging
 from labs.module02.SmtpClientConnector import smtpconnect
 from labs.module03.TempSensorAdaptorTask import data_object
 from labs.module03.TempActuatorAdaptor import TempActuatorAdaptor
@@ -45,6 +46,11 @@ class SensorDataManager(threading.Thread):
     def sendNotification(self):  # Function to Publish Alerts As Mail
         smtp_object = smtpconnect()    
         self.message = "\n Time Recorded : " + (str)((data_object.gettimestamp())) + "\n Current : " + (str)(data_object.getcurvalue()) + "\n Average : " + (str)(data_object.getavgvalue()) + "\n Samples : " + (str)(data_object.getsamplecount()) + "\n Minimum : " + (str)(data_object.getminvalue()) + "\n Maximum : " + (str)(data_object.getcurvalue())
+        if(data_object.getcurvalue() < self.nominal_temp):
+            logging.info("Current temperature is "+ self.nominal_temp - data_object.getcurvalue()+"C lesser than nomainal temp ")
+        if(data_object.getcurvalue() > self.nominal_temp):
+            logging.info("Current temperature is "+ data_object.getcurvalue() - self.nominal_temp+"C greater than nomainal temp ")
+        
         smtp_object.publishMessage("Temperature Alert", self.message)
 
     '''
