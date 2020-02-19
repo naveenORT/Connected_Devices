@@ -11,4 +11,8 @@ pipelines:
         caches:
           - pip
         script: # Modify the commands below to build your repository.
-          - pip install -r requirements.txt
+          - pip install smbus
+          - pip install sense_hat
+          - pip install psutil
+          - pip install numpy
+   
