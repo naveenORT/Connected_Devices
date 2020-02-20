@@ -95,7 +95,7 @@ class ActuatorData():
     '''
 
     def get_current_actuator_status(self):
-        return self.status
+        return self.actuator_status
      
     '''               
     Standard setter function for sensor_name
@@ -121,17 +121,17 @@ class ActuatorData():
     def set_current_actuator_status(self, command):
         
         if command == "Increase Temperature":
-            self.status = "Glowing RED"  # Set Status to RED
+            self.actuator_status = "Glowing RED"  # Set Status to RED
         
         if command == "Decrease Temperature":    
-            self.status = "Glowing BLUE"  # Set Status to BLUE
+            self.actuator_status = "Glowing BLUE"  # Set Status to BLUE
         
         if command == "i2c_inbound":
-            self.status = "green text message"
+            self.actuator_status = "green text message"
         
         if command == "api_inbound":
-            self.status = "blue text message"
+            self.actuator_status = "blue text message"
                 
         if command == "temp_inbound":
-            self.status = "showing api temp"
+            self.actuator_status = "showing api temp"
        
