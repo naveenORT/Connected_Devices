@@ -7,7 +7,6 @@ from sense_hat import SenseHat
 import threading
 import time
 import random
-
 '''
 * In this module sense hat library function is imported for sensing humidity prevailing in external environment. 
 * It is a threaded class which gets instantiated whenever the instance of MultiSensorAdaptorTask gets created. 
@@ -52,7 +51,6 @@ class HumiditySensorAdaptorTask(threading.Thread):
             api_humidity = self.getSensorData()
             print ("Humidity Value from sense hat API:" , api_humidity)
             humidity_data_object.addValue(api_humidity)  # Logging sensor data
-               
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
