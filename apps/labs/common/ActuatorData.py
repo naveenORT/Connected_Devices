@@ -55,7 +55,7 @@ class ActuatorData():
     '''
 
     def setActuation_state(self, in_value):
-        self.state = in_value
+        self.actuation_state = in_value
     
     '''
     Standard getter function for actuation state
@@ -63,7 +63,7 @@ class ActuatorData():
     '''
 
     def getActuation_state(self):
-        return self.state
+        return self.actuation_state
 
     '''               
     Standard getter function for command

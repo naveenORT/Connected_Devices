@@ -13,7 +13,9 @@ class ActuatorDataListener():
     
     def on_Actuator_Message(self, in_redis_ActuatorData):    
         if(in_redis_ActuatorData.exists("ActuatorData")):
+            print("LED actuation begins")
             return True
         else:
+            print("Actuation signal not received")
             return False
     
