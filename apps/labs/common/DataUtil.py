@@ -1,6 +1,5 @@
 '''
 Created on Feb 20, 2020
-
 @author: Naveen Rajendran
 '''
 import json
@@ -8,9 +7,7 @@ import logging
 import redis
 from labs.common.ActuatorData import ActuatorData
 from labs.common.SensorData import SensorData
-
 import pickle
-
 
 
 class DataUtil():
@@ -43,6 +40,4 @@ class DataUtil():
     def writeactuatordata(self, json_ActuatorData):            
         with open('ActuatorData.txt', 'wb') as ActuatorData_file:
             pickle.dump(json_ActuatorData, ActuatorData_file)
-            
-
         

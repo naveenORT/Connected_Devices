@@ -7,6 +7,7 @@ import redis
 import logging
 from labs.common.ActuatorData import ActuatorData
 from labs.common.SensorData import SensorData
+from labs.common.ActuatorDataListener import ActuatorDataListener
 
 
 class PersistenceUtil():
@@ -14,24 +15,34 @@ class PersistenceUtil():
     util = DataUtil()
     
     def __init__(self, input_obj):
+        
         if (isinstance(input_obj, SensorData)):
             sd = self.util.sensordatatojson(input_obj) 
             self.writeSensorDatatoDbms(sd)
+            
         elif (isinstance(input_obj, ActuatorData)):
             ad = self.util.actuatordatatojson(input_obj)
             self.writeActuatorDatatoDbms(ad)
  
     def writeActuatorDatatoDbms(self, json_actuator_data):    
-        r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
-        r.set('ActuatorData', json_actuator_data)
-        print(r.get('ActuatorData'))
-        return
+        self.redis_actuator_data = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
+        self.redis_actuator_data.set('ActuatorData', json_actuator_data)
+        print(self.redis_actuator_data.get('ActuatorData'))
+        self.registerActuatorDataListener()
     
     def writeSensorDatatoDbms(self, json_sensor_data):    
-        r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
-        r.set('SensorData', json_sensor_data)
-        print(r.get('SensorData'))
+        self.redis_sensor_data = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
+        self.redis_sensor_data.set('SensorData', json_sensor_data)
+        print(self.redis_sensor_data.get('SensorData'))
+    
+    def registerActuatorDataListener(self):
+        self.x = ActuatorDataListener(self.redis_actuator_data)
+    
+    def registerSensorDataListener(self):
         return
     
-    #def registerActuatorDataListener(self):
-        
+    def get_Register_Actuator_Data(self):
+        return self.x
+    
+    def get_Register_Sensor_Data(self):
+        return 
