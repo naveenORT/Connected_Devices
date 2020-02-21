@@ -10,6 +10,7 @@ from labs.common.SensorData import SensorData
 
 
 class PersistenceUtil():
+    
     util = DataUtil()
     
     def __init__(self, input_obj):
@@ -18,11 +19,12 @@ class PersistenceUtil():
             self.writeSensorDatatoDbms(sd)
         elif (isinstance(input_obj, ActuatorData)):
             ad = self.util.actuatordatatojson(input_obj)
-            self.writeActuatorDatatoDbms(sd)
+            self.writeActuatorDatatoDbms(ad)
  
     def writeActuatorDatatoDbms(self, json_actuator_data):    
         r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
         r.set('ActuatorData', json_actuator_data)
+        print(r.get('ActuatorData'))
         return
     
     def writeSensorDatatoDbms(self, json_sensor_data):    
@@ -30,3 +32,6 @@ class PersistenceUtil():
         r.set('SensorData', json_sensor_data)
         print(r.get('SensorData'))
         return
+    
+    #def registerActuatorDataListener(self):
+        
