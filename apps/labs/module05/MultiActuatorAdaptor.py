@@ -8,7 +8,7 @@ from labs.module05.HumiditySensorAdaptorTask import humidity_data_object
 from labs.module05.TempSensorAdaptorTask import data_object
 from labs.module05.HI2CSensorAdaptorTask import i2c_data_object
 from labs.module05.SenseHatLedActivator import SimpleLedActivator
-from labs.common.DataUtil import DataUtil
+from labs.common.PersistenceUtil import PersistenceUtil
 
 '''
 * This module triggers whenever actuation state is set by SensorData class. 
@@ -56,6 +56,7 @@ class MultiActuatorAdaptor():
                 self.humi_api_message = SimpleLedActivator(10)
                 logging.info("Going to Performing Actuation")     
                 self.humi_api_message.show_api_LED(humidity_data_object.getcurvalue())
+                obj = PersistenceUtil(self.api_actuator_status)
                 if(self.humi_api_message.get_actuation_completion() is True):
                     self.api_actuator_status.setActuation_state(True)
                 return
