@@ -28,7 +28,7 @@ class MultiActuatorAdaptor():
         self.temp_actuator_status = ActuatorData()
         self.api_actuator_status = ActuatorData()
         self.i2c_actuator_status = ActuatorData()
-       #self.temp_act()
+       # self.temp_act()
         self.humidity_api_act()
        # self.humidity_i2c_act()
 
@@ -53,6 +53,7 @@ class MultiActuatorAdaptor():
                 return        
             return
         return
+
     '''
     * Actuator function for humidity_api sensor class, actuation_status is set true when LED actuation gets completed
     '''      
@@ -74,6 +75,7 @@ class MultiActuatorAdaptor():
                         return
                 return    
         return
+
     '''
     * Actuator function for humidity_i2c sensor class, actuation_status is set true when LED actuation gets completed
     '''

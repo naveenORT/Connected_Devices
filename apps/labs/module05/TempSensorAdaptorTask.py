@@ -44,7 +44,6 @@ class TempSensorAdaptorTask(threading.Thread):
             time.sleep(6)
             environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)  # Logging sensor data
-          
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return 0
