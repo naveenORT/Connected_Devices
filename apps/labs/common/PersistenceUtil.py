@@ -23,8 +23,10 @@ class PersistenceUtil():
     def writeActuatorDatatoDbms(self, json_actuator_data):    
         r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
         r.set('ActuatorData', json_actuator_data)
+        return
     
     def writeSensorDatatoDbms(self, json_sensor_data):    
         r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
         r.set('SensorData', json_sensor_data)
         print(r.get('SensorData'))
+        return
