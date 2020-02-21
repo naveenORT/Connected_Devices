@@ -46,3 +46,6 @@ class PersistenceUtil():
     
     def get_Register_Sensor_Data(self):
         return 
+    
+    def getRedis_Actdata(self):
+        return self.redis_actuator_data
