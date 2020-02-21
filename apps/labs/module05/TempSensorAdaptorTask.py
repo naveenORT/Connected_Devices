@@ -7,7 +7,7 @@ from sense_hat import SenseHat
 import threading
 import time
 import random
-
+from labs.common.PersistenceUtil import PersistenceUtil
 data_object = SensorData()  # class object
 sense_hat = SenseHat()  # class object
 '''
@@ -44,6 +44,7 @@ class TempSensorAdaptorTask(threading.Thread):
             time.sleep(6)
             environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)  # Logging sensor data
+            obj = PersistenceUtil(data_object)
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return 0

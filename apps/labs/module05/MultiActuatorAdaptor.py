@@ -29,7 +29,7 @@ class MultiActuatorAdaptor():
         self.api_actuator_status = ActuatorData()
         self.i2c_actuator_status = ActuatorData()
         self.temp_act()
-       # self.humidity_api_act()
+        self.humidity_api_act()
        # self.humidity_i2c_act()
 
     '''
