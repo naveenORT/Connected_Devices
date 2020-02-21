@@ -54,7 +54,7 @@ class MultiActuatorAdaptor():
         if (humidity_data_object.getActuationStae() is True):
                 self.api_actuator_status.addData("api_inbound", humidity_data_object.getcurvalue(), "Humidity_API")  # logging actuator data
                 obj = PersistenceUtil(self.api_actuator_status)
-                if(obj.get_Register_Actuator_Data() == True):
+                if(obj.get_Register_Actuator_Data().on_Actuator_Message() == True):
                     self.humi_api_message = SimpleLedActivator(10)            
                     logging.info("Going to Performing Actuation")         
                     self.humi_api_message.show_api_LED(humidity_data_object.getcurvalue())
