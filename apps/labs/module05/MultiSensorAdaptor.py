@@ -34,8 +34,8 @@ class MultiSensorAdaptor(threading.Thread):
     '''
     
     def run(self):    
-        #temp_sensor_object = TempSensorAdaptorTask(20)
-        #temp_sensor_object.start()  # Starting Threaded Class Object
+        temp_sensor_object = TempSensorAdaptorTask(20)
+        temp_sensor_object.start()  # Starting Threaded Class Object
         self.humi_sensorAPI_object = HumiditySensorAdaptorTask(20)
         self.humi_sensorAPI_object.start()  # Starting Threaded Class Object
         #self.humi_sensori2c_object = HI2CSensorAdaptorTask(20)
