@@ -58,9 +58,8 @@ class MultiActuatorAdaptor():
                     self.humi_api_message = SimpleLedActivator(10)            
                     logging.info("Going to Performing Actuation")         
                     self.humi_api_message.show_api_LED(humidity_data_object.getcurvalue())
-                
-                if(self.humi_api_message.get_actuation_completion() is True):
-                    self.api_actuator_status.setActuation_state(True)
+                    if(self.humi_api_message.get_actuation_completion() is True):
+                        self.api_actuator_status.setActuation_state(True)
                 return
 
     '''
