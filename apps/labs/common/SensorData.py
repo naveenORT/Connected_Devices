@@ -40,7 +40,7 @@ class SensorData():
         self.timeStamp = str(datetime.now())
         self.curValue = newVal
         self.totValue += newVal
-        if(self.curValue < 20 | self.curValue >20):
+        if(self.curValue < 20 or self.curValue >20):
             self.setAcutationState(True)
         
         if(self.sampleCount == 1):
