@@ -17,7 +17,7 @@ class TempSensorAdaptorTask(threading.Thread):
     '''      
     * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
     '''       
-    data_object.set_sensor_name("Temp Sensor")
+    data_object.set_sensor_name("Temperature Sensor")
    
     def __init__(self, max_sample):
         threading.Thread.__init__(self)  # Invoking Thread Function

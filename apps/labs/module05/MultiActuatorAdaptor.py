@@ -39,7 +39,7 @@ class MultiActuatorAdaptor():
     def temp_act(self):    
                 
         if(data_object.getActuationState() is True):
-            self.temp_actuator_status.addData("temp_inbound", data_object.getcurvalue(), "Temp Sensor")  # logging actuator data
+            self.temp_actuator_status.addData("temp_inbound", data_object.getcurvalue(), "Temperature Sensor")  # logging actuator data
             self.persistence_temp = PersistenceUtil(self.temp_actuator_status)    
             c = self.persistence_temp.get_Register_Actuator_Data() 
             
