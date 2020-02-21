@@ -6,7 +6,7 @@ from labs.common.SensorData import SensorData
 from sense_hat import SenseHat
 import threading
 import time
-#import smbus
+import smbus
 import numpy as np
 import logging
 
