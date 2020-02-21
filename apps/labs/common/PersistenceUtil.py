@@ -42,7 +42,7 @@ class PersistenceUtil():
         return
     
     def get_Register_Actuator_Data(self):
-        return True
+        return self.x
     
     def get_Register_Sensor_Data(self):
         return 
