@@ -53,7 +53,6 @@ class HumiditySensorAdaptorTask(threading.Thread):
             print ("Humidity Value from sense hat API:" , api_humidity)
             humidity_data_object.addValue(api_humidity)  # Logging sensor data
             obj = PersistenceUtil(humidity_data_object)
-
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return
