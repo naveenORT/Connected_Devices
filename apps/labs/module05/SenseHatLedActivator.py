@@ -48,7 +48,7 @@ class SimpleLedActivator():
         text_colour = [0, 0, 255]
         back_colour = [0, 0, 0]
         y = round(api_humidity_value, 1)
-        self.led_glow.show_message(str(y), 0.04, text_colour, back_colour)
+        #self.led_glow.show_message(str(y), 0.04, text_colour, back_colour)
         self.set_actuation_completion(True)
         logging.info("Successfully Actuated")
 

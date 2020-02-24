@@ -3,17 +3,12 @@ Created on Feb 14, 2020
 @author: Naveen Rajendran
 '''
 import logging
-from labs.common.ActuatorData import ActuatorData
-from labs.module05.HumiditySensorAdaptorTask import humidity_data_object 
-from labs.module05.TempSensorAdaptorTask import data_object
-from labs.module05.HI2CSensorAdaptorTask import i2c_data_object
 from labs.module05.SenseHatLedActivator import SimpleLedActivator
-from labs.common.PersistenceUtil import PersistenceUtil
-
+import redis
 '''
 * This module triggers whenever actuation state is set by SensorData class. 
 * Once actuation state is set, it will call the instance of SenseHatLedActivator class and its functions show_api_message() 
-  & show_i2c_message() respectively    
+& show_i2c_message() respectively    
 '''
 
   
@@ -24,71 +19,15 @@ class MultiActuatorAdaptor():
     '''  
 
     def __init__(self):
+        logging.info("Actuating")
         
-        self.temp_actuator_status = ActuatorData()
-        self.api_actuator_status = ActuatorData()
-        self.i2c_actuator_status = ActuatorData()
-        self.temp_act()
-        self.humidity_api_act()
-       # self.humidity_i2c_act()
-
     '''
     * Actuator function for temperature sensor class, actuation_status is set true when LED actuation gets completed
     '''
 
-    def temp_act(self):    
-                
-        if(data_object.getActuationState() is True):
-            self.temp_actuator_status.addData("temp_inbound", data_object.getcurvalue(), "Temperature Sensor")  # logging actuator data
-            self.persistence_temp = PersistenceUtil(self.temp_actuator_status)    
-            c = self.persistence_temp.get_Register_Actuator_Data() 
-            
-            if(c.on_Actuator_Message(self.persistence_temp.getRedis_Actdata()) == True):
-                self.api_message = SimpleLedActivator(10)
-                logging.info("Going to Performing Actuation")     
-                self.api_message.show_api_LED(data_object.getcurvalue())
-    
-                if(self.api_message.get_actuation_completion is True):
-                    self.temp_actuator_status.setActuation_state(True)
-                return        
-            return
-        return
-
-    '''
-    * Actuator function for humidity_api sensor class, actuation_status is set true when LED actuation gets completed
-    '''      
-
-    def humidity_api_act(self):    
-    
-        if (humidity_data_object.getActuationState() is True):
-                self.api_actuator_status.addData("api_inbound", humidity_data_object.getcurvalue(), "Humidity_API")  # logging actuator data
-                obj = PersistenceUtil(self.api_actuator_status)
-                c = obj.get_Register_Actuator_Data() 
-        
-                if(c.on_Actuator_Message(obj.getRedis_Actdata()) == True):
-                    self.humi_api_message = SimpleLedActivator(10)            
-                    logging.info("Going to Performing Actuation")         
-                    self.humi_api_message.show_api_LED(humidity_data_object.getcurvalue())
-                
-                    if(self.humi_api_message.get_actuation_completion() is True):
-                        self.api_actuator_status.setActuation_state(True)
-                        return
-                return    
-        return
-
-    '''
-    * Actuator function for humidity_i2c sensor class, actuation_status is set true when LED actuation gets completed
-    '''
-
-    def humidity_i2c_act(self):    
-        if  (i2c_data_object.getActuationState() is True):
-                self.i2c_actuator_status.addData("i2c_inbound", i2c_data_object.getcurvalue(), "Humidity_I2C")  # logging actuator data
-                self.i2c_message = SimpleLedActivator(10)
-                logging.info("Going to Performing Actuation")     
-                self.i2c_message.show_i2c_LED(i2c_data_object.getcurvalue())
-                if(self.i2c_message.get_actuation_completion() is True):
-                    self.i2c_actuator_status.setActuation_state(True)
-                return
+    def temp_act(self,input_value):        
+            self.api_message = SimpleLedActivator(10)
+            self.api_message.show_api_LED(float(input_value))    
 
     '''
     * Function to check whether LED actuation has happened or not

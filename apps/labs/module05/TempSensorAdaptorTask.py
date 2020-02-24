@@ -13,6 +13,8 @@ sense_hat = SenseHat()  # class object
 '''
 * This class polls temperature sensor data from sense hat via its API  
 '''
+
+
 class TempSensorAdaptorTask(threading.Thread):
     '''      
     * Constructor function which sets daemon of TempSensorAdaptorTask thread to true 
@@ -41,10 +43,11 @@ class TempSensorAdaptorTask(threading.Thread):
     def run(self):    
         time.sleep(0.5)
         while TempSensorAdaptorTask.isDaemon(self):    
-            time.sleep(6)
+            time.sleep(5)
             environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)  # Logging sensor data
-            obj = PersistenceUtil(data_object)
+            sensor_obj = PersistenceUtil(data_object)
+            
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return 0

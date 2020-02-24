@@ -30,19 +30,19 @@ class ActuatorData():
         if(sensor_name == "Temperature Sensor"):
             self.sensor_name = sensor_name
             self.set_current_actuator_status(input_command)  # Setting actuator status
-            self.value = sensor_value  # Store Sensor Value
+            self.sensor_value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
         
         if(sensor_name == "Humidity_API"):
             self.sensor_name = sensor_name
             self.set_current_actuator_status(input_command)
-            self.value = sensor_value  # Store Sensor Value
+            self.sensor_value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
         
         if(sensor_name == "Humidity_I2C"):
             self.sensor_name = sensor_name
             self.set_current_actuator_status(input_command)
-            self.value = sensor_value  # Store Sensor Value
+            self.sensor_value = sensor_value  # Store Sensor Value
             self.set_command(input_command)  # Setting input command
      
         logging.info("Sensor Name = " + str(self.getName()))
@@ -71,7 +71,7 @@ class ActuatorData():
     '''
 
     def get_command(self):
-        return self.command
+        return self.input_command
    
     '''               
     Standard getter function for sensor_name
@@ -87,7 +87,7 @@ class ActuatorData():
     '''
 
     def getValue(self):
-        return self.value
+        return self.sensor_value
     
     '''               
     Standard getter function for sensor_value
@@ -95,15 +95,15 @@ class ActuatorData():
     '''
 
     def get_current_actuator_status(self):
-        return self.actuator_status
+        return self.current_actuator_status
      
     '''               
     Standard setter function for sensor_name
     Input: input_command(sensor_name) 
     '''
 
-    def setName(self, name):   
-        self.sensor_name = name
+    def setName(self, sensor_name):   
+        self.sensor_name = sensor_name
         
     '''               
     Standard setter function for input_command
@@ -111,27 +111,27 @@ class ActuatorData():
     '''
 
     def set_command(self, input_command):
-        self.command = input_command
+        self.input_command = input_command
     
     '''               
     Standard setter function for actuator_status
     Input: command (String)
     '''
 
-    def set_current_actuator_status(self, command):
+    def set_current_actuator_status(self, input_command):
         
-        if command == "Increase Temperature":
-            self.actuator_status = "Glowing RED"  # Set Status to RED
+        if input_command == "Increase Temperature":
+            self.current_actuator_status = "Glowing RED"  # Set Status to RED
         
-        if command == "Decrease Temperature":    
-            self.actuator_status = "Glowing BLUE"  # Set Status to BLUE
+        if input_command == "Decrease Temperature":    
+            self.current_actuator_status = "Glowing BLUE"  # Set Status to BLUE
         
-        if command == "i2c_inbound":
-            self.actuator_status = "green text message"
+        if input_command == "i2c_inbound":
+            self.current_actuator_status = "green text message"
         
-        if command == "api_inbound":
-            self.actuator_status = "blue text message"
+        if input_command == "api_inbound":
+            self.current_actuator_status = "blue text message"
                 
-        if command == "temp_inbound":
-            self.actuator_status = "showing api temp"
+        if input_command == "temp_inbound":
+            self.current_actuator_status = "showing api temp"
        

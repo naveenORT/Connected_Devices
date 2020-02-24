@@ -21,7 +21,6 @@ class SensorData():
     maxValue = 0.0
     totValue = 0.0
     sampleCount = 0
-    Actuation_State = False
     
     '''
     * Default Constructor which records time stamp
@@ -40,8 +39,6 @@ class SensorData():
         self.timeStamp = str(datetime.now())
         self.curValue = newVal
         self.totValue += newVal
-        if(self.curValue < 20 or self.curValue >20):
-            self.setAcutationState(True)
         
         if(self.sampleCount == 1):
             self.minValue = self.curValue

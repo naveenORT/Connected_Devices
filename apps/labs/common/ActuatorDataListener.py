@@ -4,18 +4,37 @@ Created on Feb 20, 2020
 '''
 import redis    
 import logging
+import json
+from labs.common.DataUtil import DataUtil
+from labs.module05.TempSensorAdaptorTask import data_object
+from labs.common.AData import AData
+import threading
+import time
 
 
-class ActuatorDataListener():
+class ActuatorDataListener(threading.Thread):
     
-    def __init__(self, redis_input):
-        self.on_Actuator_Message(redis_input)
+    redis_server = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
+    util = DataUtil()
+    actuation_counter = 1
+
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.on_Actuator_Message()
     
-    def on_Actuator_Message(self, in_redis_ActuatorData):    
-        if(in_redis_ActuatorData.exists("ActuatorData")):
-            print("LED actuation begins")
+    def on_Actuator_Message(self):    
+         
+        if(self.redis_server.exists(str(self.actuation_counter))):
+            print("Above threshold ........LED actuation begins")
+            x = self.redis_server.get(str(self.actuation_counter))
+            self.y = self.util.jsonToActuatorData(x)
+            self.actuation_counter = self.actuation_counter + 1
             return True
-        else:
-            print("Actuation signal not received")
-            return False
-    
+
+    def run(self):
+        while(True):
+            self.on_Actuator_Message()
+            time.sleep(7)
+
+    def get_alo_object(self):
+        return self.y
