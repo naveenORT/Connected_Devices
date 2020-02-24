@@ -18,13 +18,11 @@ class PersistenceUtil():
         if (isinstance(input_obj, SensorData)):
             self.sdo = input_obj
             sd = self.util.sensordatatojson(self.sdo) 
-            print(sd)
             self.writeSensorDatatoDbms(sd)
             
         elif (isinstance(input_obj, ActuatorData)):
             self.ado = input_obj
             ad = self.util.actuatordatatojson(self.ado)
-            print(ad)
             self.writeActuatorDatatoDbms(ad)
  
     def writeActuatorDatatoDbms(self, json_actuator_data):    
