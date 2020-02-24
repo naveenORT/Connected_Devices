@@ -20,8 +20,7 @@ class ActuatorDataListener(threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)
-        self.on_Actuator_Message()
-    
+      
     def on_Actuator_Message(self):    
          
         if(self.redis_server.exists(str(self.actuation_counter))):
@@ -34,7 +33,7 @@ class ActuatorDataListener(threading.Thread):
     def run(self):
         while(True):
             self.on_Actuator_Message()
-            time.sleep(7)
+            time.sleep(6.5)
 
     def get_alo_object(self):
         return self.y
