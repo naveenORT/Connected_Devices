@@ -31,13 +31,9 @@ class SensorDataManager(threading.Thread):
         alo.start()
         
         while(True):
-            prev_value = alo.get_alo_object().sensor_value
             if (alo.on_Actuator_Message() is True):
-                if(alo.get_alo_object().sensor_value == prev_value):
-                    continue
-                else:    
-                    maa = MultiActuatorAdaptor()
-                    maa.temp_act(alo.get_alo_object().sensor_value)
+                maa = MultiActuatorAdaptor()
+                maa.temp_act(alo.get_alo_object().sensor_value)
             else:
                 continue
             time.sleep(5)
