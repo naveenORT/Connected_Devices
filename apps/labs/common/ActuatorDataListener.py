@@ -25,8 +25,8 @@ class ActuatorDataListener(threading.Thread):
          
         if(self.redis_server.exists(str(self.actuation_counter))):
             print("Above threshold ........LED actuation begins")
-            x = self.redis_server.get(str(self.actuation_counter))
-            self.y = self.util.jsonToActuatorData(x)
+            self.x = self.redis_server.get(str(self.actuation_counter))
+            self.y = self.util.jsonToActuatorData(self.x)
             self.actuation_counter = self.actuation_counter + 1
             return True
 
@@ -37,3 +37,6 @@ class ActuatorDataListener(threading.Thread):
 
     def get_alo_object(self):
         return self.y
+
+    def get_x_jsonactdata(self):
+        return self.x

@@ -33,8 +33,8 @@ class MultiSensorAdaptor(threading.Thread):
     '''
     
     def run(self):    
-        temp_sensor_object = TempSensorAdaptorTask(20)
-        temp_sensor_object.start()  # Starting Threaded Class Object
+        self.temp_sensor_object = TempSensorAdaptorTask(20)
+        self.temp_sensor_object.start()  # Starting Threaded Class Object
         time.sleep(100)
 
     '''

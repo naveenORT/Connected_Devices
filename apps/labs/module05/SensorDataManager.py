@@ -27,13 +27,13 @@ class SensorDataManager(threading.Thread):
 
     def run(self):    
         time.sleep(1)
-        alo = ActuatorDataListener()
-        alo.start()
+        self.alo = ActuatorDataListener()
+        self.alo.start()
         
         while(True):
-            if (alo.on_Actuator_Message() is True):
+            if (self.alo.on_Actuator_Message() is True):
                 maa = MultiActuatorAdaptor()
-                maa.temp_act(alo.get_alo_object().sensor_value)
+                maa.temp_act(self.alo.get_alo_object().sensor_value)
             else:
                 continue
             time.sleep(5)

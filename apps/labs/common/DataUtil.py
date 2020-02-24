@@ -29,7 +29,6 @@ class DataUtil():
         print(" decode [post] --> " + str(ad.current_actuator_status))
         print(" decode [post] --> " + str(ad.sensor_value))
         print(" decode [post] --> " + str(ad.actuation_state))
-        
         return ad 
 
     def sensordatatojson(self, SensorData):    
@@ -48,3 +47,4 @@ class DataUtil():
         with open('ActuatorData.txt', 'wb') as ActuatorData_file:
             pickle.dump(json_ActuatorData, ActuatorData_file)
         
+   
