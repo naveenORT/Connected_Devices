@@ -20,16 +20,16 @@ class SensorDataManager(threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)    
-
+        time.sleep(1)
+        self.alo = ActuatorDataListener()
+        self.alo.start()
+        
     '''
     * Runnable thread,to perform actuation
     '''
 
     def run(self):    
-        time.sleep(1)
-        self.alo = ActuatorDataListener()
-        self.alo.start()
-        
+      
         while(True):
             if (self.alo.on_Actuator_Message() is True):
                 maa = MultiActuatorAdaptor()
