@@ -25,7 +25,7 @@ class MultiActuatorAdaptor():
     * Actuator function for temperature sensor class, actuation_status is set true when LED actuation gets completed
     '''
 
-    def temp_act(self,input_value):        
+    def temp_act(self, input_value):        
             self.api_message = SimpleLedActivator(10)
             self.api_message.show_api_LED(float(input_value))    
             return        
