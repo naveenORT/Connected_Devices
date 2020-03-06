@@ -9,14 +9,14 @@ import time
 import random
 from labs.common.PersistenceUtil import PersistenceUtil
 from labs.module06.MqttClientConnector import MqttClientConnector
-
+from labs.module06.MqttClientConnector import mqttc
 data_object = SensorData()  # class object
 sense_hat = SenseHat()  # class object
 mqtt = MqttClientConnector()
+
 '''
 * This class polls temperature sensor data from sense hat via its API  
 '''
-
 
 
 class TempSensorAdaptorTask(threading.Thread):
@@ -45,13 +45,13 @@ class TempSensorAdaptorTask(threading.Thread):
     '''       
 
     def run(self):    
-        while TempSensorAdaptorTask.isDaemon(self):    
-            time.sleep(5)
+        
+        while TempSensorAdaptorTask.isDaemon(self):        
+            time.sleep(2)
             environment_temperature = self.getSensorData()
             data_object.addValue(environment_temperature)  # Logging sensor data
-            # sensor_obj = PersistenceUtil(data_object)
+           # sensor_obj = PersistenceUtil(data_object)       
             mqtt.publish_sensor_data("SensorData", data_object)
-            
             self.max_sample -= 1                    
             if self.max_sample == 0:
                 return 0

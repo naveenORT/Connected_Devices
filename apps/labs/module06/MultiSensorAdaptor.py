@@ -60,3 +60,4 @@ class MultiSensorAdaptor(threading.Thread):
 
     def getAPIobject(self):
         return self.humi_sensorAPI_object
+                                            
