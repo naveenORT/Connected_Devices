@@ -47,7 +47,7 @@ class SensorDataManager(threading.Thread):
 
     '''
     * Standard getter function
-    Output: MultiActuatorAdaptor(object)
+    * Output: MultiActuatorAdaptor(object)
     '''
 
     def get_maaadaptor(self):   
@@ -55,8 +55,8 @@ class SensorDataManager(threading.Thread):
 
     '''
     * Function to handle sensor data, so as to activate actuator
-    Input: SensorData(Object) 
-    Output: True or False (Boolean)
+    * Input: SensorData(Object) 
+    * Output: True or False (Boolean)
     '''    
 
     def handle_sensordata(self, invalue):

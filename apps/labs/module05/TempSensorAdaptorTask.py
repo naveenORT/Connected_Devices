@@ -28,6 +28,7 @@ class TempSensorAdaptorTask(threading.Thread):
     
     '''      
     * This function uses sensehat function to extract temperature data and returns
+    * Output: c_temperature (float)
     '''       
 
     def getSensorData(self):

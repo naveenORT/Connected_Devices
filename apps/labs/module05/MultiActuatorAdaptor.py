@@ -26,14 +26,14 @@ class MultiActuatorAdaptor():
     '''
 
     def temp_act(self, input_value):        
-            self.api_message = SimpleLedActivator(10)
-            self.api_message.show_api_LED(float(input_value))    
-            return        
+        self.api_message = SimpleLedActivator(10)
+        #self.api_message.show_api_LED(float(input_value))    
+        return        
 
     '''
     * Function to check whether LED actuation has happened or not
-      Input: ActuatorData(Object)
-      Output: True/False (Boolean) 
+    * Input: ActuatorData(Object)
+    * Output: True/False (Boolean) 
     '''
 
     def update_Actuator(self, invalue):   

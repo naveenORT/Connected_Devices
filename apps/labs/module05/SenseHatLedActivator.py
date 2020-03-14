@@ -54,7 +54,7 @@ class SimpleLedActivator():
 
     '''
     Standard setter function to set actuation_status
-    Input: True or False (Boolean)
+    * Input: True or False (Boolean)
     '''
 
     def set_actuation_completion(self, invalue):
@@ -62,7 +62,7 @@ class SimpleLedActivator():
 
     '''
     Standard getter function to get status_of_actuation
-    Output: True or False (Boolean)
+    * Output: True or False (Boolean)
     '''
 
     def get_actuation_completion(self):
