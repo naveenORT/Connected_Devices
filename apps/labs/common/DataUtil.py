@@ -7,13 +7,20 @@ import logging
 import redis
 from labs.common.AData import AData
 import pickle
-
+'''
+* Python module which provides essential tools to convert to/from Json object to/from SensorData object or ActuatorData object
+'''
 
 class DataUtil():
-    
+    '''
+    * Class constructor function
+    '''    
     def __init__(self):
         logging.info("Using Data Utilities")
-        
+    '''
+    * Public function to conver json string data to ActuatorData object
+    * Output: ActuatorData (object)
+    '''        
     def jsonToActuatorData(self, jsonData):        
         adDict = json.loads(jsonData)
         ad = AData()
@@ -28,19 +35,39 @@ class DataUtil():
         print(" decode [post] --> " + str(ad.sensor_value))
         print(" decode [post] --> " + str(ad.actuation_state))
         return ad 
-    
+
+    '''
+    * Public function to convert SensorData object to Json object
+    * Input: SensorData (object)
+    * Output: Json (String)
+    ''' 
+
     def sensordatatojson(self, SensorData):    
         jsonSensor_Data = json.dumps(SensorData.__dict__)
         return jsonSensor_Data
-    
+
+    '''
+    * Public function to write SensorData object to a file
+    ''' 
+
     def writesensordatatofile(self, json_SensorData):
         with open('SensorData.txt', 'wb') as SensorData_file:
             pickle.dump(json_SensorData, SensorData_file)
-        
+
+    '''
+    * Public function to convert ActuatorData object to json
+    * Input: ActuatorData (object)
+    * Output: Json (String)
+    '''     
+
     def actuatordatatojson(self, ActuatorData):
         jsonActuator_Data = json.dumps(ActuatorData.__dict__) 
         return jsonActuator_Data
-    
+
+    '''
+    * Public function to write ActuatorData object to a file
+    '''     
+
     def writeactuatordata(self, json_ActuatorData):            
         with open('ActuatorData.txt', 'wb') as ActuatorData_file:
             pickle.dump(json_ActuatorData, ActuatorData_file)

@@ -3,7 +3,6 @@ Created on Jan 23, 2020
 @author: Naveen Rajendran
 '''
 from datetime import datetime 
-from labs.common.ActuatorData import ActuatorData
 import logging
 '''
 * This class logs value from sensor continuously, whenever addValue function is passed with sensor values  
@@ -38,7 +37,7 @@ class SensorData():
         self.sampleCount += 1
         self.timeStamp = str(datetime.now())
         self.curValue = newVal
-        self.totValue += newVal
+        self.totValue += round(newVal,2)
         
         if(self.sampleCount == 1):
             self.minValue = self.curValue
@@ -50,7 +49,7 @@ class SensorData():
             self.maxValue = self.curValue
         
         if (self.totValue != 0 and self.sampleCount > 0):  # Computing Average Value
-            self.avgValue = self.totValue / self.sampleCount
+            self.avgValue = round( self.totValue / self.sampleCount,2)
 
         curValue = "curValue = " + str(round(self.curValue, 2))  # converting all parameters to string type 
         avgValue = "avgValue = " + str(round(self.avgValue, 2))

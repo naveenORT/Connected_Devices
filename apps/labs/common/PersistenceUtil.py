@@ -17,6 +17,7 @@ util = DataUtil()
 class PersistenceUtil():
     """
     * PersistenceUtil constructor function check for Actuator/SensorData instance & converts into JSON string using DataUtil class functions
+    * Input: SensorData (Object) or ActuatorData (Object)
     """
 
     def __init__(self, input_obj):
@@ -33,6 +34,7 @@ class PersistenceUtil():
     
     """
     * This function writes ActuatorData to Redis DataBase 
+    * Input: json_string
     """
 
     def writeActuatorDatatoDbms(self, json_actuator_data):    
@@ -41,11 +43,13 @@ class PersistenceUtil():
 
     """
     * This function writes SensorData to Redis DataBase 
+    * Input: json_string
     """ 
 
     def writeSensorDatatoDbms(self, json_sensor_data):    
         self.redis_sensor_data = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
         self.redis_sensor_data.set('SensorData', json_sensor_data)
+    
     
     def getsd(self):
         return self.sd
