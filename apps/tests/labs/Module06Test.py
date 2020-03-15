@@ -1,7 +1,8 @@
 import unittest
+import json
 from labs.module06.SensorDataManager import SensorDataManager
 from labs.module06.MultiSensorAdaptor import MultiSensorAdaptor    
-from labs.module06.TempSensorAdaptorTask import mqttc 
+from labs.module06.MqttClientConnector import mqttc 
 
 """
 * This class is for the purpose of testing public functions associated with module06
@@ -25,9 +26,8 @@ class Module06Test(unittest.TestCase):
 	"""
 
 	def testPublishSensorData(self):
-		print(mqttc._on_publish.__sizeof__())
 		self.assertTrue(mqttc._on_publish.__sizeof__() > 0)
-
+		
 	"""
 	* Function to check data published from mqttc
 	"""
