@@ -13,7 +13,7 @@ Test class for all requisite Module07 functionality
 class Module07Test(unittest.TestCase):
 
 	"""
-	
+	* Setting-up essential threads for operation
 	"""
 
 	def setUp(self):
@@ -29,7 +29,7 @@ class Module07Test(unittest.TestCase):
 		self.manager_object.start()  # Starting Thread 
 
 	"""
-	
+	* Test Cases for Checking functionalities of GET,PUT,POST & DELETE
 	"""
 
 	def testPOST(self):
