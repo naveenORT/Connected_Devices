@@ -50,7 +50,6 @@ class PersistenceUtil():
         self.redis_sensor_data = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
         self.redis_sensor_data.set('SensorData', json_sensor_data)
     
-    
     def getsd(self):
         return self.sd
     
