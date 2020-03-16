@@ -6,10 +6,7 @@ from labs.common.SensorData import SensorData
 from sense_hat import SenseHat
 import threading
 import time
-import random
-from labs.common.PersistenceUtil import PersistenceUtil
 from labs.module06.MqttClientConnector import MqttClientConnector
-from labs.module06.MqttClientConnector import mqttc
 data_object = SensorData()  # class object
 sense_hat = SenseHat()  # class object
 mqtt = MqttClientConnector()
