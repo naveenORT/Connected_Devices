@@ -36,8 +36,8 @@ class SensorData():
     def addValue(self, newVal):
         self.sampleCount += 1
         self.timeStamp = str(datetime.now())
-        self.curValue = newVal
-        self.totValue += round(newVal,2)
+        self.curValue = round(newVal,1)
+        self.totValue += round(newVal,1)
         
         if(self.sampleCount == 1):
             self.minValue = self.curValue
@@ -51,22 +51,21 @@ class SensorData():
         if (self.totValue != 0 and self.sampleCount > 0):  # Computing Average Value
             self.avgValue = round( self.totValue / self.sampleCount,2)
 
-        curValue = "curValue = " + str(round(self.curValue, 2))  # converting all parameters to string type 
-        avgValue = "avgValue = " + str(round(self.avgValue, 2))
-        minValue = "minValue =" + str(round(self.minValue, 2))
-        maxValue = "maxValue =" + str(round(self.maxValue, 2))
-        totValue = "totValue =" + str(round(self.totValue, 2))
+        curValue = "curValue = " + str(round(self.curValue, 1))  # converting all parameters to string type 
+        avgValue = "avgValue = " + str(round(self.avgValue, 1))
+        minValue = "minValue =" + str(round(self.minValue, 1))
+        maxValue = "maxValue =" + str(round(self.maxValue, 1))
+        totValue = "totValue =" + str(round(self.totValue, 1))
         sampleCount = "sample count =" + str(self.sampleCount)
         
-        logging.info('\n')
-        logging.info("-----------------------------------Values From =" + self.get_sensor_name() + "---------------------------")
-        logging.info(curValue)        
-        logging.info(avgValue)
-        logging.info(minValue)
-        logging.info(maxValue)
-        logging.info(totValue)
-        logging.info(sampleCount)
-        logging.info("_____________________________________________________________________________________________")
+        logging.getLogger().info("----------------------------------------Values From =" + self.get_sensor_name() + "---------------------------")
+        logging.getLogger().info(curValue)        
+        logging.getLogger().info(avgValue)
+        logging.getLogger().info(minValue)
+        logging.getLogger().info(maxValue)
+        logging.getLogger().info(totValue)
+        logging.getLogger().info(sampleCount)
+        logging.info("_________________________________________________________________________________________________________________________________")
    
     '''
     * Standard getter function

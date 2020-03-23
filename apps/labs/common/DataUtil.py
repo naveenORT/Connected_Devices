@@ -11,16 +11,20 @@ import pickle
 * Python module which provides essential tools to convert to/from Json object to/from SensorData object or ActuatorData object
 '''
 
+
 class DataUtil():
     '''
     * Class constructor function
     '''    
+
     def __init__(self):
         logging.info("Using Data Utilities")
+
     '''
     * Public function to conver json string data to ActuatorData object
     * Output: ActuatorData (object)
     '''        
+
     def jsonToActuatorData(self, jsonData):        
         adDict = json.loads(jsonData)
         ad = AData()
@@ -71,4 +75,5 @@ class DataUtil():
     def writeactuatordata(self, json_ActuatorData):            
         with open('ActuatorData.txt', 'wb') as ActuatorData_file:
             pickle.dump(json_ActuatorData, ActuatorData_file)
+    
    
