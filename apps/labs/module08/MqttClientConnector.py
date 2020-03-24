@@ -8,7 +8,6 @@ import logging
 import ssl
 from labs.common.DataUtil import DataUtil
 import json
-from labs.module06.MqttClientConnector import on_publish
 # Define Variables
 json_tool = DataUtil()
 mqttc = mqtt.Client()
