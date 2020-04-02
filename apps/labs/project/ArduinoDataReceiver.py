@@ -7,7 +7,6 @@ import logging
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
-arduinoMessage = []
 
     
 class ArduinoDataReceiver(threading.Thread):
@@ -29,16 +28,17 @@ class ArduinoDataReceiver(threading.Thread):
         
         self.radio.openReadingPipe(0, pipes[1])
         self.radio.openReadingPipe(1, pipes[2])
-        self.radio.printDetails()
         self.radio.startListening()
     
     def run(self):
         while(1):
             self.receive_data_from_field()
-            time.sleep(2)
+            time.sleep(3)
     
     def receive_data_from_field(self):
+        arduinoMessage = []
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
+        
         if(arduinoMessage[0] == 1):
             print("Received from Cabin Device: {}".format(arduinoMessage))
             self.cabin_temperature = arduinoMessage[2]  
