@@ -41,9 +41,9 @@ class ArduinoDataReceiver(threading.Thread):
         
         if(arduinoMessage[0] == 1):
             print("Received from Cabin Device: {}".format(arduinoMessage))
-            self.cabin_temperature = arduinoMessage[2]/4  
+            self.cabin_temperature = round(arduinoMessage[2]/4,2)  
             logging.info("Cabin Temp:" + str(self.cabin_temperature))
-            self.room_humidity = arduinoMessage[4]/3
+            self.room_humidity = round(arduinoMessage[4]/3,2)
             logging.info("Room Humidity:" + str(self.room_humidity))
             self.magnetic_flux = arduinoMessage[6]/1000
             logging.info("Magnetic Flux:" + str(self.magnetic_flux))
