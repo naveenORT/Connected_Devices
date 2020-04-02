@@ -15,22 +15,22 @@ class ArduinoDataReceiver(threading.Thread):
     def __init__(self):
         
         threading.Thread.__init__(self)
-        radio = NRF24(GPIO, spidev.SpiDev())
-        radio.begin(0, 17)
+        self.radio = NRF24(GPIO, spidev.SpiDev())
+        self.radio.begin(0, 17)
         
-        radio.setPayloadSize(32)
-        radio.setChannel(0x76)
-        radio.setDataRate(NRF24.BR_1MBPS)
-        radio.setPALevel(NRF24.PA_MIN)
+        self.radio.setPayloadSize(32)
+        self.radio.setChannel(0x76)
+        self.radio.setDataRate(NRF24.BR_1MBPS)
+        self.radio.setPALevel(NRF24.PA_MIN)
         
-        radio.setAutoAck(True)
-        radio.enableDynamicPayloads()
-        radio.enableAckPayload()
+        self.radio.setAutoAck(True)
+        self.radio.enableDynamicPayloads()
+        self.radio.enableAckPayload()
         
-        radio.openReadingPipe(0, pipes[1])
-        radio.openReadingPipe(1, pipes[2])
-        radio.printDetails()
-        radio.startListening()
+        self.radio.openReadingPipe(0, pipes[1])
+        self.radio.openReadingPipe(1, pipes[2])
+        self.radio.printDetails()
+        self.radio.startListening()
     
     def run(self):
         self.receive_data_from_field()
