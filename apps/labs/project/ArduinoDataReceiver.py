@@ -33,7 +33,7 @@ class ArduinoDataReceiver(threading.Thread):
     def run(self):
         while(1):
             self.receive_data_from_field()
-            time.sleep(1)
+            time.sleep(3)
     
     def receive_data_from_field(self):
         arduinoMessage = []
