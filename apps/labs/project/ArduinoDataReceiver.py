@@ -41,20 +41,20 @@ class ArduinoDataReceiver(threading.Thread):
         
         if(arduinoMessage[0] == 1):
             print("Received from Cabin Device: {}".format(arduinoMessage))
-            self.cabin_temperature = arduinoMessage[2]  
+            self.cabin_temperature = arduinoMessage[2]/4  
             logging.info("Cabin Temp:" + str(self.cabin_temperature))
-            self.room_humidity = arduinoMessage[4]
+            self.room_humidity = arduinoMessage[4]/3
             logging.info("Room Humidity:" + str(self.room_humidity))
-            self.magnetic_flux = arduinoMessage[6]
+            self.magnetic_flux = arduinoMessage[6]/1000
             logging.info("Magnetic Flux:" + str(self.magnetic_flux))
      
         if(arduinoMessage[0] == 2):
             print("Received from Earthpit Device: {}".format(arduinoMessage)) 
             self.rod_resistence = arduinoMessage[2]  
-            logging.info("Earthpit Resistence" + str(self.rod_resistence))
+            logging.info("Earthpit Resistence " + str(self.rod_resistence))
             
             self.rod_length = arduinoMessage[4]
-            logging.info("Earthpit Resistence" + str(self.rod_length))
+            logging.info("Salt Level " + str(self.rod_length))
 
     def getCabin_Temp(self):
         return self.cabin_temperature
