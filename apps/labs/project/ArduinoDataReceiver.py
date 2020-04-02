@@ -33,8 +33,9 @@ class ArduinoDataReceiver(threading.Thread):
         self.radio.startListening()
     
     def run(self):
-        self.receive_data_from_field()
-        time.sleep(2)
+        while(1):
+            self.receive_data_from_field()
+            time.sleep(2)
     
     def receive_data_from_field(self):
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
