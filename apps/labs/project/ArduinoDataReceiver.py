@@ -14,7 +14,7 @@ class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         
-        threading.Thread.__init__()
+        threading.Thread.__init__(self)
         radio = NRF24(GPIO, spidev.SpiDev())
         radio.begin(0, 17)
         
