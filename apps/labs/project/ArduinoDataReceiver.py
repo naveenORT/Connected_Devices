@@ -31,6 +31,7 @@ class ArduinoDataReceiver(threading.Thread):
         self.radio.startListening()
     
     def run(self):
+        self.radio.flush_rx()
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
