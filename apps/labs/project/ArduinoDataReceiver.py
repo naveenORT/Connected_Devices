@@ -33,9 +33,10 @@ class ArduinoDataReceiver(threading.Thread):
     def run(self):
         while(1):
             self.receive_data_from_field()
-            time.sleep(2)
+            self.receive_data_from_elecrticpit()
+            time.sleep(1)
     
-    def receive_data_from_field(self):
+    def receive_data_from_cabindevice(self):
         arduinoMessage = []
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
         
@@ -47,7 +48,14 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Room Humidity:" + str(self.room_humidity))
             self.magnetic_flux = arduinoMessage[6]/1000
             logging.info("Magnetic Flux:" + str(self.magnetic_flux))
-     
+        
+        else:
+            return
+    
+    def receive_data_from_elecrticpit(self):    
+        arduinoMessage = []
+        self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
+    
         if(arduinoMessage[0] == 2):
             print("Received from Earthpit Device: {}".format(arduinoMessage)) 
             self.rod_resistence = arduinoMessage[2]  
@@ -55,7 +63,10 @@ class ArduinoDataReceiver(threading.Thread):
             
             self.rod_length = arduinoMessage[4]
             logging.info("Salt Level " + str(self.rod_length))
-
+        
+        else:
+            return
+    
     def getCabin_Temp(self):
         return self.cabin_temperature
     
