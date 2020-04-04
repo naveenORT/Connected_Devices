@@ -32,7 +32,7 @@ class ArduinoDataReceiver(threading.Thread):
     
     def run(self):
         while(1):
-            self.receive_data_from_field()
+            self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
             time.sleep(1)
     
