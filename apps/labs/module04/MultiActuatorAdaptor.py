@@ -26,19 +26,21 @@ class MultiActuatorAdaptor():
 
     def __init__(self):
         
-        # self.temp_act()
+        self.temp_actuator_status = ActuatorData()
         self.api_actuator_status = ActuatorData()
         self.i2c_actuator_status = ActuatorData()
+        
+        self.temp_act()
         self.humidity_api_act()
         self.humidity_i2c_act()
-
+        
     '''
     * Actuator function for temperature sensor class, actuation_status is set true when LED actuation gets completed
     '''
 
     def temp_act(self):    
         if  (data_object.getActuationState() is True):
-                self.temp_actuator_status = ActuatorData()
+            
                 self.temp_actuator_status.addData("temp_inbound", data_object.getcurvalue(), "Temp Sensor")  # logging actuator data
                 self.api_message = SimpleLedActivator(10)
                 logging.info("Going to Performing Actuation")     
