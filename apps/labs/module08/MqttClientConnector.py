@@ -94,3 +94,7 @@ def on_message(mqttc, userdata, message):
     global flag
     act_data = str(message.payload.decode("utf-8"))
     flag = True
+
+mqttc.on_connect = on_connect
+mqttc.on_publish = on_publish
+mqttc.on_message = on_message

@@ -71,7 +71,7 @@ def on_publish(mqttc, userdata, result):  # create function for callback
 
 
 def on_message(mqttc, userdata, message):
-        print("message received " , str(message.payload.decode("utf-8")))
+        print("message received ", str(message.payload.decode("utf-8")))
         print("message topic=", message.topic)
         print("message qos=", message.qos)
         print("message retain flag=", message.retain)
