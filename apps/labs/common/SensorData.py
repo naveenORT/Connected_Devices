@@ -39,6 +39,9 @@ class SensorData():
         self.curValue = round(newVal,1)
         self.totValue += round(newVal,1)
         
+        
+        self.setAcutationState(True)
+        
         if(self.sampleCount == 1):
             self.minValue = self.curValue
         
