@@ -38,8 +38,6 @@ class SensorData():
         self.timeStamp = str(datetime.now())
         self.curValue = round(newVal,1)
         self.totValue += round(newVal,1)
-        
-        self.Actuation_State = True
         self.setActuationState(True)
         
         if(self.sampleCount == 1):
@@ -156,4 +154,4 @@ class SensorData():
     '''    
 
     def getActuationState(self):    
-        return self.Actuation_State
+        return True
