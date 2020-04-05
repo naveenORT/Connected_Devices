@@ -54,14 +54,15 @@ class MultiActuatorAdaptor():
     * Actuator function for humidity_api sensor class, actuation_status is set true when LED actuation gets completed
     '''      
 
-    def humidity_api_act(self):    
+    def humidity_api_act(self): 
+        humidity_data_object.setAcutationState(True)   
         if (humidity_data_object.getActuationState() is True):
         
                 self.api_actuator_status.addData("api_inbound", humidity_data_object.getcurvalue(), "Humidity_API")  # logging actuator data
                 self.humi_api_message = SimpleLedActivator(10)
                 logging.info("Going to Performing Actuation")     
                 self.humi_api_message.show_api_LED(humidity_data_object.getcurvalue())
-                
+            
                 if(self.humi_api_message.get_actuation_completion() is True):
                     self.api_actuator_status.setActuation_state(True)
                 return
