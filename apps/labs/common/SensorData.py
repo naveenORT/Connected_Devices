@@ -150,7 +150,7 @@ class SensorData():
 
     '''
     * Standard getter function
-      Output: True or Flase (Boolean)
+      Output: True or Flase (Bool)
     '''    
 
     def getActuationState(self):    
