@@ -41,10 +41,11 @@ class MultiActuatorAdaptor():
     def temp_act(self):    
         if  (data_object.getActuationState() is True):
             
-                self.temp_actuator_status.addData("temp_inbound", data_object.getcurvalue(), "Temp Sensor")  # logging actuator data
+                self.temp_actuator_status.addData("temp_inbound", data_object.getcurvalue(), "Temperature Sensor")  # logging actuator data
                 self.api_message = SimpleLedActivator(10)
                 logging.info("Going to Performing Actuation")     
                 self.api_message.show_api_LED(data_object.getcurvalue())
+                
                 if(self.api_message.get_actuation_completion is True):
                     self.temp_actuator_status.setActuation_state(True)
                 return        
@@ -55,10 +56,12 @@ class MultiActuatorAdaptor():
 
     def humidity_api_act(self):    
         if (humidity_data_object.getActuationState() is True):
+        
                 self.api_actuator_status.addData("api_inbound", humidity_data_object.getcurvalue(), "Humidity_API")  # logging actuator data
                 self.humi_api_message = SimpleLedActivator(10)
                 logging.info("Going to Performing Actuation")     
                 self.humi_api_message.show_api_LED(humidity_data_object.getcurvalue())
+                
                 if(self.humi_api_message.get_actuation_completion() is True):
                     self.api_actuator_status.setActuation_state(True)
                 return
