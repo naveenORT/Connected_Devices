@@ -17,4 +17,4 @@ class OPC_Client(threading.Thread):
     def run(self):   
         SensorData = ArduinoDataReceiver()
         SensorData.start()
-        
+
