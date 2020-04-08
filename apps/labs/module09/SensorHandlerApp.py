@@ -7,6 +7,7 @@ import logging
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
 import threading
+import time
 
 SensorData_Object = ArduinoDataReceiver()
 
@@ -17,11 +18,12 @@ class SensorHandlerApp(threading.Thread):
     logging.info(".started logging.")
     
     def __init__(self):        
-        threading.Thread.__init__()
+        threading.Thread.__init__(self)
         logging.info("Started")
     
     def run(self):
         SensorData_Object.start()
+        time.sleep(5)
         opc = OPC_Client_Rpi()
         opc.start()
         

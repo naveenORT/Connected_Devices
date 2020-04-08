@@ -4,7 +4,7 @@ Created on Apr 2, 2020
 '''
 import threading
 from opcua import Client
-#from labs.module09.SensorHandlerApp import SensorData_Object
+from labs.module09.SensorHandlerApp import SensorData_Object
 
 
 class OPC_Client_Rpi(threading.Thread):
@@ -25,7 +25,7 @@ class OPC_Client_Rpi(threading.Thread):
     
     def run(self):
         
-        threading.Thread.__init__()    
+        threading.Thread.__init__(self)    
         
         while(1):
             
