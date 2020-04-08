@@ -3,16 +3,13 @@ from lib_nrf24 import NRF24
 import time
 import spidev
 import threading
-import logging
 
+from labs.module09.DeviceHandlerApp import logging
 from labs.module09.SensorData import SensorData
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
 SensorData_Object = SensorData()
-
-logging.BASIC_FORMAT
-#logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',level=logging.INFO,datefmt='%Y-%m-%d %H:%M:%S')
  
 class ArduinoDataReceiver(threading.Thread):
     
@@ -52,15 +49,15 @@ class ArduinoDataReceiver(threading.Thread):
             
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
             SensorData_Object.add_Temp_Value(self.cabin_temperature)
-            logging.getLogger().info("Cabin Temp:" + str(self.cabin_temperature))
+            logging.info("Cabin Temp:" + str(self.cabin_temperature))
             
             self.room_humidity = round(arduinoMessage[4] / 3, 2)
             SensorData_Object.add_Humi_Value(5)
-            logging.getLogger().info("Room Humidity:" + str(self.room_humidity))
+            logging.info("Room Humidity:" + str(self.room_humidity))
             
             self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(self.magnetic_flux)
-            logging.getLogger().info("Magnetic Flux:" + str(self.magnetic_flux))
+            logging.info("Magnetic Flux:" + str(self.magnetic_flux))
         
         else:
             return
@@ -74,11 +71,11 @@ class ArduinoDataReceiver(threading.Thread):
             
             self.rod_resistence = arduinoMessage[2]  
             SensorData_Object.add_Res_Value(self.rod_resistence)
-            logging.getLogger().info("Earthpit Resistence " + str(self.rod_resistence))
+            logging.info("Earthpit Resistence " + str(self.rod_resistence))
             
             self.rod_length = arduinoMessage[4]
             SensorData_Object.add_Cor_Value(self.rod_length)
-            logging.getLogger().info("Ultrasound Level " + str(self.rod_length))
+            logging.info("Ultrasound Level " + str(self.rod_length))
         
         else:
             return
