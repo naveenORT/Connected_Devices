@@ -5,8 +5,7 @@ Created on Apr 2, 2020
 import threading
 import time
 from opcua import Client
-from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
-from labs.module09.SensorHandlerApp import SensorData_Object
+from labs.module09.ArduinoDataReceiver import SensorData_Object
 
 
 class OPC_Client_Rpi(threading.Thread):
@@ -30,17 +29,17 @@ class OPC_Client_Rpi(threading.Thread):
         time.sleep(5)
         while(1):
             time.sleep(0.5)
-            temperature = SensorData_Object.getCabin_Temp()
+            temperature = SensorData_Object.getTemperature()
             self.temp_value.set_value(temperature)        
         
-            humidity = SensorData_Object.getRoom_Humidity()
+            humidity = SensorData_Object.getHumidity()
             self.hum_value.set_value(humidity)
         
-            flux = SensorData_Object.getMagnetic_flux()
+            flux = SensorData_Object.getMagFlux()
             self.flux_value.set_value(flux)
             
-            corona_level = SensorData_Object.getRod_Length()
+            corona_level = SensorData_Object.getCorona()
             self.corona_level.set_value(corona_level) 
             
-            Resistence = SensorData_Object.getRod_Resistence()
+            Resistence = SensorData_Object.getResistence()
             self.resistance.set_value(Resistence)

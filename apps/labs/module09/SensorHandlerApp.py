@@ -9,8 +9,6 @@ from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
 import threading
 import time
 
-
-SensorData_Object = ArduinoDataReceiver()
     
 class SensorHandlerApp(threading.Thread):
    
@@ -22,11 +20,10 @@ class SensorHandlerApp(threading.Thread):
         logging.info("Started")
     
     def run(self):
-        global SensorData_Object
+        SensorData_Object = ArduinoDataReceiver()
+        SensorData_Object.start()
         
         opc = OPC_Client_Rpi()
-        SensorData_Object.start()
-        time.sleep(5)
         opc.start()
         
 
