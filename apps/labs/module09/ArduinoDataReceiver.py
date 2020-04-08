@@ -55,7 +55,7 @@ class ArduinoDataReceiver(threading.Thread):
             SensorData_Object.add_Humi_Value(5)
             logging.info("Room Humidity:" + str(self.room_humidity))
             
-            self.magnetic_flux = arduinoMessage[6] / 100
+            self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(self.magnetic_flux)
             logging.info("Magnetic Flux:" + str(self.magnetic_flux))
         
