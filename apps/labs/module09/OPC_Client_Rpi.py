@@ -3,6 +3,7 @@ Created on Apr 2, 2020
 @author: Naveen Rajendran
 '''
 import threading
+import time
 from opcua import Client
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 
@@ -25,10 +26,9 @@ class OPC_Client_Rpi(threading.Thread):
     
     def run(self):
         
-        threading.Thread.__init__(self)    
         
         while(1):
-            
+            time.sleep(0.5)
             temperature = SensorData_Object.getCabin_Temp()
             self.temp_value.set_value(temperature)        
         

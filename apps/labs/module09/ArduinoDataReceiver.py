@@ -35,8 +35,8 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
-            time.sleep(2)
-    
+            time.sleep(0.5)
+            self.radio.flush_rx()
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
