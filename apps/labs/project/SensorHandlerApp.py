@@ -18,8 +18,11 @@ class SensorHandlerApp(threading.Thread):
     
     def __init__(self):        
         threading.Thread.__init__()
+        logging.info("Started")
+    
+    def run(self):
         SensorData_Object.start()
         opc = OPC_Client_Rpi()
         opc.start()
         time.sleep(100)
-    
+
