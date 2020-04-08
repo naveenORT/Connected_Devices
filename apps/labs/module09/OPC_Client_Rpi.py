@@ -4,9 +4,9 @@ Created on Apr 2, 2020
 '''
 import threading
 from opcua import Client
-from labs.module09.SensorHandlerApp import SensorHandlerApp
+from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 
-SensorData_Object = SensorHandlerApp()
+SensorData_Object = ArduinoDataReceiver()
 class OPC_Client_Rpi(threading.Thread):
         
     def __init__(self):
