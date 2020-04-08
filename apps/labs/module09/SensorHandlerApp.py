@@ -16,9 +16,10 @@ class SensorHandlerApp(threading.Thread):
    
     def __init__(self):        
         threading.Thread.__init__(self)
-        logging.info("Started")
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
     
     def run(self):
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         SensorData_Object = ArduinoDataReceiver()
         SensorData_Object.start()
         time.sleep(2)
