@@ -9,7 +9,9 @@ import logging
 
 def main():
     
-    logging.info("Sensor_Logging_Started!!!")
+    logging.getLogger()
+    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+    
     x = SensorHandlerApp()
     x.start()
     
