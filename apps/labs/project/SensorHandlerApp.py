@@ -24,5 +24,6 @@ class SensorHandlerApp(threading.Thread):
         SensorData_Object.start()
         opc = OPC_Client_Rpi()
         opc.start()
-        time.sleep(100)
+        
 
+SensorHandlerApp()
