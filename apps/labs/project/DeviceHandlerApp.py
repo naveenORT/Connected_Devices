@@ -8,3 +8,6 @@ from labs.project.SensorHandlerApp import SensorHandlerApp
 
 def main():
     x = SensorHandlerApp()
+    x.start()
+    
+main()
