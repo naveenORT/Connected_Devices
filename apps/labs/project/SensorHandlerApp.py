@@ -26,4 +26,3 @@ class SensorHandlerApp(threading.Thread):
         opc.start()
         
 
-SensorHandlerApp()
