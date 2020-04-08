@@ -3,10 +3,9 @@ Created on Apr 2, 2020
 
 @author: Naveen Rajendran
 '''
-import time
 import logging
-from labs.project.ArduinoDataReceiver import ArduinoDataReceiver
-from labs.project.OPC_Client_Rpi import OPC_Client_Rpi
+from labs.Project_Final.ArduinoDataReceiver import ArduinoDataReceiver
+from labs.Project_Final.OPC_Client_Rpi import OPC_Client_Rpi
 import threading
 SensorData_Object = ArduinoDataReceiver()
 
