@@ -44,7 +44,7 @@ class ArduinoDataReceiver(threading.Thread):
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
         
         if(arduinoMessage[0] == 1):
-            print("Received from Cabin Device: {}".format(arduinoMessage))
+            #print("Received from Cabin Device: {}".format(arduinoMessage))
             
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
             SensorData_Object.add_Temp_Value(self.cabin_temperature)
@@ -66,7 +66,7 @@ class ArduinoDataReceiver(threading.Thread):
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
     
         if(arduinoMessage[0] == 2):
-            print("Received from Earthpit Device: {}".format(arduinoMessage)) 
+            #print("Received from Earthpit Device: {}".format(arduinoMessage)) 
             
             self.rod_resistence = arduinoMessage[2]  
             SensorData_Object.add_Res_Value(self.rod_resistence)
