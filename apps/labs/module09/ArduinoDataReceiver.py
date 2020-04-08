@@ -35,6 +35,7 @@ class ArduinoDataReceiver(threading.Thread):
         self.radio.startListening()
     
     def run(self):
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         self.radio.flush_rx()
         while(1):
             self.receive_data_from_cabindevice()

@@ -19,7 +19,6 @@ class SensorHandlerApp(threading.Thread):
         logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
     
     def run(self):
-        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         SensorData_Object = ArduinoDataReceiver()
         SensorData_Object.start()
         time.sleep(2)
