@@ -12,9 +12,6 @@ import time
     
 class SensorHandlerApp(threading.Thread):
    
-    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
-    logging.info(".started logging.")
-
     def __init__(self):        
         threading.Thread.__init__(self)
         logging.info("Started")
