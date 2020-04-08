@@ -6,8 +6,9 @@ import threading
 import time
 from opcua import Client
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
+from labs.module09.SensorHandlerApp import SensorData_Object
 
-SensorData_Object = ArduinoDataReceiver()
+
 class OPC_Client_Rpi(threading.Thread):
         
     def __init__(self):
@@ -26,8 +27,7 @@ class OPC_Client_Rpi(threading.Thread):
     
     def run(self):
         
-        SensorData_Object.start()
-        time.sleep(8)
+        time.sleep(5)
         while(1):
             time.sleep(0.5)
             temperature = SensorData_Object.getCabin_Temp()
