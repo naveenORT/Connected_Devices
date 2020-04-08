@@ -22,7 +22,7 @@ class SensorHandlerApp(threading.Thread):
     def run(self):
         SensorData_Object = ArduinoDataReceiver()
         SensorData_Object.start()
-        
+        time.sleep(2)
         opc = OPC_Client_Rpi()
         opc.start()
         

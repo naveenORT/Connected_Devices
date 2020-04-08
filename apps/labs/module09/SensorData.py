@@ -3,6 +3,7 @@ Created on Apr 8, 2020
 @author: Naveen Rajendran
 '''
 import logging
+
 class SensorData():
     
     
