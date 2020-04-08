@@ -4,9 +4,9 @@ Created on Apr 2, 2020
 '''
 import threading
 from opcua import Client
-#from labs.module09.SensorHandlerApp import SensorData_Object
+from labs.module09.SensorHandlerApp import SensorHandlerApp
 
-
+SensorData_Object = SensorHandlerApp()
 class OPC_Client_Rpi(threading.Thread):
         
     def __init__(self):
@@ -20,8 +20,8 @@ class OPC_Client_Rpi(threading.Thread):
         self.temp_value = self.opc_client.get_node('ns=2; s="Cabin_Temperature"')
         self.hum_value = self.opc_client.get_node('ns=2; s="Room_Humidity"')
         self.flux_value = self.opc_client.get_node('ns=2; s="Room_Humidity"')
-        self.corona_level = self.opc_client.get_node('ns=3; s="Salt_Level"', "SaltLevel")
-        self.resistance = self.opc_client.get_node('ns=3; s="Rod_Resistence"', "Resistance")
+        self.corona_level = self.opc_client.get_node('ns=3; s="Salt_Level"')
+        self.resistance = self.opc_client.get_node('ns=3; s="Rod_Resistence"')
     
     def run(self):
         
