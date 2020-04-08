@@ -6,10 +6,6 @@ import threading
 import time
 from opcua import Client
 from labs.module09.ArduinoDataReceiver import SensorData_Object
-import logging
-
-logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
-logging.info(".started logging.")
 
 
 class OPC_Client_Rpi(threading.Thread):
@@ -29,7 +25,6 @@ class OPC_Client_Rpi(threading.Thread):
         self.resistance = self.opc_client.get_node('ns=3; s="Rod_Resistence"')
     
     def run(self):
-        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         time.sleep(5)
         while(1):
             time.sleep(0.5)

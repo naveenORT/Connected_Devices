@@ -10,13 +10,12 @@ GPIO.setmode(GPIO.BCM)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
 SensorData_Object = SensorData()
 
-logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
-logging.info(".started logging.")
-
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+
         threading.Thread.__init__(self)
         self.radio = NRF24(GPIO, spidev.SpiDev())
         self.radio.begin(0, 17)
