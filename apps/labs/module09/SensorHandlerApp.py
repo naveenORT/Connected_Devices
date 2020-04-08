@@ -22,7 +22,6 @@ class SensorHandlerApp(threading.Thread):
     
     def run(self):
         opc = OPC_Client_Rpi()
-        time.sleep(5)
         opc.start()
         
 

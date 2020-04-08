@@ -26,7 +26,8 @@ class OPC_Client_Rpi(threading.Thread):
     
     def run(self):
         
-        
+        SensorData_Object.start()
+        time.sleep(8)
         while(1):
             time.sleep(0.5)
             temperature = SensorData_Object.getCabin_Temp()
