@@ -10,7 +10,7 @@ SensorData_Object = ArduinoDataReceiver()
 class OPC_Client_Rpi(threading.Thread):
         
     def __init__(self):
-    
+        threading.Thread.__init__(self)
         self.opc_client = Client("opc.tcp://10.0.0.57:4048")
         self.opc_client.connect()
         self.initiate_nodes()
