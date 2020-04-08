@@ -6,6 +6,10 @@ import threading
 import time
 from opcua import Client
 from labs.module09.ArduinoDataReceiver import SensorData_Object
+import logging
+
+logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+logging.info(".started logging.")
 
 
 class OPC_Client_Rpi(threading.Thread):
