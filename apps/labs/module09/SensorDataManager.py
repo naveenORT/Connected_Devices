@@ -20,15 +20,15 @@ class SensorDataManager(threading.Thread):
         
         if (SensorData_Object.getHumidity() > 50):
             data = "Excess Humidity Value Detected @ Site" + str(SensorData_Object.getHumidity())
-            SMTP.publishMessage("Excess Temperature Detected", data)
+            SMTP.publishMessage("Excess Humidity Detected", data)
     
         if (SensorData_Object.getResistence() > 110):
             data = "Excess Resistance Value Detected @ Site" + str (SensorData_Object.getResistence())
-            SMTP.publishMessage("Excess Temperature Detected", data)
+            SMTP.publishMessage("Excess Resistance Detected", data)
     
         if (SensorData_Object.getCorona() > 75):
             data = "Excess Corona_level Value Detected @ Site" + str (SensorData_Object.getCorona())
-            SMTP.publishMessage("Excess Temperature Detected", data)
+            SMTP.publishMessage("Excess Corona Detected", data)
     
         if (SensorData_Object.getTemperature() > 25):
             data = "Excess Temperartue Value Detected @ Site" + str(SensorData_Object.getTemperature())
@@ -36,7 +36,7 @@ class SensorDataManager(threading.Thread):
     
         if (SensorData_Object.getMagFlux() > 70):
             data = "Excess Induction Value Detected @ Site" + str(SensorData_Object.getTemperature())
-            SMTP.publishMessage("Excess Temperature Detected", data)
+            SMTP.publishMessage("Excess Magnetic Flux Detected", data)
     
     
     def run(self):
