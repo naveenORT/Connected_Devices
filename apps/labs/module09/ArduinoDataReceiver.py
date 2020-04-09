@@ -61,7 +61,7 @@ class ArduinoDataReceiver(threading.Thread):
             mag_x = round(mag["x"], 2)
             mag_y = round(mag["y"], 2)
             mag_z = round(mag["z"], 2)
-            mag_t = round(sqrt(mag_x * mag_x + mag_y * mag_y + mag_z * mag_z), 3)
+            mag_t = round(sqrt(abs(mag_x * mag_x + mag_y * mag_y + mag_z * mag_z)), 3)
             print("Magnetic Flux:" + str(mag_t))
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(mag_t)
