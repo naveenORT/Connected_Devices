@@ -20,7 +20,7 @@ class OPC_Client_Rpi(threading.Thread):
         
         self.temp_value = self.opc_client.get_node('ns=2; s="Cabin_Temperature"')
         self.hum_value = self.opc_client.get_node('ns=2; s="Room_Humidity"')
-        self.flux_value = self.opc_client.get_node('ns=2; s="Room_Humidity"')
+        self.flux_value = self.opc_client.get_node('ns=2; s="Magnetic_Flux"')
         self.corona_level = self.opc_client.get_node('ns=3; s="Salt_Level"')
         self.resistance = self.opc_client.get_node('ns=3; s="Rod_Resistence"')
     
