@@ -10,7 +10,7 @@ GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
 SensorData_Object = SensorData()
- 
+sense = SenseHat()
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
@@ -49,16 +49,16 @@ class ArduinoDataReceiver(threading.Thread):
             
             print("\n")
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
-            SensorData_Object.add_Temp_Value(SenseHat.get_temperature())
-            print("Cabin Temp:" + str(self.cabin_temperature))
+            SensorData_Object.add_Temp_Value(sense.get_temperature())
+            print("Cabin Temp:" + str(sense.get_temperature()))
             
             self.room_humidity = round(arduinoMessage[4] / 3, 2)
-            SensorData_Object.add_Humi_Value(self.room_humidity)
-            print("Room Humidity:" + str(self.room_humidity))
+            SensorData_Object.add_Humi_Value(sense.get_humidity())
+            print("Room Humidity:" + str(sense.get_humidity()))
             
             self.magnetic_flux = arduinoMessage[6]/10
             SensorData_Object.add_Mag_Value(self.magnetic_flux)
-            pitch, roll, yaw = SenseHat.get_orientation().values()
+            pitch, roll, yaw = sense.get_orientation().values()
             print("pitch=%s, roll=%s, yaw=%s" % (pitch,yaw,roll))
             #print("Magnetic Flux:" + str())
         
