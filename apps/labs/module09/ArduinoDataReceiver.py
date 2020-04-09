@@ -58,7 +58,7 @@ class ArduinoDataReceiver(threading.Thread):
             
             self.magnetic_flux = arduinoMessage[6]/10
             SensorData_Object.add_Mag_Value(self.magnetic_flux)
-            pitch, roll, yaw = sense.get_orientation_degrees()
+            pitch, roll, yaw = sense.get_orientation_degrees().value()
             print("pitch=%s, roll=%s, yaw=%s" % (pitch,yaw,roll))
             #print("Magnetic Flux:" + str())
         
