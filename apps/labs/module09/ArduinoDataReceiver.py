@@ -6,6 +6,7 @@ import threading
 import logging
 from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
+from cmath import sqrt
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
@@ -65,6 +66,7 @@ class ArduinoDataReceiver(threading.Thread):
             mag_y = round(mag["y"],2)
             mag_z = round(mag["z"],2)
             print('x'+ str(mag_x) + 'y' + str(mag_y)+  'z' + str (mag_z) )
+            print("\n" + sqrt(mag_x*mag_x+mag_y * mag_y + mag_z*mag_z))
         else:
             return
     
