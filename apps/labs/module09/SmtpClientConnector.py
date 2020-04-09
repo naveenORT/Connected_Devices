@@ -17,7 +17,7 @@ class smtpconnect():
     host = ''
 
     def __init__(self):               
-        self.config = ConfigUtil(r"/home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
+        self.config = ConfigUtil(r"C:\Users\Naveen Rajendran\Desktop\MS COURSE\CSYE-6530 CONNECTED DEVICES WORKSPACE\iot-device\apps\labs\common\ConnectedDevicesConfig.props")
         logging.info('Configuration data...\n' + '\n' +str(self.config.config.sections()))  # Constructor loading config properties from the file
     
     def publishMessage(self, topic, data):  # Publishing Mail Via SMTP
