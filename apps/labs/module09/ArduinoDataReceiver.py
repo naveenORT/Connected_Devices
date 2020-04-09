@@ -3,8 +3,8 @@ from lib_nrf24 import NRF24
 import time
 import spidev
 import threading
+import logging
 
-from labs.module09.DeviceHandlerApp import logging
 from labs.module09.SensorData import SensorData
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
