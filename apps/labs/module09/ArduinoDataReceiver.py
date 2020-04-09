@@ -66,7 +66,7 @@ class ArduinoDataReceiver(threading.Thread):
             mag_y = round(mag["y"],2)
             mag_z = round(mag["z"],2)
             print('x'+ str(mag_x) + 'y' + str(mag_y)+  'z' + str (mag_z) )
-            print("\n" + sqrt(mag_x*mag_x+mag_y * mag_y + mag_z*mag_z))
+            print("\n" + str(sqrt(mag_x*mag_x+mag_y * mag_y + mag_z*mag_z)))
         else:
             return
     
