@@ -6,6 +6,7 @@ Created on Apr 8, 2020
 '''
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
+from labs.module09.SensorDataManager import SensorDataManager
 import time
 import logging
 
@@ -18,6 +19,7 @@ def main():
     time.sleep(2)
     opc = OPC_Client_Rpi()
     opc.start()
- 
+    sdm = SensorDataManager()
+    sdm.start()
     
 main()
