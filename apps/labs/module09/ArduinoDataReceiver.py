@@ -11,10 +11,11 @@ GPIO.setmode(GPIO.BCM)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
 SensorData_Object = SensorData()
 sense = SenseHat()
+
+
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
-        
         
         threading.Thread.__init__(self)
         self.radio = NRF24(GPIO, spidev.SpiDev())
@@ -45,7 +46,7 @@ class ArduinoDataReceiver(threading.Thread):
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
         
         if(arduinoMessage[0] == 1):
-            #print("Received from Cabin Device: {}".format(arduinoMessage))
+            # print("Received from Cabin Device: {}".format(arduinoMessage))
             
             print("\n")
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
@@ -56,12 +57,14 @@ class ArduinoDataReceiver(threading.Thread):
             SensorData_Object.add_Humi_Value(sense.get_humidity())
             print("Room Humidity:" + str(sense.get_humidity()))
             
-            self.magnetic_flux = arduinoMessage[6]/10
+            self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(self.magnetic_flux)
-            pitch, roll, yaw = sense.get_orientation_degrees().value()
-            print("pitch=%s, roll=%s, yaw=%s" % (pitch,yaw,roll))
-            #print("Magnetic Flux:" + str())
-        
+            # print("Magnetic Flux:" + str())
+            mag = sense.get_compass_raw()
+            mag_x = round(mag["x"],2)
+            mag_y = round(mag["y"],2)
+            mag_z = round(mag["z"],2)
+            print('x'+ str(mag_x) + 'y' + str(mag_y)+  'z' + str (mag_z) )
         else:
             return
     
@@ -70,7 +73,7 @@ class ArduinoDataReceiver(threading.Thread):
         self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
     
         if(arduinoMessage[0] == 2):
-            #print("Received from Earthpit Device: {}".format(arduinoMessage)) 
+            # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
             
             self.rod_resistence = arduinoMessage[2]  
             SensorData_Object.add_Res_Value(self.rod_resistence)
@@ -82,5 +85,4 @@ class ArduinoDataReceiver(threading.Thread):
             print("\n")
         else:
             return
-    
   
