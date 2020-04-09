@@ -57,8 +57,8 @@ class ArduinoDataReceiver(threading.Thread):
             print("Room Humidity:" + str(sense.get_humidity()))
             
             self.magnetic_flux = arduinoMessage[6]/10
-            SensorData_Object.add_Mag_Value(self.magnetic_flux)
-            pitch, roll, yaw = sense.get_orientation().values()
+            SensorData_Object.add_Mag_Value(self.magnetic_flux.get)
+            pitch, roll, yaw = sense.get_orientation_degrees()
             print("pitch=%s, roll=%s, yaw=%s" % (pitch,yaw,roll))
             #print("Magnetic Flux:" + str())
         
