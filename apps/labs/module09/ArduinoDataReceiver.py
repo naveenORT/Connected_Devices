@@ -47,6 +47,7 @@ class ArduinoDataReceiver(threading.Thread):
         if(arduinoMessage[0] == 1):
             #print("Received from Cabin Device: {}".format(arduinoMessage))
             
+            print("\n")
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
             SensorData_Object.add_Temp_Value(self.cabin_temperature)
             print("Cabin Temp:" + str(self.cabin_temperature))
@@ -76,7 +77,7 @@ class ArduinoDataReceiver(threading.Thread):
             self.rod_length = arduinoMessage[4]
             SensorData_Object.add_Cor_Value(self.rod_length)
             print("Ultrasound Level " + str(self.rod_length))
-        
+            print("\n")
         else:
             return
     
