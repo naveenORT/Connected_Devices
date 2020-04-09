@@ -11,7 +11,7 @@ import threading
 
 class DevicePerformanceMonitor(threading.Thread):
     
-    def __init__(self, count):
+    def __init__(self, count=1000):
         
         threading.Thread.__init__(self)  # initializing thread function
         self.count = count
