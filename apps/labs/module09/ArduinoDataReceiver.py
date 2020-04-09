@@ -4,7 +4,7 @@ import time
 import spidev
 import threading
 import logging
-
+from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
@@ -49,7 +49,7 @@ class ArduinoDataReceiver(threading.Thread):
             
             print("\n")
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
-            SensorData_Object.add_Temp_Value(self.cabin_temperature)
+            SensorData_Object.add_Temp_Value(SenseHat.get_temperature())
             print("Cabin Temp:" + str(self.cabin_temperature))
             
             self.room_humidity = round(arduinoMessage[4] / 3, 2)
@@ -58,7 +58,9 @@ class ArduinoDataReceiver(threading.Thread):
             
             self.magnetic_flux = arduinoMessage[6]/10
             SensorData_Object.add_Mag_Value(self.magnetic_flux)
-            print("Magnetic Flux:" + str(self.magnetic_flux))
+            pitch, roll, yaw = SenseHat.get_orientation().values()
+            print("pitch=%s, roll=%s, yaw=%s" % (pitch,yaw,roll))
+            #print("Magnetic Flux:" + str())
         
         else:
             return
