@@ -5,6 +5,7 @@ Created on Apr 2, 2020
 import threading
 import time
 import logging
+       
 from opcua import Client
 from labs.module09.ArduinoDataReceiver import SensorData_Object
 
@@ -13,7 +14,6 @@ class OPC_Client_Rpi(threading.Thread):
         
     def __init__(self):
         threading.Thread.__init__(self)
-        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         self.opc_client = Client("opc.tcp://10.0.0.57:4048")
         self.opc_client.connect()
         self.initiate_nodes()
@@ -45,4 +45,4 @@ class OPC_Client_Rpi(threading.Thread):
             Resistence = SensorData_Object.getResistence()
             self.resistance.set_value(Resistence)
             
-            logging.getLogger('Main').info("All Data Published to OPC Server")
+            logging.info("All Data Published to OPC Server")

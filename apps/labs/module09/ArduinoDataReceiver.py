@@ -1,4 +1,6 @@
 import logging
+#logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+
 import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24
 import time
