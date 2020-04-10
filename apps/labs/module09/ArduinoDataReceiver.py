@@ -1,3 +1,5 @@
+import logging
+logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24
 import time
@@ -6,7 +8,6 @@ import threading
 from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from cmath import sqrt
-import logging
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
@@ -18,8 +19,6 @@ class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         
-        logging.getLogger().setLevel(logging.INFO)
-        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         logging.info("started logging")
         threading.Thread.__init__(self)
         self.radio = NRF24(GPIO, spidev.SpiDev())

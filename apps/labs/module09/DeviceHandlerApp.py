@@ -9,9 +9,6 @@ from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
 import time
 import logging
 
-logging.getLogger().setLevel(logging.INFO)
-logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
-logging.info("started logging")
     
 def main():
     
