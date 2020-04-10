@@ -9,17 +9,12 @@ from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
 import time
 import logging
 
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-logger.propagate = False
-
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
-ch.setFormatter(formatter)
-
-logger.addHandler(ch)
-
+rootLogger = logging.getLogger()  # note no text passed in--that's how we grab the root logger
+if not rootLogger.handlers:
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.INFO)
+        ch.setFormatter(logging.Formatter('%(process)s|%(levelname)s] %(message)s'))
+        rootLogger.addHandler(ch)
 
 
 def main():
