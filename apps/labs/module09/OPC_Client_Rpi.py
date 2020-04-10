@@ -6,6 +6,7 @@ import threading
 import time
 from opcua import Client
 from labs.module09.ArduinoDataReceiver import SensorData_Object
+from labs.module09.SensorDataManager import logging
 
 
 class OPC_Client_Rpi(threading.Thread):
@@ -42,3 +43,5 @@ class OPC_Client_Rpi(threading.Thread):
             
             Resistence = SensorData_Object.getResistence()
             self.resistance.set_value(Resistence)
+            
+            logging.getLogger('Main').info("All Data Published to OPC Server")
