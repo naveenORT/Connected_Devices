@@ -12,10 +12,7 @@ GPIO.setmode(GPIO.BCM)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
 SensorData_Object = SensorData()
 sense = SenseHat()
-
-logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
-
-logging = logging.getLogger("Main").setLevel(logging.INFO)
+logging = logging.getLogger("Main")
 
 class ArduinoDataReceiver(threading.Thread):
     

@@ -23,11 +23,11 @@ def main():
     opc = OPC_Client_Rpi()
     opc.start()
     
- #   sdm = SensorDataManager()
- #   sdm.start()
+    sdm = SensorDataManager()
+    sdm.start()
     
- #   dpm = DevicePerformanceMonitor()
- #   dpm.start()
+    dpm = DevicePerformanceMonitor()
+    dpm.start()
 
 
 main()
