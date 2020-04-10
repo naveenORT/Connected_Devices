@@ -1,3 +1,4 @@
+import logging
 import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24
 import time
@@ -17,7 +18,6 @@ class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         
-        logging.info("started logging")
         threading.Thread.__init__(self)
         self.radio = NRF24(GPIO, spidev.SpiDev())
         self.radio.begin(0, 17)
