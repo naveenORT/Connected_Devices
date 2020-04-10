@@ -9,10 +9,10 @@ from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
 import time
 import logging
 
-logger = logging.getLogger('Main')
+logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
-ch.setLevel(logging.WARNING)
+ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
 ch.setFormatter(formatter)
 logger.addHandler(ch)
