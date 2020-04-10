@@ -8,17 +8,12 @@ from labs.module09.SensorDataManager import SensorDataManager
 from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
 import time
 import logging
-
-rootLogger = logging.getLogger()  # note no text passed in--that's how we grab the root logger
-if not rootLogger.handlers:
-        ch = logging.StreamHandler()
-        ch.setLevel(logging.INFO)
-        ch.setFormatter(logging.Formatter('%(process)s|%(levelname)s] %(message)s'))
-        rootLogger.addHandler(ch)
-
-
 def main():
     
+    logging.getLogger("main")
+    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+    logging.info("started logging")
+       
     SensorData_Object = ArduinoDataReceiver()
     SensorData_Object.start()
     
