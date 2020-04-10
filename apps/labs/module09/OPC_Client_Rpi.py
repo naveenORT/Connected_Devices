@@ -4,9 +4,9 @@ Created on Apr 2, 2020
 '''
 import threading
 import time
+import logging
 from opcua import Client
 from labs.module09.ArduinoDataReceiver import SensorData_Object
-from labs.module09.SensorDataManager import logging
 
 
 class OPC_Client_Rpi(threading.Thread):
