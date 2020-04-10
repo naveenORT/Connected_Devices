@@ -9,14 +9,16 @@ from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
 import time
 import logging
 
-logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+logger = logging.getLogger('Main')
+logger.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
 
 def main():
-    
-    
-    logger = logging.getLogger('Main')
-    logger.setLevel(logging.INFO)
-    
     
     SensorData_Object = ArduinoDataReceiver()
     SensorData_Object.start()
