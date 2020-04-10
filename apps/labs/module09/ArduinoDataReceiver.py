@@ -18,6 +18,9 @@ class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         
+        logging.getLogger().setLevel(logging.INFO)
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+        logging.info("started logging")
         threading.Thread.__init__(self)
         self.radio = NRF24(GPIO, spidev.SpiDev())
         self.radio.begin(0, 17)
