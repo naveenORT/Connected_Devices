@@ -11,9 +11,9 @@ import logging
 
 
 def main():
-    logging = logging.getLogger("Main")
-    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
-    logging.info(".started logging.")
+    log = logging.getLogger("Main")
+    log.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+    log.info(".started logging.")
 
     SensorData_Object = ArduinoDataReceiver()
     SensorData_Object.start()
