@@ -13,6 +13,7 @@ class OPC_Client_Rpi(threading.Thread):
         
     def __init__(self):
         threading.Thread.__init__(self)
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         self.opc_client = Client("opc.tcp://10.0.0.57:4048")
         self.opc_client.connect()
         self.initiate_nodes()
