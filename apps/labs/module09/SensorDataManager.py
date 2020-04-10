@@ -41,7 +41,7 @@ class SensorDataManager(threading.Thread):
     
     
     def run(self):
-        time.sleep(7)
+        time.sleep(10)
         while(1):
             self.send_notification()
             time.sleep(5)
