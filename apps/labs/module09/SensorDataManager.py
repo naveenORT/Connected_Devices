@@ -5,11 +5,12 @@ Created on Apr 9, 2020
 '''
 import threading
 import time
+import logging
 from labs.module09.ArduinoDataReceiver import SensorData_Object
 from labs.module09.SmtpClientConnector import smtpconnect
 
 SMTP = smtpconnect()
-
+logging = logging.getLogger("Main")
 
 class SensorDataManager(threading.Thread):
     

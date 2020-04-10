@@ -9,7 +9,7 @@ from labs.common.ConfigUtil import ConfigUtil
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-
+logging =  logging.getLogger("Main")
 class smtpconnect():
     msgBody = ''
     fromAddr = ''

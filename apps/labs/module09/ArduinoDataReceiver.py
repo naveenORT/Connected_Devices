@@ -6,12 +6,13 @@ import threading
 from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from cmath import sqrt
+import logging
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
 SensorData_Object = SensorData()
 sense = SenseHat()
-
+logging = logging.getLogger("Main")
 
 class ArduinoDataReceiver(threading.Thread):
     
@@ -51,18 +52,18 @@ class ArduinoDataReceiver(threading.Thread):
             print("\n")
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
             SensorData_Object.add_Temp_Value(sense.get_temperature())
-            print("Cabin Temp:" + str(sense.get_temperature()))
+            logging.info("Cabin Temp:" + str(sense.get_temperature()))
             
             self.room_humidity = round(arduinoMessage[4] / 3, 2)
             SensorData_Object.add_Humi_Value(sense.get_humidity())
-            print("Room Humidity:" + str(sense.get_humidity()))
+            logging.info("Room Humidity:" + str(sense.get_humidity()))
             
             mag = sense.get_compass_raw()
             mag_x = round(mag["x"], 2)
             mag_y = round(mag["y"], 2)
             mag_z = round(mag["z"], 2)
             mag_t = sqrt(abs(mag_x * mag_x + mag_y * mag_y + mag_z * mag_z))
-            print("Magnetic Flux:" + str(abs(mag_t)))
+            logging.info("Magnetic Flux:" + str(abs(mag_t)))
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(abs(mag_t))
             
@@ -78,12 +79,12 @@ class ArduinoDataReceiver(threading.Thread):
             
             self.rod_resistence = arduinoMessage[2]  
             SensorData_Object.add_Res_Value(self.rod_resistence)
-            print("Earthpit Resistence " + str(self.rod_resistence))
+            logging.info("Earthpit Resistence " + str(self.rod_resistence))
             
             self.rod_length = arduinoMessage[4]
             SensorData_Object.add_Cor_Value(self.rod_length)
-            print("Ultrasound Level " + str(self.rod_length))
-            print("\n")
+            logging.info("Ultrasound Level " + str(self.rod_length))
+            logging.info("\n")
         else:
             return
   
