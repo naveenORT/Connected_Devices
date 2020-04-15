@@ -20,8 +20,8 @@ def main():
     
     time.sleep(2)
     
-   # opc = OPC_Client_Rpi()
-   # opc.start()
+   opc = OPC_Client_Rpi()
+   opc.start()
     
     sdm = SensorDataManager()
     sdm.start()
