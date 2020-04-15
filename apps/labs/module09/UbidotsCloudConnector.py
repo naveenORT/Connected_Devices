@@ -12,13 +12,15 @@ from labs.module09.ArduinoDataReceiver import DeviceData_Object
 import threading
 from labs.module09.SensorDataManager import logging
 
+mqtt_client = mqttClient.Client()
+connected = False  
 
 class UbidotsCloudConnector(threading.Thread):    
     
     def __init__(self):        
         threading.Thread.__init__(self)
         self.load_prop = ConfigUtil(r"home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
-        self.connected = False  
+     
         self.BROKER_ENDPOINT = self.load_prop.getValues('ubidots.cloud', 'host')
         self.TLS_PORT = int(self.load_prop.getValues('ubidots.cloud', 'port'))
         self.MQTT_USERNAME = self.load_prop.getValues('ubidots.cloud', 'authToken')  
@@ -26,7 +28,7 @@ class UbidotsCloudConnector(threading.Thread):
         self.TOPIC = '/v1.6/devices/'
         self.DEVICE_LABEL = 'substation-gateway'
         self.TLS_CERT_PATH = self.load_prop.getValues('ubidots.cloud', 'certFile')  
-        self.mqtt_client = mqttClient.Client() 
+         
         logging.info("Configuring & Setting Up Cloud Connection Properties")
     
     def publish(self, mqtt_client, topic, payload): 
@@ -78,7 +80,7 @@ class UbidotsCloudConnector(threading.Thread):
             time.sleep(2)
 
 
-def on_connect(client, userdata, flags, rc):
+def on_connect(mqtt_client, userdata, flags, rc):
     if rc == 0:
         print("[INFO] Connected to broker")
         global connected  # Use global variable
@@ -87,5 +89,9 @@ def on_connect(client, userdata, flags, rc):
         print("[INFO] Error, connection failed")
 
 
-def on_publish(client, userdata, result):
+def on_publish(mqtt_client, userdata, result):
     print("Published!")
+
+
+mqtt_client.on_publish = on_publish
+mqtt_client.on_connect = on_connect
