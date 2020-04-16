@@ -96,7 +96,7 @@ class ArduinoDataReceiver(threading.Thread):
             return
     
     def publish_actdata(self):    
-        if (ActuatorAdaptor.getRelay()=)
+        if (ActuatorAdaptor.getRelay() is True):
             message = 'H'
             self.radio.write(message)
             logging.info("Message Sent")
