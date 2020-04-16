@@ -84,7 +84,7 @@ class SensorDataManager(threading.Thread):
         radio.openWritingPipe(pipe)
         
     def run(self):
-        self.enableRadio()
+        #self.enableRadio()
         while(1):
             #self.send_notification()
             #self.perform_actuation()
