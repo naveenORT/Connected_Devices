@@ -42,7 +42,7 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
-            time.sleep(2)
+            time.sleep(5)
     
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
@@ -86,9 +86,10 @@ class ArduinoDataReceiver(threading.Thread):
             
             self.rod_length = arduinoMessage[4]
             SensorData_Object.add_Cor_Value(self.rod_length)
-            logging.info("Ultrasound Level " + str(self.rod_length))
+            logging.info("Corona Level " + str(self.rod_length))
             logging.info("\n")
         else:
             DeviceData_Object.setArduino1_status(False)
             return
   
+            

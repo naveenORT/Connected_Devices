@@ -27,15 +27,15 @@ class SensorDataManager(threading.Thread):
             data = "Excess Resistance Value Detected @ Site" + str (SensorData_Object.getResistence())
             SMTP.publishMessage("Excess Resistance Detected", data)
     
-        if (SensorData_Object.getCorona() > 75):
+        if (SensorData_Object.getCorona() > 50):
             data = "Excess Corona_level Value Detected @ Site" + str (SensorData_Object.getCorona())
             SMTP.publishMessage("Excess Corona Detected", data)
     
-        if (SensorData_Object.getTemperature() > 25):
+        if (SensorData_Object.getTemperature() > 40):
             data = "Excess Temperartue Value Detected @ Site" + str(SensorData_Object.getTemperature())
             SMTP.publishMessage("Excess Temperature Detected", data)
     
-        if (SensorData_Object.getMagFlux() > 70):
+        if (SensorData_Object.getMagFlux() > 50):
             data = "Excess Induction Value Detected @ Site" + str(SensorData_Object.getTemperature())
             SMTP.publishMessage("Excess Magnetic Flux Detected", data)
     
@@ -44,4 +44,4 @@ class SensorDataManager(threading.Thread):
         time.sleep(10)
         while(1):
             self.send_notification()
-            time.sleep(5)
+            time.sleep(1)
