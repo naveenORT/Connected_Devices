@@ -14,7 +14,7 @@ class DeviceData():
             self.arduino2_status = 0
         
     def setMem_Util(self, input):
-        self.mem = input
+        self.ram = input
         
     def setCpu_Util(self, input):
         self.cpu = input
@@ -26,7 +26,7 @@ class DeviceData():
         return self.arduino2_status
     
     def getMem_Util(self):
-        return self.mem
+        return self.ram
     
     def getCpu_Util(self):
         return self.cpu
