@@ -47,7 +47,7 @@ class ArduinoDataReceiver(threading.Thread):
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
         radio.read(arduinoMessage, radio.getDynamicPayloadSize())
-        
+        print(arduinoMessage)
         if(arduinoMessage[0] == 1):
             # print("Received from Cabin Device: {}".format(arduinoMessage))
             DeviceData_Object.setArduino1_status(True)
