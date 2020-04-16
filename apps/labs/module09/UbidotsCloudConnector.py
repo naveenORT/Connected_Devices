@@ -96,10 +96,10 @@ def on_message(mqtt_client, userdata, message):
     
     if(act_data == "1"):
         act_obj.setRelay(True)
-        
+        logging.info("Relay On")
     else:
         act_obj.setRelay(False)
-    
+        logging.info("Relay Off")
 
 mqtt_client.on_connect = on_connect
 mqtt_client.on_publish = on_publish
