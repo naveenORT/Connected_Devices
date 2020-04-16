@@ -86,6 +86,6 @@ class SensorDataManager(threading.Thread):
     def run(self):
         #self.enableRadio()
         while(1):
-            #self.send_notification()
+            self.send_notification()
             #self.perform_actuation()
-            time.sleep(5)
+            time.sleep(10)
