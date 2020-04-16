@@ -1,6 +1,5 @@
 '''
 Created on Apr 9, 2020
-
 @author: Naveen Rajendran
 '''
 from labs.module01.SystemMemUtilTask import memutil
@@ -9,7 +8,6 @@ from labs.module09.ArduinoDataReceiver import DeviceData_Object
 import time
 import logging
 import threading
-
 
 class DevicePerformanceMonitor(threading.Thread):
     
@@ -33,8 +31,7 @@ class DevicePerformanceMonitor(threading.Thread):
             logging.info(cpuData + "%")
             logging.info(memData + "%")
             time.sleep(5)  # Calling Thread Every 3 seconds  
-            self.count -= 1  # Decrementing count call by 1
-            
+            self.count -= 1  # Decrementing count call by 1            
             if self.count == 0:
                 return  # stopping thread after executing 'N' times
           
