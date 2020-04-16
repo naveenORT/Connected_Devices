@@ -42,7 +42,7 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
-            time.sleep(2)
+            time.sleep(1)
  
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
@@ -70,7 +70,7 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Magnetic Flux:" + str(abs(mag_t)))
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(abs(mag_t))
-            time.sleep(1.4)
+            time.sleep(1.2)
         else:
             DeviceData_Object.setArduino1_status(False)
         
