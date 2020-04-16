@@ -42,8 +42,7 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
-            self.publish_actdata()
-            time.sleep(0.5)
+            time.sleep(5)
     
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
@@ -72,7 +71,7 @@ class ArduinoDataReceiver(threading.Thread):
             
         else:
             DeviceData_Object.setArduino1_status(False)
-            return
+        
     
     def receive_data_from_elecrticpit(self):    
         arduinoMessage = []
