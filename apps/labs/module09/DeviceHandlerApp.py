@@ -23,7 +23,7 @@ def main():
     #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
     #OPC.start()
     
-    SDM = SensorDataManager()  # Publish SensorData to AWS Cloud & Trigger Notification
+    SDM = SensorDataManager()  # Publish SensorData to Ubidots Cloud & Trigger Notification
     SDM.start()
     
     DPM = DevicePerformanceMonitor()  # Compute Device Performance
