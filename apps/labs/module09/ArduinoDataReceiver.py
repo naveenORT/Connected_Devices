@@ -77,7 +77,7 @@ class ArduinoDataReceiver(threading.Thread):
                 return
             
             time.sleep(0.5)
-    
+            radio.flush_rx()
     def receive_data_from_elecrticpit(self):    
         arduinoMessage = []
         radio.read(arduinoMessage, radio.getDynamicPayloadSize())
@@ -100,3 +100,4 @@ class ArduinoDataReceiver(threading.Thread):
             else:
                 DeviceData_Object.setArduino1_status(False)
                 return
+            radio.flush_rx()
