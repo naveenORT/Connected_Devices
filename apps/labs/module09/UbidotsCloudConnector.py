@@ -52,7 +52,7 @@ class UbidotsCloudConnector(threading.Thread):
            # self.publish(mqtt_client, topic, sensor_payload)
             #self.publish(mqtt_client, topic, device_payload)
         
-            mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
+            mqtt_client.subscribe("/v1.6/devices/substation-gateway/resistence")
             mqtt_client.on_message = on_message
             time.sleep(5)
         
