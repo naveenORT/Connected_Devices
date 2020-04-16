@@ -35,25 +35,26 @@ class UbidotsCloudConnector(threading.Thread):
         self.connect(mqtt_client, self.MQTT_USERNAME, self.MQTT_PASSWORD, self.BROKER_ENDPOINT, self.TLS_PORT)
     
     def connect(self, mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
-            mqtt_client.username_pw_set(mqtt_username, password=mqtt_password)
-            mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
-            mqtt_client.tls_insecure_set(False)
-            mqtt_client.connect(broker_endpoint, port=port)
-            mqtt_client.loop_start()
         
+        mqtt_client.username_pw_set(mqtt_username, password=mqtt_password)
+        mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
+        mqtt_client.tls_insecure_set(False)
+        mqtt_client.connect(broker_endpoint, port=port)
+        mqtt_client.loop_start()
+    
          
             
     def run(self): 
+        while(1):
+            topic = "{}{}".format(self.TOPIC, self.DEVICE_LABEL)
+            sensor_payload = convert_json.sensordatatojson(SensorData_Object)
+            device_payload = convert_json.sensordatatojson(DeviceData_Object)
+            print(sensor_payload + "\n" + device_payload)
         
-        topic = "{}{}".format(self.TOPIC, self.DEVICE_LABEL)
-        sensor_payload = convert_json.sensordatatojson(SensorData_Object)
-        device_payload = convert_json.sensordatatojson(DeviceData_Object)
-        print(sensor_payload + "\n" + device_payload)
-
-        self.publish(mqtt_client, topic, sensor_payload)
-        self.publish(mqtt_client, topic, device_payload)
-        
-        time.sleep(2)
+            self.publish(mqtt_client, topic, sensor_payload)
+            self.publish(mqtt_client, topic, device_payload)
+            
+            time.sleep(2)
         
     def publish(self, mqtt_client, topic, payload): 
         try:
