@@ -41,7 +41,7 @@ class ArduinoDataReceiver(threading.Thread):
         radio.flush_rx()
         while(1):
             self.receive_data_from_cabindevice()
-            time.sleep(1)
+            time.sleep(1.5)
             self.receive_data_from_elecrticpit()
             time.sleep(1)
  
