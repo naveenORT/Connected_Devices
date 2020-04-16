@@ -14,7 +14,8 @@ from labs.module09.SmtpClientConnector import smtpconnect
 from labs.module09.UbidotsCloudConnector import act_obj
 SMTP = smtpconnect()
 logging = logging.getLogger("Main")
-
+radio = NRF24(GPIO, spidev.SpiDev())
+        
 
 class SensorDataManager(threading.Thread):
     
@@ -45,7 +46,7 @@ class SensorDataManager(threading.Thread):
     
     def perform_actuation(self):
         
-        self.radio.stopListening()
+        radio.stopListening()
         if (act_obj != None):
             logging.info("\n"+"Actuator Data Received From cloud")
             if (act_obj.getRelay() is True):
@@ -63,7 +64,6 @@ class SensorDataManager(threading.Thread):
     
     def enableRadio(self):
         pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
-        radio = NRF24(GPIO, spidev.SpiDev())
         radio.begin(0, 17)        
         radio.setPayloadSize(32)
         radio.setChannel(0x76)
