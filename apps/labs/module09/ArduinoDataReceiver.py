@@ -8,7 +8,7 @@ from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from labs.module09.DeviceData import DeviceData
 from cmath import sqrt
-from labs.module09.UbidotsCloudConnector import act_obj
+#from labs.module09.UbidotsCloudConnector import act_obj
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05], [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]]
