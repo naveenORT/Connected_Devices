@@ -47,7 +47,7 @@ class SensorDataManager(threading.Thread):
     def perform_actuation(self):
         
         radio.stopListening()
-        if (act_obj != None):
+        if (act_obj.getRelay() != None):
             logging.info("\n" + "Actuator Data Received From cloud")
             if (act_obj.getRelay() is True):
                 message = 'H'
