@@ -5,6 +5,9 @@ Created on Apr 16, 2020
 '''
 class ActuatorAdaptor():
     
+    def __init__(self):
+        self.relay_status = False
+        
     def setRelay(self,input):
         self.relay_status = input
     
