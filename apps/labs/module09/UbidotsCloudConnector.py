@@ -48,25 +48,19 @@ class UbidotsCloudConnector(threading.Thread):
             topic = "{}{}".format(self.TOPIC, self.DEVICE_LABEL)
             sensor_payload = convert_json.sensordatatojson(SensorData_Object)
             device_payload = convert_json.sensordatatojson(DeviceData_Object)
-            print(sensor_payload + "\n" + device_payload)
+            print("\n" + sensor_payload + "\n" + device_payload)
             self.publish(mqtt_client, topic, sensor_payload)
             self.publish(mqtt_client, topic, device_payload)
-            mqtt_client.on_publish = on_publish
-
+  
             mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             mqtt_client.on_message = on_message
             time.sleep(5)
         
     def publish(self, mqtt_client, topic, payload): 
+        
         try:
-            if (payload == self.sensor_payload):
-                    mqtt_client.publish(topic, payload)
-                    logging.info("SensorData Published")
-            
-            elif(payload == self.device_payload):
-                    mqtt_client.publish(topic, payload)
-                    logging.info("DeviceData Published")
-            
+            mqtt_client.publish(topic, payload)
+            mqtt_client.on_publish = on_publish
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
 
@@ -97,7 +91,9 @@ def on_message(mqtt_client, userdata, message):
     global flag
     act_data = str(message.payload.decode("utf-8"))
     flag = True
+    print(act_data)
     logging.info("Received Actuator Data From Cloud")
+    
     if(act_data == "1"):
         act_obj.setRelay(True)
         
