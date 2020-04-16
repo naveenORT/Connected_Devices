@@ -36,11 +36,10 @@ class UbidotsCloudConnector(threading.Thread):
     
     def connect(self, mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
         mqtt_client.username_pw_set(mqtt_username, password=mqtt_password)
-        #mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
-        #mqtt_client.tls_insecure_set(False)
-        mqtt_client.on_connect = on_connect
-        mqtt_client.on_publish = on_publish
+        mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
+        mqtt_client.tls_insecure_set(False)
         mqtt_client.connect(broker_endpoint, port=port)
+        mqtt_client.on_connect = on_connect
         mqtt_client.loop_start()
         
 
@@ -60,6 +59,7 @@ class UbidotsCloudConnector(threading.Thread):
     def publish(self, mqtt_client, topic, payload): 
         try:
             mqtt_client.publish(topic, payload)
+            mqtt_client.on_publish = on_publish
             logging.info("Data Published")
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
@@ -80,7 +80,6 @@ def on_publish(mqtt, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
-
     logging.getLogger().info("Data Published to IoT Gateway App \n")
 
 
@@ -89,7 +88,6 @@ def on_message(mqtt, userdata, message):
     '''
     * MQTT Callback function on receiving json ActuatorData via mqtt
     '''    
-
     global act_data
     global flag
     act_data = str(message.payload.decode("utf-8"))
