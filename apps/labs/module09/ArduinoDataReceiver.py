@@ -50,7 +50,7 @@ class ArduinoDataReceiver(threading.Thread):
         
         if(arduinoMessage[0] == 1):
             # print("Received from Cabin Device: {}".format(arduinoMessage))
-            DeviceData_Object.setArduino1_status(True)
+            
             print("\n")
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
             SensorData_Object.add_Temp_Value(round(sense.get_temperature(), 2))
@@ -68,9 +68,14 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Magnetic Flux:" + str(abs(mag_t)))
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(abs(mag_t))
+            
+            if (arduinoMessage[8] == 1):
+                DeviceData_Object.setArduino1_status(True)
+            else:
+                DeviceData_Object.setArduino1_status(False)
+            
             time.sleep(1.2)
-        else:
-            DeviceData_Object.setArduino1_status(False)
+        
         
     
     def receive_data_from_elecrticpit(self):    
@@ -89,8 +94,10 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Corona Level " + str(self.rod_length))
             logging.info("\n")
         
-        else:
-            DeviceData_Object.setArduino1_status(False)
-            return
-    
- 
+            if (arduinoMessage[6] == 1):
+                DeviceData_Object.setArduino1_status(True)
+            else:
+                DeviceData_Object.setArduino1_status(False)
+            
+
+        
