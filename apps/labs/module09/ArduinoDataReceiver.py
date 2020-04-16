@@ -34,7 +34,7 @@ class ArduinoDataReceiver(threading.Thread):
         
         radio.openReadingPipe(0, pipes[1])
         radio.openReadingPipe(1, pipes[2])
-        radio.openWritingPipe(pipes[2])
+        
         radio.startListening()
         
     def run(self):
