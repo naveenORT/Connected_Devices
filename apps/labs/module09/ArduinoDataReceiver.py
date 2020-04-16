@@ -71,7 +71,7 @@ class ArduinoDataReceiver(threading.Thread):
                 
             else:
                 DeviceData_Object.setArduino1_status(False)
-        
+                return
             time.sleep(1.5)
     
     def receive_data_from_elecrticpit(self):    
@@ -92,8 +92,9 @@ class ArduinoDataReceiver(threading.Thread):
                 SensorData_Object.add_Cor_Value(self.rod_length)
                 logging.info("Corona Level " + str(self.rod_length))
                 logging.info("\n")
+                
             else:
-                DeviceData_Object.setArduino1_status(False)
+                DeviceData_Object.setArduino2_status(False)
                 return
             
             time.sleep(1)
