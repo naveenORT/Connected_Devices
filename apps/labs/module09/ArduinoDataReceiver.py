@@ -38,63 +38,63 @@ class ArduinoDataReceiver(threading.Thread):
         radio.startListening()
         
     def run(self):
-        radio.flush_rx()        
-        self.receive_data_from_cabindevice()
-        self.receive_data_from_elecrticpit()
-     
-    def receive_data_from_cabindevice(self):
+        radio.flush_rx()
         while(1):
-            arduinoMessage = []
-            radio.read(arduinoMessage, radio.getDynamicPayloadSize())
-            print(arduinoMessage)
+            self.receive_data_from_cabindevice()
+            self.receive_data_from_elecrticpit()
+            time.sleep(2)
+ 
+    def receive_data_from_cabindevice(self):
+        arduinoMessage = []
+        radio.read(arduinoMessage, radio.getDynamicPayloadSize())
+        print(arduinoMessage)
+        radio.flush_rx()
+        time.sleep(3)
+
+        if(arduinoMessage[0] == 1):
+            # print("Received from Cabin Device: {}".format(arduinoMessage))
+            DeviceData_Object.setArduino1_status(True)
+            print("\n")
+            self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
+            SensorData_Object.add_Temp_Value(round(sense.get_temperature(), 2))
+            logging.info("Cabin Temp:" + str(round(sense.get_temperature(), 2)))
             
-            if(arduinoMessage[0] == 1):
-                # print("Received from Cabin Device: {}".format(arduinoMessage))
-                DeviceData_Object.setArduino1_status(True)
-                print("\n")
-                self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
-                SensorData_Object.add_Temp_Value(round(sense.get_temperature(), 2))
-                logging.info("Cabin Temp:" + str(round(sense.get_temperature(), 2)))
-                
-                self.room_humidity = round(arduinoMessage[4] / 3, 2)
-                SensorData_Object.add_Humi_Value(sense.get_humidity())
-                logging.info("Room Humidity:" + str(sense.get_humidity()))
-                
-                mag = sense.get_compass_raw()
-                mag_x = round(mag["x"], 2)
-                mag_y = round(mag["y"], 2)
-                mag_z = round(mag["z"], 2)
-                mag_t = sqrt(abs(mag_x * mag_x + mag_y * mag_y + mag_z * mag_z))
-                logging.info("Magnetic Flux:" + str(abs(mag_t)))
-                # self.magnetic_flux = arduinoMessage[6] / 10
-                SensorData_Object.add_Mag_Value(abs(mag_t))
-                
-            else:
-                DeviceData_Object.setArduino1_status(False)
-                return
-            time.sleep(1.5)
+            self.room_humidity = round(arduinoMessage[4] / 3, 2)
+            SensorData_Object.add_Humi_Value(sense.get_humidity())
+            logging.info("Room Humidity:" + str(sense.get_humidity()))
+            
+            mag = sense.get_compass_raw()
+            mag_x = round(mag["x"], 2)
+            mag_y = round(mag["y"], 2)
+            mag_z = round(mag["z"], 2)
+            mag_t = sqrt(abs(mag_x * mag_x + mag_y * mag_y + mag_z * mag_z))
+            logging.info("Magnetic Flux:" + str(abs(mag_t)))
+            # self.magnetic_flux = arduinoMessage[6] / 10
+            SensorData_Object.add_Mag_Value(abs(mag_t))
+            
+        else:
+            DeviceData_Object.setArduino1_status(False)
+        
     
     def receive_data_from_elecrticpit(self):    
-        while(1):
-            arduinoMessage = []
-            radio.read(arduinoMessage, radio.getDynamicPayloadSize())
-            print(arduinoMessage)
-            radio.flush_rx()
+        arduinoMessage = []
+        radio.read(arduinoMessage, radio.getDynamicPayloadSize())
+        print(arduinoMessage)
+        
+        if(arduinoMessage[0] == 2):
+            # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
+            DeviceData_Object.setArduino2_status(True)
+            self.rod_resistence = arduinoMessage[2]  
+            SensorData_Object.add_Res_Value(self.rod_resistence)
+            logging.info("Earthpit Resistence " + str(self.rod_resistence))
             
-            if(arduinoMessage[0] == 2):
-                # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
-                DeviceData_Object.setArduino2_status(True)
-                self.rod_resistence = arduinoMessage[2]  
-                SensorData_Object.add_Res_Value(self.rod_resistence)
-                logging.info("Earthpit Resistence " + str(self.rod_resistence))
-                
-                self.rod_length = arduinoMessage[4]
-                SensorData_Object.add_Cor_Value(self.rod_length)
-                logging.info("Corona Level " + str(self.rod_length))
-                logging.info("\n")
-                
-            else:
-                DeviceData_Object.setArduino2_status(False)
-                return
-            
-            time.sleep(1)
+            self.rod_length = arduinoMessage[4]
+            SensorData_Object.add_Cor_Value(self.rod_length)
+            logging.info("Corona Level " + str(self.rod_length))
+            logging.info("\n")
+        
+        else:
+            DeviceData_Object.setArduino1_status(False)
+            return
+    
+ 
