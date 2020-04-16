@@ -47,7 +47,6 @@ class ArduinoDataReceiver(threading.Thread):
             arduinoMessage = []
             radio.read(arduinoMessage, radio.getDynamicPayloadSize())
             print(arduinoMessage)
-            radio.flush_rx()
             
             if(arduinoMessage[0] == 1):
                 # print("Received from Cabin Device: {}".format(arduinoMessage))
@@ -73,7 +72,7 @@ class ArduinoDataReceiver(threading.Thread):
             else:
                 DeviceData_Object.setArduino1_status(False)
         
-        time.sleep(1.5)
+            time.sleep(1.5)
     
     def receive_data_from_elecrticpit(self):    
         while(1):
@@ -96,4 +95,5 @@ class ArduinoDataReceiver(threading.Thread):
             else:
                 DeviceData_Object.setArduino1_status(False)
                 return
-        time.sleep(2)
+            
+            time.sleep(2)
