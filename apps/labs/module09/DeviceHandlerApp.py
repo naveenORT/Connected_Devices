@@ -18,7 +18,7 @@ def main():
     SensorData_Object = ArduinoDataReceiver()  # Get Data from Constrained Device
     SensorData_Object.start()
     
-    time.sleep(10)
+    time.sleep(5)
     
     #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
     #OPC.start()
@@ -26,8 +26,8 @@ def main():
     #SDM = SensorDataManager()  # Publish SensorData to AWS Cloud & Trigger Notification
     #SDM.start()
     
-    #DPM = DevicePerformanceMonitor()  # Compute Device Performance
-    #DPM.start()
+    DPM = DevicePerformanceMonitor()  # Compute Device Performance
+    DPM.start()
 
     UCC = UbidotsCloudConnector()
     UCC.start()

@@ -1,4 +1,3 @@
-
 import logging
 import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24
@@ -42,7 +41,7 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
-            time.sleep(2)
+            time.sleep(0.5)
     
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
@@ -53,8 +52,8 @@ class ArduinoDataReceiver(threading.Thread):
             DeviceData_Object.setArduino1_status(True)
             print("\n")
             self.cabin_temperature = round(arduinoMessage[2] / 4, 2)  
-            SensorData_Object.add_Temp_Value(sense.get_temperature())
-            logging.info("Cabin Temp:" + str(sense.get_temperature()))
+            SensorData_Object.add_Temp_Value(round(sense.get_temperature(), 2))
+            logging.info("Cabin Temp:" + str(round(sense.get_temperature(), 2)))
             
             self.room_humidity = round(arduinoMessage[4] / 3, 2)
             SensorData_Object.add_Humi_Value(sense.get_humidity())
@@ -91,5 +90,4 @@ class ArduinoDataReceiver(threading.Thread):
         else:
             DeviceData_Object.setArduino1_status(False)
             return
-  
             
