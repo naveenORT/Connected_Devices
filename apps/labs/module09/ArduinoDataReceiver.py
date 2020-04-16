@@ -41,10 +41,13 @@ class ArduinoDataReceiver(threading.Thread):
         radio.flush_rx()
         while(1):
             self.receive_data_from_cabindevice()
-            time.sleep(1.5)
+            time.sleep(1)
+            radio.flush_rx()
+            time.sleep(2)
             self.receive_data_from_elecrticpit()
             time.sleep(1)
- 
+            radio.flush_rx()
+            time.sleep(2)
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
         radio.read(arduinoMessage, radio.getDynamicPayloadSize())
@@ -70,8 +73,7 @@ class ArduinoDataReceiver(threading.Thread):
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(round(abs(mag_t), 2))
             
-            radio.flush_rx()
-   
+    
     def receive_data_from_elecrticpit(self):    
         arduinoMessage = []
         radio.read(arduinoMessage, radio.getDynamicPayloadSize())
@@ -88,4 +90,4 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Corona Level " + str(self.rod_length))
             logging.info("\n")
                      
-            radio.flush_rx()
+            
