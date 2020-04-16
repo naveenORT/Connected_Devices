@@ -19,7 +19,7 @@ class UbidotsCloudConnector(threading.Thread):
     
     def __init__(self):        
         threading.Thread.__init__(self)
-        self.load_prop = ConfigUtil(r"home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
+        self.load_prop = ConfigUtil(r"/home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
      
         self.BROKER_ENDPOINT = self.load_prop.getValues('ubidots.cloud', 'host')
         self.TLS_PORT = int(self.load_prop.getValues('ubidots.cloud', 'port'))
