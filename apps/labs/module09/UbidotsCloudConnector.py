@@ -41,7 +41,7 @@ class UbidotsCloudConnector(threading.Thread):
             mqtt_client.connect(broker_endpoint, port=port)
             mqtt_client.loop_start()
         
-            attempts = 0
+         
             
     def run(self): 
         
@@ -52,7 +52,6 @@ class UbidotsCloudConnector(threading.Thread):
 
         self.publish(mqtt_client, topic, sensor_payload)
         self.publish(mqtt_client, topic, device_payload)
-        return True
         
         time.sleep(2)
         
