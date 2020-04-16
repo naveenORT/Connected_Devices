@@ -70,7 +70,7 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Magnetic Flux:" + str(abs(mag_t)))
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(abs(mag_t))
-            time.sleep(1)
+            time.sleep(1.4)
         else:
             DeviceData_Object.setArduino1_status(False)
         
