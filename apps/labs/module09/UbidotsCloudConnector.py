@@ -65,7 +65,7 @@ class UbidotsCloudConnector(threading.Thread):
             print("[ERROR] Could not publish data, error: {}".format(e))
 
 
-def on_connect(mqttc, userdata, flags, rc):
+def on_connect(client, userdata, flags, rc):
     '''
     * MQTT Callback function on connection establishment
     '''
@@ -75,7 +75,7 @@ def on_connect(mqttc, userdata, flags, rc):
         logging.getLogger().info("Bad connection - MQTT Broker Not Running")
 
 
-def on_publish(mqttc, userdata, result):  # create function for callback
+def on_publish(client, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
@@ -83,7 +83,7 @@ def on_publish(mqttc, userdata, result):  # create function for callback
     logging.getLogger().info("Data Published to IoT Gateway App \n")
 
 
-def on_message(mqttc, userdata, message):    
+def on_message(client, userdata, message):    
     '''
     * MQTT Callback function on receiving json ActuatorData via mqtt
     '''    
