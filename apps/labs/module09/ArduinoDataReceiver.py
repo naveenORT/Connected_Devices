@@ -23,8 +23,7 @@ class ArduinoDataReceiver(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         
-        radio.begin(0, 17)
-        
+        radio.begin(0, 17)        
         radio.setPayloadSize(32)
         radio.setChannel(0x76)
         radio.setDataRate(NRF24.BR_1MBPS)
@@ -38,7 +37,7 @@ class ArduinoDataReceiver(threading.Thread):
         radio.openReadingPipe(1, pipes[2])
         radio.openWritingPipe(pipes[2])
         radio.startListening()
-    
+        
     def run(self):
         radio.flush_rx()
         while(1):
@@ -95,10 +94,4 @@ class ArduinoDataReceiver(threading.Thread):
             DeviceData_Object.setArduino1_status(False)
             return
     
-    def publish_actdata(self):    
-        if (act_obj.getRelay() is True):
-            message = 'H'
-            self.radio.write(message)
-            logging.info("Message Sent")
-        else:
-            return
+ 

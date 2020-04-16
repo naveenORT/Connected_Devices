@@ -6,11 +6,15 @@ Created on Apr 9, 2020
 import threading
 import time
 import logging
+from lib_nrf24 import NRF24
+import spidev
+import RPi.GPIO as GPIO
 from labs.module09.ArduinoDataReceiver import SensorData_Object
 from labs.module09.SmtpClientConnector import smtpconnect
-
+from labs.module09.UbidotsCloudConnector import act_obj
 SMTP = smtpconnect()
 logging = logging.getLogger("Main")
+
 
 class SensorDataManager(threading.Thread):
     
@@ -39,9 +43,40 @@ class SensorDataManager(threading.Thread):
             data = "Excess Induction Value Detected @ Site" + str(SensorData_Object.getTemperature())
             SMTP.publishMessage("Excess Magnetic Flux Detected", data)
     
+    def perform_actuation(self):
+        
+        self.radio.stopListening()
+        if (act_obj != None):
+            logging.info("\n"+"Actuator Data Received From cloud")
+            if (act_obj.getRelay() is True):
+                message = 'H'
+                self.radio.write(message)
+                logging.info("Safety Relay Activated!!")
     
+            elif (act_obj.getRelay() is False):
+                message = 'L'
+                self.radio.write(message)
+                logging.info("Safety Relay Deactivated")
+        else:
+            return
+    
+    def enableRadio(self):
+        pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
+        radio = NRF24(GPIO, spidev.SpiDev())
+        radio.begin(0, 17)        
+        radio.setPayloadSize(32)
+        radio.setChannel(0x76)
+        radio.setDataRate(NRF24.BR_1MBPS)
+        radio.setPALevel(NRF24.PA_MIN)
+        radio.setAutoAck(True)
+        radio.enableDynamicPayloads()
+        radio.enableAckPayload()
+        radio.openWritingPipe(pipe)
+        
     def run(self):
-        time.sleep(10)
+        self.enableRadio()
+        time.sleep(5)
         while(1):
             self.send_notification()
+            self.perform_actuation()
             time.sleep(1)
