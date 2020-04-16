@@ -71,10 +71,10 @@ class ArduinoDataReceiver(threading.Thread):
             
             if (arduinoMessage[8] == 1):
                 DeviceData_Object.setArduino1_status(True)
-                return
+                
             else:
                 DeviceData_Object.setArduino1_status(False)
-                return
+                
             
             time.sleep(0.5)
             radio.flush_rx()
@@ -96,8 +96,8 @@ class ArduinoDataReceiver(threading.Thread):
         
             if (arduinoMessage[6] == 1):
                 DeviceData_Object.setArduino1_status(True)
-                return
+                
             else:
                 DeviceData_Object.setArduino1_status(False)
-                return
+                
             radio.flush_rx()
