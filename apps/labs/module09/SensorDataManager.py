@@ -46,12 +46,19 @@ class SensorDataManager(threading.Thread):
     
     def perform_actuation(self):
         
-        radio.stopListening()
         print(act_obj.getRelay())
+        pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
+        radio.openWritingPipe(pipe)
+        
         if (act_obj.getRelay() != None):
             logging.info("\n" + "Actuator Data Received From cloud")
+            
+            message = list("H")
+            
+            while len(message) < 32:
+                message.append(0)
+            
             if (act_obj.getRelay() is True):
-                message = 'H'
                 radio.write(message)
                 logging.info("Safety Relay Activated!!")
     
@@ -80,5 +87,5 @@ class SensorDataManager(threading.Thread):
         self.enableRadio()
         while(1):
             #self.send_notification()
-            #self.perform_actuation()
+            self.perform_actuation()
             time.sleep(5)
