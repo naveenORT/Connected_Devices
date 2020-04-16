@@ -15,13 +15,13 @@ pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 
 SensorData_Object = SensorData()
 DeviceData_Object = DeviceData()
 sense = SenseHat()
-
+radio = NRF24(GPIO, spidev.SpiDev())
+       
 
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         threading.Thread.__init__(self)
-        radio = NRF24(GPIO, spidev.SpiDev())
         radio.begin(0, 17)        
         radio.setPayloadSize(32)
         radio.setChannel(0x76)
@@ -38,7 +38,7 @@ class ArduinoDataReceiver(threading.Thread):
         radio.startListening()
         
     def run(self):
-        self.radio.flush_rx()
+        radio.flush_rx()
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
@@ -47,7 +47,7 @@ class ArduinoDataReceiver(threading.Thread):
     
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
-        self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
+        radio.read(arduinoMessage, radio.getDynamicPayloadSize())
         
         if(arduinoMessage[0] == 1):
             # print("Received from Cabin Device: {}".format(arduinoMessage))
@@ -76,7 +76,7 @@ class ArduinoDataReceiver(threading.Thread):
     
     def receive_data_from_elecrticpit(self):    
         arduinoMessage = []
-        self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
+        radio.read(arduinoMessage, radio.getDynamicPayloadSize())
         
         if(arduinoMessage[0] == 2):
             # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
