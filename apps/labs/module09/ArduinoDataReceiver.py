@@ -81,8 +81,7 @@ class ArduinoDataReceiver(threading.Thread):
             radio.read(arduinoMessage, radio.getDynamicPayloadSize())
             print(arduinoMessage)
             radio.flush_rx()
-            time.sleep(3)
-    
+            
             if(arduinoMessage[0] == 2):
                 # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
                 DeviceData_Object.setArduino2_status(True)
@@ -97,5 +96,4 @@ class ArduinoDataReceiver(threading.Thread):
             else:
                 DeviceData_Object.setArduino1_status(False)
                 return
-        
         time.sleep(2)
