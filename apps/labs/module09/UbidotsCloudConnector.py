@@ -40,7 +40,7 @@ class UbidotsCloudConnector(threading.Thread):
         mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
         mqtt_client.tls_insecure_set(False)
         mqtt_client.connect(broker_endpoint, port=port)
-        #mqtt_client.on_connect = on_connect
+        mqtt_client.on_connect = on_connect
         mqtt_client.loop_start()
 
     def run(self): 

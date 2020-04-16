@@ -18,7 +18,7 @@ def main():
     SensorData_Object = ArduinoDataReceiver()  # Get Data from Constrained Device
     SensorData_Object.start()
     
-    time.sleep(20)
+    time.sleep(10)
     
     #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
     #OPC.start()
@@ -29,8 +29,8 @@ def main():
     #DPM = DevicePerformanceMonitor()  # Compute Device Performance
     #DPM.start()
 
-    #UCC = UbidotsCloudConnector()
-    #UCC.start()
+    UCC = UbidotsCloudConnector()
+    UCC.start()
 
 
 main()
