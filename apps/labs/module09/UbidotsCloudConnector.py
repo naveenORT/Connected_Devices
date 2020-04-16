@@ -36,8 +36,10 @@ class UbidotsCloudConnector(threading.Thread):
     
     def connect(self, mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
         mqtt_client.username_pw_set(mqtt_username, password=mqtt_password)
-        mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
-        mqtt_client.tls_insecure_set(False)
+        #mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
+        #mqtt_client.tls_insecure_set(False)
+        mqtt_client.on_connect = on_connect
+        mqtt_client.on_publish = on_publish
         mqtt_client.connect(broker_endpoint, port=port)
         mqtt_client.loop_start()
         
@@ -50,8 +52,7 @@ class UbidotsCloudConnector(threading.Thread):
             print(sensor_payload + "\n" + device_payload)
             self.publish(mqtt_client, topic, sensor_payload)
             self.publish(mqtt_client, topic, device_payload)
-            mqtt_client.on_publish = on_publish
-
+        
             #mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             #mqtt_client.on_message = on_message
             time.sleep(5)
