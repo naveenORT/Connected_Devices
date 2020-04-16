@@ -54,7 +54,7 @@ class UbidotsCloudConnector(threading.Thread):
             self.publish(mqtt_client, topic, sensor_payload)
             self.publish(mqtt_client, topic, device_payload)
             
-            time.sleep(2)
+            time.sleep(5)
         
     def publish(self, mqtt_client, topic, payload): 
         try:
