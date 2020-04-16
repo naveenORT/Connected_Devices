@@ -69,13 +69,6 @@ class ArduinoDataReceiver(threading.Thread):
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(round(abs(mag_t), 2))
             
-            if (arduinoMessage[8] == 1):
-                DeviceData_Object.setArduino1_status(True)
-                
-            else:
-                DeviceData_Object.setArduino1_status(False)
-                
-            
             time.sleep(0.5)
             radio.flush_rx()
     def receive_data_from_elecrticpit(self):    
@@ -94,10 +87,5 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Corona Level " + str(self.rod_length))
             logging.info("\n")
         
-            if (arduinoMessage[6] == 1):
-                DeviceData_Object.setArduino1_status(True)
-                
-            else:
-                DeviceData_Object.setArduino1_status(False)
-                
+                 
             radio.flush_rx()
