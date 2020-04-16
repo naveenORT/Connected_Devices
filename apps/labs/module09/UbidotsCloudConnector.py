@@ -80,18 +80,18 @@ class UbidotsCloudConnector(threading.Thread):
             time.sleep(2)
 
 
-def on_connect(mqtt_client, userdata, flags, rc):
-    if rc == 0:
-        print("[INFO] Connected to broker")
-        global connected  # Use global variable
-        connected = True  # Signal connection
-    else:
-        print("[INFO] Error, connection failed")
-
-
-def on_publish(mqtt_client, userdata, result):
-    print("Published!")
-
-
-mqtt_client.on_publish = on_publish
-mqtt_client.on_connect = on_connect
+        def on_connect(mqtt_client, userdata, flags, rc):
+            if rc == 0:
+                print("[INFO] Connected to broker")
+                global connected  # Use global variable
+                connected = True  # Signal connection
+            else:
+                print("[INFO] Error, connection failed")
+        
+        
+        def on_publish(mqtt_client, userdata, result):
+            print("Published!")
+        
+        
+        mqtt_client.on_publish = on_publish
+        mqtt_client.on_connect = on_connect
