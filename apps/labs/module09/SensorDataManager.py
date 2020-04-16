@@ -58,6 +58,7 @@ class SensorDataManager(threading.Thread):
                 self.radio.write(message)
                 logging.info("Safety Relay Deactivated")
         else:
+            logging.info("Actuation Not Required")
             return
     
     def enableRadio(self):
@@ -75,8 +76,7 @@ class SensorDataManager(threading.Thread):
         
     def run(self):
         self.enableRadio()
-        time.sleep(5)
         while(1):
-            self.send_notification()
+            #self.send_notification()
             self.perform_actuation()
-            time.sleep(1)
+            time.sleep(5)

@@ -59,13 +59,19 @@ class UbidotsCloudConnector(threading.Thread):
         
     def publish(self, mqtt_client, topic, payload): 
         try:
-            mqtt_client.publish(topic, payload)
-            logging.info("Data Published")
+            if (payload == self.sensor_payload):
+                    mqtt_client.publish(topic, payload)
+                    logging.info("SensorData Published")
+            
+            elif(payload == self.device_payload):
+                    mqtt_client.publish(topic, payload)
+                    logging.info("DeviceData Published")
+            
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
 
 
-def on_connect(mqttc, userdata, flags, rc):
+def on_connect(mqtt_client, userdata, flags, rc):
     '''
     * MQTT Callback function on connection establishment
     '''
@@ -75,15 +81,15 @@ def on_connect(mqttc, userdata, flags, rc):
         logging.getLogger().info("Bad connection - MQTT Broker Not Running")
 
 
-def on_publish(mqttc, userdata, result):  # create function for callback
+def on_publish(mqtt_client, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
 
-    logging.getLogger().info("Data Published to IoT Gateway App \n")
+    logging.getLogger().info("Publish Callback Received\n")
 
 
-def on_message(mqttc, userdata, message):    
+def on_message(mqtt_client, userdata, message):    
     '''
     * MQTT Callback function on receiving json ActuatorData via mqtt
     '''    
@@ -91,7 +97,7 @@ def on_message(mqttc, userdata, message):
     global flag
     act_data = str(message.payload.decode("utf-8"))
     flag = True
-    
+    logging.info("Received Actuator Data From Cloud")
     if(act_data == "1"):
         act_obj.setRelay(True)
         
