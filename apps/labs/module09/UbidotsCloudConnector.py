@@ -31,16 +31,9 @@ class UbidotsCloudConnector(threading.Thread):
         self.TOPIC = '/v1.6/devices/'
         self.DEVICE_LABEL = 'substation-gateway'
         self.TLS_CERT_PATH = self.load_prop.getValues('ubidots.cloud', 'certFile')  
-         
         logging.info("Configuring & Setting Up Cloud Connection Properties")
+        self.connect(mqtt_client, self.MQTT_USERNAME, self.MQTT_PASSWORD, self.BROKER_ENDPOINT, self.TLS_PORT)
     
-    def publish(self, mqtt_client, topic, payload): 
-        try:
-            mqtt_client.publish(topic, payload)
-    
-        except Exception as e:
-            print("[ERROR] Could not publish data, error: {}".format(e))
-
     def connect(self, mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
             mqtt_client.username_pw_set(mqtt_username, password=mqtt_password)
             mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
@@ -56,12 +49,16 @@ class UbidotsCloudConnector(threading.Thread):
         sensor_payload = convert_json.sensordatatojson(SensorData_Object)
         device_payload = convert_json.sensordatatojson(DeviceData_Object)
         print(sensor_payload + "\n" + device_payload)
-        
-        if not self.connect(mqtt_client, self.MQTT_USERNAME, self.MQTT_PASSWORD, self.BROKER_ENDPOINT, self.TLS_PORT):
-            return False
+
         self.publish(mqtt_client, topic, sensor_payload)
         self.publish(mqtt_client, topic, device_payload)
         return True
         
         time.sleep(2)
         
+    def publish(self, mqtt_client, topic, payload): 
+        try:
+            mqtt_client.publish(topic, payload)
+            logging.info("Data Published")
+        except Exception as e:
+            print("[ERROR] Could not publish data, error: {}".format(e))
