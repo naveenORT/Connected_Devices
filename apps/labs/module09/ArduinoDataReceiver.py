@@ -96,4 +96,4 @@ class ArduinoDataReceiver(threading.Thread):
                 DeviceData_Object.setArduino1_status(False)
                 return
             
-            time.sleep(2)
+            time.sleep(1)
