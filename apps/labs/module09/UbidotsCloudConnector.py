@@ -39,7 +39,6 @@ class UbidotsCloudConnector(threading.Thread):
         mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
         mqtt_client.tls_insecure_set(False)
         mqtt_client.connect(broker_endpoint, port=port)
-        mqtt_client.on_connect = on_connect
         mqtt_client.loop_start()
         
 
@@ -66,7 +65,7 @@ class UbidotsCloudConnector(threading.Thread):
 
 
 
-def on_connect(mqttc, userdata, flags, rc):
+def on_connect(mqtt, userdata, flags, rc):
     '''
     * MQTT Callback function on connection establishment
     '''
@@ -76,7 +75,7 @@ def on_connect(mqttc, userdata, flags, rc):
         logging.getLogger().info("Bad connection - MQTT Broker Not Running")
 
 
-def on_publish(mqttc, userdata, result):  # create function for callback
+def on_publish(mqtt, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
@@ -84,7 +83,7 @@ def on_publish(mqttc, userdata, result):  # create function for callback
     logging.getLogger().info("Data Published to IoT Gateway App \n")
 
 
-def on_message(mqttc, userdata, message):
+def on_message(mqtt, userdata, message):
     
     '''
     * MQTT Callback function on receiving json ActuatorData via mqtt
@@ -100,7 +99,3 @@ def on_message(mqttc, userdata, message):
         ActuatorAdaptor.setRelay(False)
     flag = True
     """
-
-mqtt_client.on_connect = on_connect
-mqtt_client.on_publish = on_publish
-mqtt_client.on_message = on_message
