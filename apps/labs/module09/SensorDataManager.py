@@ -47,6 +47,7 @@ class SensorDataManager(threading.Thread):
     def perform_actuation(self):
         
         radio.stopListening()
+        print(act_obj.getRelay())
         if (act_obj.getRelay() != None):
             logging.info("\n" + "Actuator Data Received From cloud")
             if (act_obj.getRelay() is True):
@@ -58,6 +59,7 @@ class SensorDataManager(threading.Thread):
                 message = 'L'
                 radio.write(message)
                 logging.info("Safety Relay Deactivated")
+        
         else:
             logging.info("Actuation Not Required")
             return
