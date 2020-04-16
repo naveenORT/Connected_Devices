@@ -26,31 +26,31 @@ class SensorDataManager(threading.Thread):
         
         if (SensorData_Object.getHumidity() > 50):
             
-            logging.info("\n" + "Humidity Exceeded By" + str(SensorData_Object.getHumidity() - 50) + "Units" )
+            logging.info("Humidity Exceeded By: " + str(SensorData_Object.getHumidity() - 50) + " Units" )
             data = "Excess Humidity Value Detected @ Site" + str(SensorData_Object.getHumidity())
             SMTP.publishMessage("Excess Humidity Detected", data)
     
         if (SensorData_Object.getResistence() > 110):
             
-            logging.info("\n" + "Resistence Exceeded By" + str(SensorData_Object.getResistence() - 110) + "Units" )
+            logging.info("Resistence Exceeded By: " + str(SensorData_Object.getResistence() - 110) + " Units" )
             data = "Excess Resistance Value Detected @ Site" + str (SensorData_Object.getResistence())
             SMTP.publishMessage("Excess Resistance Detected", data)
     
         if (SensorData_Object.getCorona() > 50):
             
-            logging.info("\n" + "Corona-Level Exceeded By" + str(SensorData_Object.getCorona() - 50) +"Units")
+            logging.info("Corona-Level Exceeded By: " + str(SensorData_Object.getCorona() - 50) +" Units")
             data = "Excess Corona_level Value Detected @ Site" + str (SensorData_Object.getCorona())
             SMTP.publishMessage("Excess Corona Detected", data)
     
         if (SensorData_Object.getTemperature() > 40):
             
-            logging.info("\n" + "Temperature Level Exceeded By" + str(SensorData_Object.getTemperature() - 40) +"Units" ) 
+            logging.info("Temperature Level Exceeded By: " + str(SensorData_Object.getTemperature() - 40) +" Units" ) 
             data = "Excess Temperartue Value Detected @ Site" + str(SensorData_Object.getTemperature())
             SMTP.publishMessage("Excess Temperature Detected", data)
     
         if (SensorData_Object.getMagFlux() > 50):
             
-            logging.info("\n" + "Temperature Level Exceeded By" + str(SensorData_Object.getMagFlux() - 50) +"Units" ) 
+            logging.info("Temperature Level Exceeded By: " + str(SensorData_Object.getMagFlux() - 50) +" Units" ) 
             data = "Excess Induction Value Detected @ Site" + str(SensorData_Object.getTemperature())
             SMTP.publishMessage("Excess Magnetic Flux Detected", data)
     
