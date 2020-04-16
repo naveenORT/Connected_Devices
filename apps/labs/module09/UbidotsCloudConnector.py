@@ -90,11 +90,12 @@ def on_message(mqtt_client, userdata, message):
     global act_data
     global flag
     act_data = str(message.payload.decode("utf-8"))
+    json_actdata = convert_json.jsonToUbidotsActuatorData(act_data)
     flag = True
     print(act_data)
     logging.info("Received Actuator Data From Cloud")
     
-    if(act_data == "1"):
+    if(json_actdata.value == "1"):
         act_obj.setRelay(True)
         logging.info("Relay On")
     else:
