@@ -16,7 +16,6 @@ from labs.module09.SensorDataManager import logging
 mqtt_client = mqttClient.Client()
 connected = False  
 convert_json = DataUtil()
-act_obj = ActuatorAdaptor()
 flag = False
 
 
@@ -91,12 +90,13 @@ def on_message(mqttc, userdata, message):
     global act_data
     global flag
     act_data = str(message.payload.decode("utf-8"))
+    """
     if(act_data == "1"):
         ActuatorAdaptor.setRelay(True)
     else:
         ActuatorAdaptor.setRelay(False)
     flag = True
-
+    """
 
 mqtt_client.on_connect = on_connect
 mqtt_client.on_publish = on_publish
