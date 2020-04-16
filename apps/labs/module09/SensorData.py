@@ -35,7 +35,7 @@ class SensorData():
         return self.magflux
     
     def getCorona(self):
-        return self.corona
+        return self.corona_level
     
     def getResistence(self):
         return self.resistence
