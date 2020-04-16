@@ -8,44 +8,48 @@ from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from labs.module09.DeviceData import DeviceData
 from cmath import sqrt
+from labs.module09.UbidotsCloudConnector import ActuatorAdaptor
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
-pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05]]
+pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05], [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]]
 SensorData_Object = SensorData()
 DeviceData_Object = DeviceData()
 sense = SenseHat()
+radio = NRF24(GPIO, spidev.SpiDev())
 
 
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         threading.Thread.__init__(self)
-        self.radio = NRF24(GPIO, spidev.SpiDev())
-        self.radio.begin(0, 17)
         
-        self.radio.setPayloadSize(32)
-        self.radio.setChannel(0x76)
-        self.radio.setDataRate(NRF24.BR_1MBPS)
-        self.radio.setPALevel(NRF24.PA_MIN)
+        radio.begin(0, 17)
         
-        self.radio.setAutoAck(True)
-        self.radio.enableDynamicPayloads()
-        self.radio.enableAckPayload()
+        radio.setPayloadSize(32)
+        radio.setChannel(0x76)
+        radio.setDataRate(NRF24.BR_1MBPS)
+        radio.setPALevel(NRF24.PA_MIN)
         
-        self.radio.openReadingPipe(0, pipes[1])
-        self.radio.openReadingPipe(1, pipes[2])
-        self.radio.startListening()
+        radio.setAutoAck(True)
+        radio.enableDynamicPayloads()
+        radio.enableAckPayload()
+        
+        radio.openReadingPipe(0, pipes[1])
+        radio.openReadingPipe(1, pipes[2])
+        radio.openWritingPipe(pipes[2])
+        radio.startListening()
     
     def run(self):
-        self.radio.flush_rx()
+        radio.flush_rx()
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
+            self.publish_actdata()
             time.sleep(0.5)
     
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
-        self.radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
+        radio.read(arduinoMessage, self.radio.getDynamicPayloadSize())
         
         if(arduinoMessage[0] == 1):
             # print("Received from Cabin Device: {}".format(arduinoMessage))
@@ -90,4 +94,9 @@ class ArduinoDataReceiver(threading.Thread):
         else:
             DeviceData_Object.setArduino1_status(False)
             return
-            
+    
+    def publish_actdata(self):    
+        if (ActuatorAdaptor.getRelay()=)
+            message = 'H'
+            self.radio.write(message)
+            logging.info("Message Sent")
