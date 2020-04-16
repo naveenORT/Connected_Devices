@@ -41,7 +41,7 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             time.sleep(1)
-            radio.flush_rx()
+            
      
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
