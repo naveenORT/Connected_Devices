@@ -38,11 +38,12 @@ class ArduinoDataReceiver(threading.Thread):
         radio.startListening()
         
     def run(self):
+        radio.flush_rx()
         while(1):
             self.receive_data_from_cabindevice()
-            time.sleep(1)
-            
-     
+            self.receive_data_from_elecrticpit()
+            time.sleep(2)
+ 
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
         radio.read(arduinoMessage, radio.getDynamicPayloadSize())
@@ -68,6 +69,17 @@ class ArduinoDataReceiver(threading.Thread):
             # self.magnetic_flux = arduinoMessage[6] / 10
             SensorData_Object.add_Mag_Value(round(abs(mag_t), 2))
             
+            if (arduinoMessage[8] == 1):
+                DeviceData_Object.setArduino1_status(True)
+ 
+            else:
+                DeviceData_Object.setArduino1_status(False)
+            
+            time.sleep(0.5)
+    
+    def receive_data_from_elecrticpit(self):    
+        arduinoMessage = []
+        radio.read(arduinoMessage, radio.getDynamicPayloadSize())
         
         if(arduinoMessage[0] == 2):
             # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
@@ -80,5 +92,9 @@ class ArduinoDataReceiver(threading.Thread):
             SensorData_Object.add_Cor_Value(round(self.rod_length,2))
             logging.info("Corona Level " + str(self.rod_length))
             logging.info("\n")
-                     
+        
+            if (arduinoMessage[6] == 1):
+                DeviceData_Object.setArduino1_status(True)
+            else:
+                DeviceData_Object.setArduino1_status(False)
         
