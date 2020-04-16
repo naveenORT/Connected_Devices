@@ -8,7 +8,7 @@ from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from labs.module09.DeviceData import DeviceData
 from cmath import sqrt
-from labs.module09.UbidotsCloudConnector import ActuatorAdaptor
+from labs.module09.UbidotsCloudConnector import act_obj
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05], [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]]
@@ -96,7 +96,9 @@ class ArduinoDataReceiver(threading.Thread):
             return
     
     def publish_actdata(self):    
-        if (ActuatorAdaptor.getRelay() is True):
+        if (act_obj.getRelay() is True):
             message = 'H'
             self.radio.write(message)
             logging.info("Message Sent")
+        else:
+            return
