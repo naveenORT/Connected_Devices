@@ -8,7 +8,7 @@ from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from labs.module09.DeviceData import DeviceData
 from cmath import sqrt
-#from labs.module09.UbidotsCloudConnector import act_obj
+# from labs.module09.UbidotsCloudConnector import act_obj
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
 pipes = [[0xE8, 0xE8, 0xF0, 0xF0, 0xE1], [0xC2, 0xC2, 0xC2, 0xC2, 0xC2], [0x01, 0x02, 0x03, 0x04, 0x05], [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]]
@@ -57,17 +57,17 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Cabin Temp:" + str(round(sense.get_temperature(), 2)))
             
             self.room_humidity = round(arduinoMessage[4] / 3, 2)
-            SensorData_Object.add_Humi_Value(sense.get_humidity())
-            logging.info("Room Humidity:" + str(sense.get_humidity()))
+            SensorData_Object.add_Humi_Value(round(sense.get_humidity(), 2))
+            logging.info("Room Humidity:" + str(round(sense.get_humidity(), 2)))
             
             mag = sense.get_compass_raw()
             mag_x = round(mag["x"], 2)
             mag_y = round(mag["y"], 2)
             mag_z = round(mag["z"], 2)
             mag_t = sqrt(abs(mag_x * mag_x + mag_y * mag_y + mag_z * mag_z))
-            logging.info("Magnetic Flux:" + str(abs(mag_t)))
+            logging.info("Magnetic Flux:" + str(round(abs(mag_t), 2)))
             # self.magnetic_flux = arduinoMessage[6] / 10
-            SensorData_Object.add_Mag_Value(abs(mag_t))
+            SensorData_Object.add_Mag_Value(round(abs(mag_t), 2))
             
             if (arduinoMessage[8] == 1):
                 DeviceData_Object.setArduino1_status(True)
@@ -75,8 +75,6 @@ class ArduinoDataReceiver(threading.Thread):
                 DeviceData_Object.setArduino1_status(False)
             
             time.sleep(0.5)
-        
-        
     
     def receive_data_from_elecrticpit(self):    
         arduinoMessage = []
@@ -86,8 +84,8 @@ class ArduinoDataReceiver(threading.Thread):
             # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
             DeviceData_Object.setArduino2_status(True)
             self.rod_resistence = arduinoMessage[2]  
-            SensorData_Object.add_Res_Value(self.rod_resistence)
-            logging.info("Earthpit Resistence " + str(self.rod_resistence))
+            SensorData_Object.add_Res_Value(round(self.rod_resistence, 2))
+            logging.info("Earthpit Resistence " + str(round(self.rod_resistence), 2))
             
             self.rod_length = arduinoMessage[4]
             SensorData_Object.add_Cor_Value(self.rod_length)
@@ -98,6 +96,4 @@ class ArduinoDataReceiver(threading.Thread):
                 DeviceData_Object.setArduino1_status(True)
             else:
                 DeviceData_Object.setArduino1_status(False)
-            
-
         
