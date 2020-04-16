@@ -2,6 +2,7 @@
 Created on Apr 15, 2020
 @author: Naveen Rajendran
 '''
+import logging
 import paho.mqtt.client as mqttClient
 import time
 import ssl
@@ -10,13 +11,13 @@ from labs.common.ConfigUtil import ConfigUtil
 from labs.module09.ArduinoDataReceiver import SensorData_Object
 from labs.module09.ArduinoDataReceiver import DeviceData_Object
 import threading
-from labs.module09.SensorDataManager import logging
-#from labs.module09.ActuatorAdaptor import ActuatorAdaptor
+from labs.module09.ActuatorAdaptor import ActuatorAdaptor
 
 mqtt_client = mqttClient.Client()
 connected = False  
 convert_json = DataUtil()
 flag = False
+act_obj = ActuatorAdaptor()
 
 
 class UbidotsCloudConnector(threading.Thread):    
@@ -41,7 +42,6 @@ class UbidotsCloudConnector(threading.Thread):
         mqtt_client.connect(broker_endpoint, port=port)
         mqtt_client.on_connect = on_connect
         mqtt_client.loop_start()
-        
 
     def run(self): 
         while(1):
@@ -53,8 +53,8 @@ class UbidotsCloudConnector(threading.Thread):
             self.publish(mqtt_client, topic, device_payload)
             mqtt_client.on_publish = on_publish
 
-            mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
-            mqtt_client.on_message = on_message
+            #mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
+            #mqtt_client.on_message = on_message
             time.sleep(5)
         
     def publish(self, mqtt_client, topic, payload): 
@@ -63,7 +63,6 @@ class UbidotsCloudConnector(threading.Thread):
             logging.info("Data Published")
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
-
 
 
 def on_connect(mqttc, userdata, flags, rc):
@@ -84,23 +83,21 @@ def on_publish(mqttc, userdata, result):  # create function for callback
     logging.getLogger().info("Data Published to IoT Gateway App \n")
 
 
-def on_message(mqttc, userdata, message):
-    
+def on_message(mqttc, userdata, message):    
     '''
     * MQTT Callback function on receiving json ActuatorData via mqtt
     '''    
-
-    
     global act_data
     global flag
     act_data = str(message.payload.decode("utf-8"))
-    """
-    if(act_data == "1"):
-        ActuatorAdaptor.setRelay(True)
-    else:
-        ActuatorAdaptor.setRelay(False)
     flag = True
-    """
+    
+    if(act_data == "1"):
+        act_obj.setRelay(True)
+        
+    else:
+        act_obj.setRelay(False)
+    
 
 mqtt_client.on_connect = on_connect
 mqtt_client.on_publish = on_publish
