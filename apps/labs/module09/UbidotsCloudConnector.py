@@ -11,13 +11,13 @@ from labs.module09.ArduinoDataReceiver import SensorData_Object
 from labs.module09.ArduinoDataReceiver import DeviceData_Object
 import threading
 from labs.module09.SensorDataManager import logging
-#from labs.module09.ActuatorAdaptor import ActuatorAdaptor
+from labs.module09.ActuatorAdaptor import ActuatorAdaptor 
 
 mqtt_client = mqttClient.Client()
 connected = False  
 convert_json = DataUtil()
 flag = False
-
+act_obj = ActuatorAdaptor()
 
 class UbidotsCloudConnector(threading.Thread):    
     
@@ -90,7 +90,6 @@ def on_message(mqttc, userdata, message):
     * MQTT Callback function on receiving json ActuatorData via mqtt
     '''    
 
-    
     global act_data
     global flag
     act_data = str(message.payload.decode("utf-8"))
