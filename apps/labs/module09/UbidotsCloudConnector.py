@@ -19,6 +19,7 @@ convert_json = DataUtil()
 flag = False
 act_obj = ActuatorAdaptor()
 
+
 class UbidotsCloudConnector(threading.Thread):    
     
     def __init__(self):        
@@ -41,7 +42,6 @@ class UbidotsCloudConnector(threading.Thread):
         mqtt_client.connect(broker_endpoint, port=port)
         mqtt_client.on_connect = on_connect
         mqtt_client.loop_start()
-        
 
     def run(self): 
         while(1):
@@ -49,10 +49,10 @@ class UbidotsCloudConnector(threading.Thread):
             sensor_payload = convert_json.sensordatatojson(SensorData_Object)
             device_payload = convert_json.sensordatatojson(DeviceData_Object)
             print(sensor_payload + "\n" + device_payload)
-           # self.publish(mqtt_client, topic, sensor_payload)
-            #self.publish(mqtt_client, topic, device_payload)
+            # self.publish(mqtt_client, topic, sensor_payload)
+            # self.publish(mqtt_client, topic, device_payload)
         
-            mqtt_client.subscribe("/v1.6/devices/substation-gateway/resistence")
+            mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             mqtt_client.on_message = on_message
             time.sleep(5)
         
@@ -63,7 +63,6 @@ class UbidotsCloudConnector(threading.Thread):
             logging.info("Data Published")
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
-
 
 
 def on_connect(mqtt, userdata, flags, rc):
@@ -92,10 +91,10 @@ def on_message(mqtt, userdata, message):
     global flag
     act_data = str(message.payload.decode("utf-8"))
     print(act_data)
-    """
-    if(act_data == "1"):
-        ActuatorAdaptor.setRelay(True)
+    act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
+    if(act_data_obj.value == "1"):
+        act_obj.setRelay(True)
+        logging.info("Relay On")
     else:
-        ActuatorAdaptor.setRelay(False)
-    flag = True
-    """
+        act_obj.setRelay(False)
+        logging.info("Relay Off")
