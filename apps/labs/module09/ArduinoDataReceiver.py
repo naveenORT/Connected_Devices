@@ -42,12 +42,14 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
-            time.sleep(5)
-    
+            time.sleep(2)
+
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
         radio.read(arduinoMessage, radio.getDynamicPayloadSize())
         print(arduinoMessage)
+        radio.flush_rx()
+
         if(arduinoMessage[0] == 1):
             # print("Received from Cabin Device: {}".format(arduinoMessage))
             DeviceData_Object.setArduino1_status(True)
@@ -76,7 +78,9 @@ class ArduinoDataReceiver(threading.Thread):
     def receive_data_from_elecrticpit(self):    
         arduinoMessage = []
         radio.read(arduinoMessage, radio.getDynamicPayloadSize())
-        
+        print(arduinoMessage)
+        radio.flush_rx()
+
         if(arduinoMessage[0] == 2):
             # print("Received from Earthpit Device: {}".format(arduinoMessage)) 
             DeviceData_Object.setArduino2_status(True)
