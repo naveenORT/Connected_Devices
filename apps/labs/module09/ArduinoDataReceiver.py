@@ -85,10 +85,10 @@ class ArduinoDataReceiver(threading.Thread):
             DeviceData_Object.setArduino2_status(True)
             self.rod_resistence = arduinoMessage[2]  
             SensorData_Object.add_Res_Value(round(self.rod_resistence, 2))
-            logging.info("Earthpit Resistence " + str(round(self.rod_resistence), 2))
+            logging.info("Earthpit Resistence " + str(self.rod_resistence))
             
             self.rod_length = arduinoMessage[4]
-            SensorData_Object.add_Cor_Value(self.rod_length)
+            SensorData_Object.add_Cor_Value(round(self.rod_length,2))
             logging.info("Corona Level " + str(self.rod_length))
             logging.info("\n")
         
