@@ -20,6 +20,11 @@ sense = SenseHat()
 radio = NRF24(GPIO, spidev.SpiDev())
 
 act_obj = ActuatorAdaptor()
+message1 = list("H")
+            
+while len(message1) < 32:
+    message1.append(0)
+
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
@@ -33,6 +38,7 @@ class ArduinoDataReceiver(threading.Thread):
         radio.enableDynamicPayloads()
         radio.enableAckPayload()
         radio.openWritingPipe(pipes[3])
+        radio.write(message1)
         radio.openReadingPipe(0, pipes[1])
         radio.openReadingPipe(1, pipes[2])
         radio.startListening()
@@ -42,7 +48,7 @@ class ArduinoDataReceiver(threading.Thread):
         while(1):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
-            self.perform_actuation()
+        #    self.perform_actuation()
             time.sleep(2)
  
     def receive_data_from_cabindevice(self):
@@ -115,13 +121,11 @@ class ArduinoDataReceiver(threading.Thread):
                 message1.append(0)
             
             if (act_obj.getRelay() is True):
-                start = time.time()
                 radio.write(message1)
                 logging.info("Safety Relay Activated!!")
     
             
             elif (act_obj.getRelay() is False):
-                start = time.time()
                 radio.write(message2)
                 logging.info("Safety Relay Deactivated")
         
