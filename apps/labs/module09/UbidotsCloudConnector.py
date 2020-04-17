@@ -87,13 +87,11 @@ def on_message(mqtt, userdata, message):
     '''
     * MQTT Callback function on receiving json ActuatorData via mqtt
     '''    
-    print("subscribed data received")    
-    act_data = str(message.payload.decode("utf-8"))
-    print(act_data)
-    
+    act_data = str(message.payload.decode("utf-8")) 
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
     
-    if(act_data_obj.value == "1.0"):
+    if(act_data_obj.value == 1.0):
+        logging.info(" <----------------------------------------------Subscribed Data Received from Cloud ")
         act_obj.setRelay(True)
         logging.info("Relay On")
     else:
