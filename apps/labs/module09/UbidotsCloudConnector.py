@@ -92,10 +92,8 @@ def on_message(mqtt, userdata, message):
     print(act_data)
     
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
-    print(act_data_obj)
-    logging.info("value:" + act_data_obj.value)
     
-    if(act_data_obj.value == "1"):
+    if(act_data_obj.value == "1.0"):
         act_obj.setRelay(True)
         logging.info("Relay On")
     else:
