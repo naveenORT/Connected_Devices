@@ -56,7 +56,7 @@ class UbidotsCloudConnector(threading.Thread):
         
             mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             mqtt_client.on_message = on_message
-            time.sleep(5)
+            time.sleep(10)
         
     def publish(self, mqtt_client, topic, payload): 
         try:

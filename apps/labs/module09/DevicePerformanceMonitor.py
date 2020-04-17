@@ -30,7 +30,7 @@ class DevicePerformanceMonitor(threading.Thread):
             DeviceData_Object.setMem_Util(self.y.getSensorData())
             logging.info(cpuData + "%")
             logging.info(memData + "%")
-            time.sleep(2)  # Calling Thread Every 3 seconds  
+            time.sleep(5)  # Calling Thread Every 3 seconds  
             self.count -= 1  # Decrementing count call by 1            
             if self.count == 0:
                 return  # stopping thread after executing 'N' times
