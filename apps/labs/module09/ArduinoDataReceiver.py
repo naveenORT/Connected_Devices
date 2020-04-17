@@ -7,7 +7,9 @@ import threading
 from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from labs.module09.DeviceData import DeviceData
+from labs.module09.UbidotsCloudConnector import act_obj
 from cmath import sqrt
+
 # from labs.module09.UbidotsCloudConnector import act_obj
 GPIO.setmode(GPIO.BCM)
 # GPIO.setwarnings(False)
@@ -16,22 +18,20 @@ SensorData_Object = SensorData()
 DeviceData_Object = DeviceData()
 sense = SenseHat()
 radio = NRF24(GPIO, spidev.SpiDev())
-radio.begin(0, 17)        
-radio.setPayloadSize(32)
-radio.setChannel(0x76)
-radio.setDataRate(NRF24.BR_1MBPS)
-radio.setPALevel(NRF24.PA_MIN)
-
-radio.setAutoAck(True)
-radio.enableDynamicPayloads()
-radio.enableAckPayload()
 
 
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
         threading.Thread.__init__(self)
-        
+        radio.begin(0, 17)        
+        radio.setPayloadSize(32)
+        radio.setChannel(0x76)
+        radio.setDataRate(NRF24.BR_1MBPS)
+        radio.setPALevel(NRF24.PA_MIN)
+        radio.setAutoAck(True)
+        radio.enableDynamicPayloads()
+        radio.enableAckPayload()
         radio.openReadingPipe(0, pipes[1])
         radio.openReadingPipe(1, pipes[2])
         
@@ -89,7 +89,7 @@ class ArduinoDataReceiver(threading.Thread):
             logging.info("Earthpit Resistence " + str(self.rod_resistence))
             
             self.rod_length = arduinoMessage[4]
-            SensorData_Object.add_Cor_Value(round(self.rod_length,2))
+            SensorData_Object.add_Cor_Value(round(self.rod_length, 2))
             logging.info("Corona Level " + str(self.rod_length))
             logging.info("\n")
         
@@ -98,3 +98,25 @@ class ArduinoDataReceiver(threading.Thread):
             else:
                 DeviceData_Object.setArduino1_status(False)
         
+    def perform_actuation(self):
+        radio.stopListening()
+        if (act_obj.getRelay() != None):
+            logging.info("\n" + "Actuator Data Received From cloud")
+            
+            message = list("H")
+            
+            while len(message) < 32:
+                message.append(0)
+            
+            if (act_obj.getRelay() is True):
+                radio.write(message)
+                logging.info("Safety Relay Activated!!")
+    
+            elif (act_obj.getRelay() is False):
+                message = 'L'
+                radio.write(message)
+                logging.info("Safety Relay Deactivated")
+        
+        else:
+            logging.info("Actuation Not Required")
+            return
