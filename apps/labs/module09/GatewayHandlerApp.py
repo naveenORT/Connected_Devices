@@ -12,8 +12,7 @@ from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 import time
 
     
-def main():
-       
+class GatewayHandlerApp():       
     SensorData_Object = ArduinoDataReceiver()  # Get Data from Constrained Device
     SensorData_Object.start()
     
@@ -22,14 +21,28 @@ def main():
     #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
     #OPC.start()
     
-    #SDM = SensorDataManager()  # Publish SensorData to Ubidots Cloud & Trigger Notification
-    #SDM.start()
+    SDM = SensorDataManager()  # Publish SensorData to Ubidots Cloud & Trigger Notification
+    SDM.start()
     
-    #DPM = DevicePerformanceMonitor()  # Compute Device Performance
-    #DPM.start()
+    DPM = DevicePerformanceMonitor()  # Compute Device Performance
+    DPM.start()
 
     UCC = UbidotsCloudConnector()
     UCC.start()
 
+    def getArduino_Receiver_Obj(self):
+        return self.SensorData_Object
+    
+    def getOPC_Client_Rpi(self):
+        return self.SensorData_Object
+    
+    def getSensorDataManager(self):
+        return self.SDM
 
-main()
+    def devicePerfMonit(self):
+        return self.DPM
+    
+    def getUbidotsCloudConnector(self):
+        return self.UCC
+
+x = GatewayHandlerApp()    
