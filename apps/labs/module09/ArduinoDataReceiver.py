@@ -8,7 +8,6 @@ from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from labs.module09.DeviceData import DeviceData
 from cmath import sqrt
-from labs.module09.ActuatorAdaptor import ActuatorAdaptor
 
 # from labs.module09.UbidotsCloudConnector import act_obj
 GPIO.setmode(GPIO.BCM)
