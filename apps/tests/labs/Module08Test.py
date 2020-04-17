@@ -1,41 +1,39 @@
 import unittest
+from labs.module08.MultiSensorAdaptor import MultiSensorAdaptor
+from labs.module08.SensorDataManager import SensorDataManager
+from labs.module08.MqttClientConnector import mqttc
+from labs.module08.MqttClientConnector import act_data
 
 
-"""
-Test class for all requisite Module08 functionality.
-
-Instructions:
-1) Rename 'testSomething()' method such that 'Something' is specific to your needs; add others as needed, beginning each method with 'test...()'.
-2) Add the '@Test' annotation to each new 'test...()' method you add.
-3) Import the relevant modules and classes to support your tests.
-4) Run this class as unit test app.
-5) Include a screen shot of the report when you submit your assignment.
-
-Please note: While some example test cases may be provided, you must write your own for the class.
-"""
 class Module08Test(unittest.TestCase):
 
 	"""
-	Use this to setup your tests. This is where you may want to load configuration
-	information (if needed), initialize class-scoped variables, create class-scoped
-	instances of complex objects, initialize any requisite connections, etc.
+	* Setting up essential threads & functions for testing	
 	"""
+
 	def setUp(self):
-		pass
+		self.msa = MultiSensorAdaptor()  # Thread 1
+		self.msa.start()  # Starting Thread
+		manager_object = SensorDataManager()  # Thread 2
+		manager_object.start()  # Starting
 
 	"""
-	Use this to tear down any allocated resources after your tests are complete. This
-	is where you may want to release connections, zero out any long-term data, etc.
+	* Function to check data published from mqttc
 	"""
-	def tearDown(self):
-		pass
 
+	def testPublishSensorData(self):
+		self.assertTrue(mqttc.on_publish.__sizeof__() > 0)
+		
 	"""
-	Place your comments describing the test here.
+	* Function to check data published from mqttc
 	"""
-	def testSomething(self):
-		pass
+
+	def testConnect(self):
+		self.assertTrue(mqttc.is_connected() is True)
+
+	def testSubscribeActuatorData(self):
+		self.assertTrue(isinstance(act_data, str),"Not a String")
+
 
 if __name__ == "__main__":
-	#import sys;sys.argv = ['', 'Test.testName']
 	unittest.main()
