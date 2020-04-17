@@ -17,7 +17,6 @@ class GatewayHandlerApp():
     SensorData_Object = ArduinoDataReceiver()  # Get Data from Constrained Device
     SensorData_Object.start()
     
-    time.sleep(10)
     
     #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
     #OPC.start()
