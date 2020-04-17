@@ -55,29 +55,23 @@ class SensorDataManager(threading.Thread):
             SMTP.publishMessage("Excess Magnetic Flux Detected", data)
     
     def perform_actuation(self):
-
+        
+        
         if (act_obj.getRelay() != None):
             logging.info("\n" + "Actuator Data Received From cloud")
             
-            message1 = list("H")
+            message = list("H")
             
-            while len(message1) < 32:
-                message1.append(0)
-            
-            
-            message2 = list("L")
-            
-            while len(message2) < 32:
-                message2.append(0)
-            
+            while len(message) < 32:
+                message.append(0)
             
             if (act_obj.getRelay() is True):
-                radio.write(message1)
+                radio.write(message)
                 logging.info("Safety Relay Activated!!")
     
-            
             elif (act_obj.getRelay() is False):
-                radio.write(message2)
+                message = 'L'
+                radio.write(message)
                 logging.info("Safety Relay Deactivated")
         
         else:
@@ -85,21 +79,13 @@ class SensorDataManager(threading.Thread):
             return
     
     def enableRadio(self):
-        pipe = [[0xD2, 0XD2, 0XD2, 0XD2, 0XD2]]
-        radio.begin(0, 17)        
-        radio.setPayloadSize(32)
-        radio.setChannel(0x76)
-        radio.setDataRate(NRF24.BR_1MBPS)
-        radio.setPALevel(NRF24.PA_MIN)
-        radio.setAutoAck(True)
-        radio.enableDynamicPayloads()
-        radio.enableAckPayload()
-        radio.openWritingPipe(pipe[0])
+        pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
+        radio.openWritingPipe(pipe)
         radio.stopListening()
-    
+         
     def run(self):
         #self.enableRadio()
         while(1):
-            #self.send_notification()
-            self.perform_actuation()
+            self.send_notification()
+            #self.perform_actuation()
             time.sleep(10)
