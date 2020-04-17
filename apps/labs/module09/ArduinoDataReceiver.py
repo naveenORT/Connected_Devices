@@ -19,11 +19,6 @@ DeviceData_Object = DeviceData()
 sense = SenseHat()
 radio = NRF24(GPIO, spidev.SpiDev())
 
-act_obj = ActuatorAdaptor()
-message1 = list("H")
-            
-while len(message1) < 32:
-    message1.append(0)
 
 class ArduinoDataReceiver(threading.Thread):
     
@@ -37,8 +32,6 @@ class ArduinoDataReceiver(threading.Thread):
         radio.setAutoAck(True)
         radio.enableDynamicPayloads()
         radio.enableAckPayload()
-        radio.openWritingPipe(pipes[3])
-        radio.write(message1)
         radio.openReadingPipe(0, pipes[1])
         radio.openReadingPipe(1, pipes[2])
         radio.startListening()
@@ -105,30 +98,4 @@ class ArduinoDataReceiver(threading.Thread):
             else:
                 DeviceData_Object.setArduino1_status(False)
         
-    def perform_actuation(self):
-        radio.stopListening()
-        if (act_obj.getRelay() != None):
-            logging.info("\n" + "Actuator Data Received From cloud")
-            
-            message1 = list("H")
-            
-            while len(message1) < 32:
-                message1.append(0)
-           
-            message2 = list("L")
-            
-            while len(message1) < 32:
-                message1.append(0)
-            
-            if (act_obj.getRelay() is True):
-                radio.write(message1)
-                logging.info("Safety Relay Activated!!")
     
-            
-            elif (act_obj.getRelay() is False):
-                radio.write(message2)
-                logging.info("Safety Relay Deactivated")
-        
-        else:
-            logging.info("Actuation Not Required")
-            return
