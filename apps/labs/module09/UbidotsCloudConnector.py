@@ -49,12 +49,11 @@ class UbidotsCloudConnector(threading.Thread):
             topic = "{}{}".format(self.TOPIC, self.DEVICE_LABEL)
             sensor_payload = convert_json.sensordatatojson(SensorData_Object)
             device_payload = convert_json.sensordatatojson(DeviceData_Object)
-            logging.info(sensor_payload) 
-            logging.info(device_payload)
+            #logging.info(sensor_payload) 
+            #logging.info(device_payload)
             #self.publish(mqtt_client, topic, sensor_payload)
             #self.publish(mqtt_client, topic, device_payload)
             mqtt_client.on_message = on_message
-   
             mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             time.sleep(5)
         
