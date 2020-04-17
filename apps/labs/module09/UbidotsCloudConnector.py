@@ -90,7 +90,7 @@ def on_message(mqtt, userdata, message):
     print("subscribed data received")
     global act_data
     global flag
-    act_data = str(message.payload.decode())
+    act_data = str(message.payload)
     print(act_data)
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
     print(act_data_obj)
