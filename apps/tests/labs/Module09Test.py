@@ -9,7 +9,8 @@ class Module09Test(unittest.TestCase):
 	
 	
 	def testSensorData(self):
-		
+		exp1 = self.x.getArduino_Receiver_Obj().getSensorData_object()
+		self.assertTrue(isinstance(exp1.getCorona(),float))
 		pass
 
 
