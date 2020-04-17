@@ -49,11 +49,10 @@ class UbidotsCloudConnector(threading.Thread):
             topic = "{}{}".format(self.TOPIC, self.DEVICE_LABEL)
             sensor_payload = convert_json.sensordatatojson(SensorData_Object)
             device_payload = convert_json.sensordatatojson(DeviceData_Object)
-            #logging.info(sensor_payload) 
-            #logging.info(device_payload)
+            logging.info(sensor_payload + "\n" + device_payload)
             #self.publish(mqtt_client, topic, sensor_payload)
             #self.publish(mqtt_client, topic, device_payload)
-            
+        
             mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             mqtt_client.on_message = on_message
             time.sleep(5)
@@ -80,7 +79,7 @@ def on_publish(mqtt, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
-    logging.info("Data Published to Ubidots ----------------------------------------->>>>>>>>>>>>>> ")
+    logging.info("Data Published to Ubidots ")
 
 
 def on_message(mqtt, userdata, message):
@@ -91,13 +90,10 @@ def on_message(mqtt, userdata, message):
     global act_data
     global flag
     act_data = str(message.payload.decode("utf-8"))
+    print(act_data)
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
-    logging.info(act_data_obj)
-    logging.info("value:" + act_data_obj.value)
-    
     if(act_data_obj.value == "1"):
-        logging.info("ActuatorData received from Cloud <<<<<<<<<<<-----------------------------------")
-        act_obj.setRelay(True)        
+        act_obj.setRelay(True)
         logging.info("Relay On")
     else:
         act_obj.setRelay(False)
