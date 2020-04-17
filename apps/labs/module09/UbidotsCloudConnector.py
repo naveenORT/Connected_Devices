@@ -53,9 +53,9 @@ class UbidotsCloudConnector(threading.Thread):
             logging.info(device_payload)
             #self.publish(mqtt_client, topic, sensor_payload)
             #self.publish(mqtt_client, topic, device_payload)
-        
-            mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             mqtt_client.on_message = on_message
+   
+            mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             time.sleep(5)
         
     def publish(self, mqtt_client, topic, payload): 
@@ -92,7 +92,9 @@ def on_message(mqtt, userdata, message):
     global flag
     act_data = str(message.payload.decode("utf-8"))
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
-    print("value:" + act_data_obj.value)
+    logging.info(act_data_obj)
+    logging.info("value:" + act_data_obj.value)
+    
     if(act_data_obj.value == "1"):
         logging.info("ActuatorData received from Cloud <<<<<<<<<<<-----------------------------------")
         act_obj.setRelay(True)        
