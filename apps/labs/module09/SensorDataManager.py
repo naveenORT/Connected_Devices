@@ -55,26 +55,29 @@ class SensorDataManager(threading.Thread):
             SMTP.publishMessage("Excess Magnetic Flux Detected", data)
     
     def perform_actuation(self):
-        
-        
-        pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
-        radio.openWritingPipe(pipe)
-        
+
         if (act_obj.getRelay() != None):
             logging.info("\n" + "Actuator Data Received From cloud")
             
-            message = list("H")
+            message1 = list("H")
             
-            while len(message) < 32:
-                message.append(0)
+            while len(message1) < 32:
+                message1.append(0)
+            
+            
+            message2 = list("L")
+            
+            while len(message2) < 32:
+                message2.append(0)
+            
             
             if (act_obj.getRelay() is True):
-                radio.write(message)
+                radio.write(message1)
                 logging.info("Safety Relay Activated!!")
     
+            
             elif (act_obj.getRelay() is False):
-                message = 'L'
-                radio.write(message)
+                radio.write(message2)
                 logging.info("Safety Relay Deactivated")
         
         else:
@@ -82,7 +85,7 @@ class SensorDataManager(threading.Thread):
             return
     
     def enableRadio(self):
-        pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
+        pipe = [[0xD2, 0XD2, 0XD2, 0XD2, 0XD2]]
         radio.begin(0, 17)        
         radio.setPayloadSize(32)
         radio.setChannel(0x76)
@@ -91,7 +94,7 @@ class SensorDataManager(threading.Thread):
         radio.setAutoAck(True)
         radio.enableDynamicPayloads()
         radio.enableAckPayload()
-        radio.openWritingPipe(pipe)
+        radio.openWritingPipe(pipe[0])
         
     def run(self):
         #self.enableRadio()
