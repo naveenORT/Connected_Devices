@@ -89,7 +89,7 @@ def on_message(mqtt, userdata, message):
     '''    
     global act_data
     global flag
-    act_data = str(message.payload.decode("utf-8"))
+    act_data = str(message.payload.decode())
     print(act_data)
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
     logging.info("value:" + act_data_obj.value)
