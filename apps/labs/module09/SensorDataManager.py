@@ -6,7 +6,7 @@ Created on Apr 9, 2020
 import threading
 import time
 import logging
-from lib_nrf24 import NRF24
+from labs.module09.lib_nrf24 import NRF24
 import spidev
 import RPi.GPIO as GPIO
 from labs.module09.ArduinoDataReceiver import SensorData_Object
