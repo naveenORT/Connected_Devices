@@ -104,18 +104,23 @@ class ArduinoDataReceiver(threading.Thread):
         if (act_obj.getRelay() != None):
             logging.info("\n" + "Actuator Data Received From cloud")
             
-            message = list("H")
+            message1 = list("H")
             
-            while len(message) < 32:
-                message.append(0)
+            while len(message1) < 32:
+                message1.append(0)
+           
+            message2 = list("L")
+            
+            while len(message1) < 32:
+                message1.append(0)
             
             if (act_obj.getRelay() is True):
-                radio.write(message)
+                radio.write(message1)
                 logging.info("Safety Relay Activated!!")
     
+            
             elif (act_obj.getRelay() is False):
-                message = 'L'
-                radio.write(message)
+                radio.write(message2)
                 logging.info("Safety Relay Deactivated")
         
         else:
