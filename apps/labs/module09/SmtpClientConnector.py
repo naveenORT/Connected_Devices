@@ -46,13 +46,13 @@ class smtpconnect():
         smtpServer.close()
         
     def getfromAddr(self):       
-         return self.fromAddr
+        return self.fromAddr
 
     def gettoAddr(self):       
-         return self.toAddr
+        return self.toAddr
      
     def getmsgBody(self):
-         return self.msgBody
+        return self.msgBody
      
     def getHost(self):
         return self.host

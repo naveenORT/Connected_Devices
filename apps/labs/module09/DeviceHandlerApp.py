@@ -20,8 +20,8 @@ def main():
     
     time.sleep(10)
     
-    OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
-    OPC.start()
+    #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
+    #OPC.start()
     
     SDM = SensorDataManager()  # Publish SensorData to Ubidots Cloud & Trigger Notification
     SDM.start()
@@ -29,8 +29,8 @@ def main():
     DPM = DevicePerformanceMonitor()  # Compute Device Performance
     DPM.start()
 
-    #UCC = UbidotsCloudConnector()
-    #UCC.start()
+    UCC = UbidotsCloudConnector()
+    UCC.start()
 
 
 main()
