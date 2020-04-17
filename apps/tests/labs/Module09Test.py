@@ -9,6 +9,7 @@ class Module09Test(unittest.TestCase):
 		self.x = GatewayHandlerApp()
 	
 	def testSensorData(self):
+		time.sleep(5)
 		exp1 = self.x.getArduino_Receiver_Obj().getSensorData_object()
 		self.assertTrue(isinstance(exp1.getCorona(), int) and 0 < exp1.getCorona() < 200)
 		self.assertTrue(isinstance(exp1.getResistence(), int) and 0 < exp1.getResistence() < 150)
@@ -17,6 +18,7 @@ class Module09Test(unittest.TestCase):
 		self.assertTrue(isinstance(exp1.getTemperature(), float) and 0 < exp1.getCorona() < 160)
 		
 	def testDeviceData(self):
+		time.sleep(15)
 		exp2 = self.x.getArduino_Receiver_Obj().getDeviceData_object()
 		self.assertTrue(isinstance(exp2.getCpu_Util(), float) and 0 < exp2.getCpu_Util() < 100)
 		self.assertTrue(isinstance(exp2.getMem_Util(), float)  and 0 < exp2.getMem_Util() < 100)
@@ -25,10 +27,12 @@ class Module09Test(unittest.TestCase):
 		self.assertTrue(isinstance(exp2.getMem_Util(), int)  and 0 or 1)
 
 	def testAlertData(self):
+		time.sleep(5)
 		exp3 = self.x.getSensorDataManager().getSMTP()
 		self.assertTrue(isinstance(exp3.getmsgBody(), str))
 	
 	def ubidots_test(self):
+		time.sleep(20)
 		exp4 = self.x.getUbidotsCloudConnector()
 		self.assertTrue(exp4.get_connected_flag() is True)
 		self.assertTrue(exp4.get_publish_flag() is True)
