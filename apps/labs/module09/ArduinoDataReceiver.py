@@ -41,7 +41,7 @@ class ArduinoDataReceiver(threading.Thread):
             self.receive_data_from_cabindevice()
             self.receive_data_from_elecrticpit()
         #    self.perform_actuation()
-            time.sleep(2)
+            time.sleep(5)
  
     def receive_data_from_cabindevice(self):
         arduinoMessage = []
