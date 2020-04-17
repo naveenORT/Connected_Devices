@@ -92,6 +92,7 @@ def on_message(mqtt, userdata, message):
     act_data = str(message.payload.decode("utf-8"))
     print(act_data)
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
+    logging.info("value:" + act_data_obj.value)
     if(act_data_obj.value == "1"):
         act_obj.setRelay(True)
         logging.info("Relay On")
