@@ -1,5 +1,8 @@
 
 class DeviceData():
+    def __init__(self):
+        self.ram = 0
+        self.cpu = 0
     
     def setArduino1_status(self, input):
         if (input == True):
