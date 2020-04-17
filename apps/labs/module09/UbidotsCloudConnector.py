@@ -65,7 +65,18 @@ class UbidotsCloudConnector(threading.Thread):
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
 
-
+    def get_connected_flag(self):
+        return connected_flag
+    
+    def get_publish_flag(self):
+        return publish_flag
+    
+    def get_subscribe_flag(self):
+        return subscribe_flag
+    
+    def get_act_obj(self):
+        return act_obj
+    
 def on_connect(mqtt, userdata, flags, rc):
     '''
     * MQTT Callback function on connection establishment

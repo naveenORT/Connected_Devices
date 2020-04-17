@@ -99,3 +99,6 @@ class ArduinoDataReceiver(threading.Thread):
         
     def getSensorData_object(self):
         return SensorData_Object
+    
+    def getDeviceData_object(self):
+        return DeviceData_Object
