@@ -80,8 +80,10 @@ class SensorDataManager(threading.Thread):
     
     def enableRadio(self):
         pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
-        radio.openWritingPipe(pipe)
         radio.stopListening()
+        radio.flush_tx()
+        radio.openWritingPipe(pipe)
+        
          
     def run(self):
         self.enableRadio()
