@@ -7,8 +7,8 @@ import threading
 from sense_hat import SenseHat
 from labs.module09.SensorData import SensorData
 from labs.module09.DeviceData import DeviceData
-from labs.module09.UbidotsCloudConnector import act_obj
 from cmath import sqrt
+from labs.module09.ActuatorAdaptor import ActuatorAdaptor
 
 # from labs.module09.UbidotsCloudConnector import act_obj
 GPIO.setmode(GPIO.BCM)
@@ -19,7 +19,7 @@ DeviceData_Object = DeviceData()
 sense = SenseHat()
 radio = NRF24(GPIO, spidev.SpiDev())
 
-
+act_obj = ActuatorAdaptor()
 class ArduinoDataReceiver(threading.Thread):
     
     def __init__(self):
