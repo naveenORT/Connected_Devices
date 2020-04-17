@@ -56,7 +56,7 @@ class SensorDataManager(threading.Thread):
     
     def perform_actuation(self):
         
-        print(act_obj.getRelay())
+        
         pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
         radio.openWritingPipe(pipe)
         
@@ -96,6 +96,6 @@ class SensorDataManager(threading.Thread):
     def run(self):
         #self.enableRadio()
         while(1):
-            self.send_notification()
-            #self.perform_actuation()
+            #self.send_notification()
+            self.perform_actuation()
             time.sleep(10)
