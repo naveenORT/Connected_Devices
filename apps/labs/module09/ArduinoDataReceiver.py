@@ -35,7 +35,6 @@ class ArduinoDataReceiver(threading.Thread):
         radio.openWritingPipe(pipes[3])
         radio.openReadingPipe(0, pipes[1])
         radio.openReadingPipe(1, pipes[2])
-        radio.stopListening()
         radio.startListening()
         
     def run(self):
@@ -116,11 +115,13 @@ class ArduinoDataReceiver(threading.Thread):
                 message1.append(0)
             
             if (act_obj.getRelay() is True):
+                start = time.time()
                 radio.write(message1)
                 logging.info("Safety Relay Activated!!")
     
             
             elif (act_obj.getRelay() is False):
+                start = time.time()
                 radio.write(message2)
                 logging.info("Safety Relay Deactivated")
         
