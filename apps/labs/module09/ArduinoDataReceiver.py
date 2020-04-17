@@ -32,7 +32,7 @@ class ArduinoDataReceiver(threading.Thread):
         radio.setAutoAck(True)
         radio.enableDynamicPayloads()
         radio.enableAckPayload()
-        radio.openWritingpipe(pipes[3])
+        radio.openWritingPipe(pipes[3])
         radio.openReadingPipe(0, pipes[1])
         radio.openReadingPipe(1, pipes[2])
         radio.stopListening()
