@@ -86,3 +86,6 @@ class SensorDataManager(threading.Thread):
             self.send_notification()
             # self.perform_actuation()
             time.sleep(10)
+    
+    def getSMTP(self):
+        return SMTP

@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 logging = logging.getLogger("Main")
-
+sent_flag = ''
 
 class smtpconnect():
     msgBody = ''
@@ -42,7 +42,9 @@ class smtpconnect():
         smtpServer.login(self.fromAddr, authToken)  # Authentication
         msgText = msg.as_string()  # Converting to String
         smtpServer.sendmail(self.fromAddr, self.toAddr, msgText)  # Send Mail
+        sent_flag = True
         logging.info("Successfully mailed alert from address " + self.fromAddr)
+        
         smtpServer.close()
         
     def getfromAddr(self):       
@@ -56,3 +58,6 @@ class smtpconnect():
      
     def getHost(self):
         return self.host
+    
+    def getsentstatus(self):
+        return sent_flag
