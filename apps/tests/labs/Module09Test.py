@@ -1,27 +1,18 @@
 import unittest
+from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 import time
-from labs.module09.GatewayHandlerApp import GatewayHandlerApp
 
 class Module09Test(unittest.TestCase):
 
 	def setUp(self):
-		x = GatewayHandlerApp()
-
-
+		self.x = ArduinoDataReceiver()
+		self.x.start()
+	
 	def testSensorData(self):
-		pass
-
-
-
-
-
-
-
-
-
-
-
-
+		time.sleep(5)
+		exp1= self.x.getSensorData_object()
+		self.assertTrue(isinstance(exp1.getCorona(),float))
+	
 
 
 
@@ -31,4 +22,5 @@ class Module09Test(unittest.TestCase):
 
 
 if __name__ == "__main__":
+	#import sys;sys.argv = ['', 'Test.testName']
 	unittest.main()
