@@ -98,4 +98,5 @@ class ArduinoDataReceiver(threading.Thread):
             else:
                 DeviceData_Object.setArduino1_status(False)
         
-    
+    def getSensorData_object(self):
+        return SensorData_Object
