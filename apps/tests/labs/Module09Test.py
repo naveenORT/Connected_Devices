@@ -9,6 +9,7 @@ class Module09Test(unittest.TestCase):
 		self.x = GatewayHandlerApp()
 	
 	def testSensorData(self):
+		time.sleep(10)
 		exp1 = self.x.getArduino_Receiver_Obj().getSensorData_object()
 		self.assertTrue(isinstance(exp1.getCorona(), int) and 0 < exp1.getCorona() < 200)
 		self.assertTrue(isinstance(exp1.getResistence(), int) and 0 < exp1.getResistence() < 150)
