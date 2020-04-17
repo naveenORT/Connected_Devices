@@ -6,7 +6,7 @@ class Module09Test(unittest.TestCase):
 
 	def setUp(self):
 		self.x = GatewayHandlerApp()
-		self.x.start()
+	
 	
 	def testSensorData(self):
 		
