@@ -1,22 +1,12 @@
 import unittest
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 import time
-import logging
-import RPi.GPIO as GPIO
-from lib_nrf24 import NRF24
-import time
-import spidev
-import threading
-from sense_hat import SenseHat
-from labs.module09.SensorData import SensorData
-from labs.module09.DeviceData import DeviceData
-from cmath import sqrt
-from labs.module09.ActuatorAdaptor import ActuatorAdaptor
 
 class Module09Test(unittest.TestCase):
 
 	def setUp(self):
 		self.x = ArduinoDataReceiver()
+		time.sleep(5)
 		self.x.start()
 	
 	def testSensorData(self):
