@@ -20,7 +20,7 @@ class GatewayHandlerApp():
     
     #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
     #OPC.start()
-    
+    time.sleep(8)
     SDM = SensorDataManager()  # Publish SensorData to Ubidots Cloud & Trigger Notification
     SDM.start()
     
