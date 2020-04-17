@@ -95,7 +95,8 @@ class SensorDataManager(threading.Thread):
         radio.enableDynamicPayloads()
         radio.enableAckPayload()
         radio.openWritingPipe(pipe[0])
-        
+        radio.stopListening()
+    
     def run(self):
         #self.enableRadio()
         while(1):
