@@ -14,10 +14,11 @@ from labs.module09.SensorDataManager import logging
 from labs.module09.ActuatorAdaptor import ActuatorAdaptor 
 
 mqtt_client = mqttClient.Client()
-connected = False  
 convert_json = DataUtil()
-flag = False
 act_obj = ActuatorAdaptor()
+connected_flag = False  
+publish_flag = False
+subscribe_flag = False
 
 
 class UbidotsCloudConnector(threading.Thread):    
@@ -50,8 +51,8 @@ class UbidotsCloudConnector(threading.Thread):
             sensor_payload = convert_json.sensordatatojson(SensorData_Object)
             device_payload = convert_json.sensordatatojson(DeviceData_Object)
             logging.info(sensor_payload + "\n" + device_payload)
-            #self.publish(mqtt_client, topic, sensor_payload)
-            #self.publish(mqtt_client, topic, device_payload)
+            # self.publish(mqtt_client, topic, sensor_payload)
+            # self.publish(mqtt_client, topic, device_payload)
         
             mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             mqtt_client.on_message = on_message
@@ -79,7 +80,9 @@ def on_publish(mqtt, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
+    global publish_flag
     logging.info("Data Published to Ubidots ")
+    publish_flag = True
 
 
 def on_message(mqtt, userdata, message):
@@ -87,6 +90,8 @@ def on_message(mqtt, userdata, message):
     '''
     * MQTT Callback function on receiving json ActuatorData via mqtt
     '''    
+    global subscribe_flag
+    
     act_data = str(message.payload.decode("utf-8")) 
     act_data_obj = convert_json.jsonToUbidotsActuatorData(act_data) 
     
@@ -94,6 +99,8 @@ def on_message(mqtt, userdata, message):
         logging.info(" <----------------------------------------------Subscribed Data Received from Cloud ")
         act_obj.setRelay(True)
         logging.info("Relay On")
+        subscribe_flag = True
+    
     else:
         act_obj.setRelay(False)
         logging.info("Relay Off")
