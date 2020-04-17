@@ -33,6 +33,7 @@ class UbidotsCloudConnector(threading.Thread):
         self.DEVICE_LABEL = 'substation-gateway'
         self.TLS_CERT_PATH = self.load_prop.getValues('ubidots.cloud', 'certFile')  
         logging.info("Configuring & Setting Up Cloud Connection Properties")
+        mqtt_client.on_connect = on_connect
         self.connect(mqtt_client, self.MQTT_USERNAME, self.MQTT_PASSWORD, self.BROKER_ENDPOINT, self.TLS_PORT)
     
     def connect(self, mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
@@ -40,7 +41,7 @@ class UbidotsCloudConnector(threading.Thread):
         mqtt_client.tls_set(ca_certs=self.TLS_CERT_PATH, certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
         mqtt_client.tls_insecure_set(False)
         mqtt_client.connect(broker_endpoint, port=port)
-        mqtt_client.on_connect = on_connect
+       
         mqtt_client.loop_start()
 
     def run(self): 
@@ -49,8 +50,8 @@ class UbidotsCloudConnector(threading.Thread):
             sensor_payload = convert_json.sensordatatojson(SensorData_Object)
             device_payload = convert_json.sensordatatojson(DeviceData_Object)
             print(sensor_payload + "\n" + device_payload)
-            #self.publish(mqtt_client, topic, sensor_payload)
-            #self.publish(mqtt_client, topic, device_payload)
+            self.publish(mqtt_client, topic, sensor_payload)
+            self.publish(mqtt_client, topic, device_payload)
         
             #mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
             #mqtt_client.on_message = on_message
@@ -60,7 +61,6 @@ class UbidotsCloudConnector(threading.Thread):
         try:
             mqtt_client.publish(topic, payload)
             mqtt_client.on_publish = on_publish
-            logging.info("Data Published")
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
 
@@ -79,7 +79,7 @@ def on_publish(mqtt, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
-    logging.getLogger().info("Data Published to IoT Gateway App \n")
+    logging.info("Data Published to Ubidots ")
 
 
 def on_message(mqtt, userdata, message):
