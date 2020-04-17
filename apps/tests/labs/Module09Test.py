@@ -36,7 +36,7 @@ class Module09Test(unittest.TestCase):
 	
 	def testactData(self):
 		exp5 = self.x.getUbidotsCloudConnector().get_act_obj()
-		self.assertTrue(exp5.getRelay() is True or False)
+		self.assertTrue(isinstance(exp5.getRelay(), bool))
 
 
 if __name__ == "__main__":
