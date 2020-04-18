@@ -3,6 +3,7 @@ Created on Apr 8, 2020
 @author: Naveen Rajendran
 '''
 import logging
+from pip._internal import self_outdated_check
 """
 This data-storage python module provides functions to store various sensor's data, embedded in a single class object
 """
@@ -14,6 +15,12 @@ class SensorData():
         """
         Class Constructor
         """
+        self.temperature = 0
+        self.humidity = 0
+        self.corona_level = 0
+        self.magflux = 0
+        self.resistence = 0
+        
         logging.info("Creating Sensor Data Object")
         
     def add_Temp_Value(self, input):
