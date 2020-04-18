@@ -48,7 +48,7 @@ def on_publish(mqtt, userdata, result):  # create function for callback
     '''
     * MQTT Callback function on publishing json data to MQTT Broker
     '''    
-    logging.info("Data Published to Ubidots ------------------------------------------------>>>>>>>> ")
+    logging.info("Data Published to AWS_IoT_Core ------------------------------------------------>>>>>>>> ")
 
 
 def on_connect(client, userdata, flags, rc):  
