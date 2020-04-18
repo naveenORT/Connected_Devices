@@ -36,16 +36,13 @@ class AWS_Cloud_Connector(threading.Thread):
     def run(self):
         while (1):
             self.data_publish()
-            time.sleep(10)
+            time.sleep(5)
         
     def data_publish(self):    
         time.sleep(10)
-        if connflag == True: 
-            json_sensor_data = convert_json.sensordatatojson(SensorData_Object)
-            mqttc.publish('update/environment/dht1', json_sensor_data, qos=1)  
-        else:
-            print("waiting for connection...")                  
-
+        json_sensor_data = convert_json.sensordatatojson(SensorData_Object)
+        mqttc.publish('update/environment/dht1', json_sensor_data, qos=1)  
+        mqttc.on_publish = on_publish
 
 def on_publish(mqtt, userdata, result):  # create function for callback
     '''
@@ -58,8 +55,7 @@ def on_connect(client, userdata, flags, rc):
     global connflag
     print ("Connected to AWS")
     connflag = True
-    print("Connection returned result: " + str(rc))
-
+   
  
 def on_message(client, userdata, msg): 
     print(msg.topic + " " + str(msg.payload))
