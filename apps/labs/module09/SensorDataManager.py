@@ -15,15 +15,23 @@ from labs.module09.UbidotsCloudConnector import act_obj
 SMTP = smtpconnect()
 logging = logging.getLogger("Main")
 radio = NRF24(GPIO, spidev.SpiDev())
-        
+"""
+Python class module which helps to perform triggering & actuation of an event based on received SensorData 
+"""        
+
 
 class SensorDataManager(threading.Thread):
     
     def __init__(self):
+        """
+        Class constructor 
+        """        
         threading.Thread.__init__(self)
         
     def send_notification(self):
-        
+        """
+        Function which perfoms alert triggering using SMTPClientConnector class function 
+        """        
         if (SensorData_Object.getHumidity() > 50):
             
             logging.info("Humidity Exceeded By: " + str(SensorData_Object.getHumidity() - 50) + " Units")
@@ -55,7 +63,10 @@ class SensorDataManager(threading.Thread):
             SMTP.publishMessage("Excess Magnetic Flux Detected", data)
     
     def perform_actuation(self):
-        
+        """
+        Function which uses NRF lora library to transmit actuation data to constrained device 
+        """        
+    
         if (act_obj.getRelay() != None):
             logging.info("\n" + "Actuator Data Received From cloud")
             
@@ -78,9 +89,16 @@ class SensorDataManager(threading.Thread):
             return
     
     def enableRadio(self):
+        """
+        * Opening radio pipe to write data
+        """
         pipe = [0xD2, 0XD2, 0XD2, 0XD2, 0XD2]
-         
+        radio.openWritingPipe(pipe)
+                 
     def run(self):
+        """
+        * Repetitive thread function which triggers email notification & performs actuation
+        """
         # self.enableRadio()
         while(1):
             self.send_notification()
@@ -88,4 +106,8 @@ class SensorDataManager(threading.Thread):
             time.sleep(5)
     
     def getSMTP(self):
+        """
+        Get function which returns SMTP Client Connector Object
+        Output: SMTP (Object)
+        """
         return SMTP

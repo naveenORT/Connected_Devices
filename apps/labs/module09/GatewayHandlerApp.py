@@ -9,40 +9,66 @@ from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
 from labs.module09.SensorDataManager import SensorDataManager
 from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
 from labs.module09.UbidotsCloudConnector import UbidotsCloudConnector        
-
+from labs.module09.AWS_Cloud_Connector import AWS_Cloud_Connector
 import time
 
     
 class GatewayHandlerApp():       
+   
     SensorData_Object = ArduinoDataReceiver()  # Get Data from Constrained Device
     SensorData_Object.start()
     
+    # OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
+    # OPC.start()
     
-    #OPC = OPC_Client_Rpi()  # Backup data at OPC_ Server
-    #OPC.start()
     time.sleep(10)
+    
     SDM = SensorDataManager()  # Publish SensorData to Ubidots Cloud & Trigger Notification
     SDM.start()
     
     DPM = DevicePerformanceMonitor()  # Compute Device Performance
     DPM.start()
 
-    UCC = UbidotsCloudConnector()
-    UCC.start()
+#    UCC = UbidotsCloudConnector()  # Publish & Subscribe Data from Ubidots  Cloud
+#    UCC.start()
 
+    AWS = AWS_Cloud_Connector()
+    AWS.start()
+    
     def getArduino_Receiver_Obj(self):
+        """
+        Getter function to return Sensor_Data Object
+        Output: Sensor_Data (Object) 
+        """
         return self.SensorData_Object
     
     def getOPC_Client_Rpi(self):
-        return self.SensorData_Object
+        """
+        Getter function to return OPC_Data Object
+        Output: OPC (Object) 
+        """
+        return self.OPC
     
     def getSensorDataManager(self):
+        """
+        Getter function to return Sensor_Data_Manager Object
+        Output: SDM (Object) 
+        """
         return self.SDM
 
     def devicePerfMonit(self):
+        """
+        Getter function to return devicePerfMonit Object
+        Output: DPM (Object) 
+        """
         return self.DPM
     
     def getUbidotsCloudConnector(self):
+        """
+        Getter function to return UbidotsCloud_Data Object
+        Output: OCC (Object) 
+        """
         return self.UCC
+
 
 x = GatewayHandlerApp()    
