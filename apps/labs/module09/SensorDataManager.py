@@ -32,36 +32,40 @@ class SensorDataManager(threading.Thread):
         """
         Function which perfoms alert triggering using SMTPClientConnector class function 
         """        
-        if (SensorData_Object.getHumidity() > 50):
+        if(SensorData_Object != None):
             
-            logging.info("Humidity Exceeded By: " + str(SensorData_Object.getHumidity() - 50) + " Units")
-            data = "Excess Humidity Value Detected @ Site" + str(SensorData_Object.getHumidity())
-            SMTP.publishMessage("Excess Humidity Detected", data)
-    
-        if (SensorData_Object.getResistence() > 110):
-            
-            logging.info("Resistence Exceeded By: " + str(SensorData_Object.getResistence() - 110) + " Units")
-            data = "Excess Resistance Value Detected @ Site" + str (SensorData_Object.getResistence())
-            SMTP.publishMessage("Excess Resistance Detected", data)
-    
-        if (SensorData_Object.getCorona() > 50):
-            
-            logging.info("Corona-Level Exceeded By: " + str(SensorData_Object.getCorona() - 50) + " Units")
-            data = "Excess Corona_level Value Detected @ Site" + str (SensorData_Object.getCorona())
-            SMTP.publishMessage("Excess Corona Detected", data)
-    
-        if (SensorData_Object.getTemperature() > 40):
-            
-            logging.info("Temperature Level Exceeded By: " + str(SensorData_Object.getTemperature() - 40) + " Units") 
-            data = "Excess Temperartue Value Detected @ Site" + str(SensorData_Object.getTemperature())
-            SMTP.publishMessage("Excess Temperature Detected", data)
-    
-        if (SensorData_Object.getMagFlux() > 50):
-            
-            logging.info("Temperature Level Exceeded By: " + str(SensorData_Object.getMagFlux() - 50) + " Units") 
-            data = "Excess Induction Value Detected @ Site" + str(SensorData_Object.getTemperature())
-            SMTP.publishMessage("Excess Magnetic Flux Detected", data)
-    
+            if (SensorData_Object.getHumidity() > 50):
+                
+                logging.info("Humidity Exceeded By: " + str(SensorData_Object.getHumidity() - 50) + " Units")
+                data = "Excess Humidity Value Detected @ Site" + str(SensorData_Object.getHumidity())
+                SMTP.publishMessage("Excess Humidity Detected", data)
+        
+            if (SensorData_Object.getResistence() > 110):
+                
+                logging.info("Resistence Exceeded By: " + str(SensorData_Object.getResistence() - 110) + " Units")
+                data = "Excess Resistance Value Detected @ Site" + str (SensorData_Object.getResistence())
+                SMTP.publishMessage("Excess Resistance Detected", data)
+        
+            if (SensorData_Object.getCorona() > 50):
+                
+                logging.info("Corona-Level Exceeded By: " + str(SensorData_Object.getCorona() - 50) + " Units")
+                data = "Excess Corona_level Value Detected @ Site" + str (SensorData_Object.getCorona())
+                SMTP.publishMessage("Excess Corona Detected", data)
+        
+            if (SensorData_Object.getTemperature() > 40):
+                
+                logging.info("Temperature Level Exceeded By: " + str(SensorData_Object.getTemperature() - 40) + " Units") 
+                data = "Excess Temperartue Value Detected @ Site" + str(SensorData_Object.getTemperature())
+                SMTP.publishMessage("Excess Temperature Detected", data)
+        
+            if (SensorData_Object.getMagFlux() > 50):
+                
+                logging.info("Temperature Level Exceeded By: " + str(SensorData_Object.getMagFlux() - 50) + " Units") 
+                data = "Excess Induction Value Detected @ Site" + str(SensorData_Object.getTemperature())
+                SMTP.publishMessage("Excess Magnetic Flux Detected", data)
+        else:
+            return
+
     def perform_actuation(self):
         """
         Function which uses NRF lora library to transmit actuation data to constrained device 
