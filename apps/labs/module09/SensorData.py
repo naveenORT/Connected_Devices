@@ -3,7 +3,6 @@ Created on Apr 8, 2020
 @author: Naveen Rajendran
 '''
 import logging
-from pip._internal import self_outdated_check
 """
 This data-storage python module provides functions to store various sensor's data, embedded in a single class object
 """
