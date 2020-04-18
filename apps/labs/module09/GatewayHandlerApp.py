@@ -29,8 +29,8 @@ class GatewayHandlerApp():
     DPM = DevicePerformanceMonitor()  # Compute Device Performance
     DPM.start()
 
-    UCC = UbidotsCloudConnector()  # Publish & Subscribe Data from Ubidots  Cloud
-    UCC.start()
+#    UCC = UbidotsCloudConnector()  # Publish & Subscribe Data from Ubidots  Cloud
+#    UCC.start()
 
     AWS = AWS_Cloud_Connector()
     AWS.start()
