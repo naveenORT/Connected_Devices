@@ -2,14 +2,56 @@
 Created on Apr 10, 2020
 @author: Naveen Rajendran
 '''
-
 import paho.mqtt.client as paho
-from labs.module09.SensorData import SensorData
-import json
+from labs.module09.ArduinoDataReceiver import SensorData_Object
+from labs.common.DataUtil import DataUtil
 import ssl
-from time import sleep
-from random import uniform
+import time 
+from labs.common.ConfigUtil import ConfigUtil
+import threading
+import logging
+
 connflag = False
+load_prop = ConfigUtil("/home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
+convert_json = DataUtil()
+mqttc = paho.Client() 
+awshost = load_prop.getValues('aws.cloud', 'awshost') 
+awsport = load_prop.getValues('aws.cloud', 'awsport')  
+clientId = load_prop.getValues('aws.cloud', 'clientId') 
+thingName = load_prop.getValues('aws.cloud', 'thingName')
+caPath = load_prop.getValues('aws.cloud', 'caPath') 
+certPath = load_prop.getValues('aws.cloud', 'certPath')  
+keyPath = load_prop.getValues('aws.cloud', 'keyPath') 
+
+
+class AWS_Cloud_Connector(threading.Thread):    
+    
+    def __init__(self):
+        threading.Thread.__init__(self)
+        mqttc.tls_set(caPath, certfile=certPath, keyfile=keyPath, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)  # pass parameters 
+        mqttc.connect(awshost, awsport, keepalive=60) 
+        mqttc.on_connect = on_connect 
+        mqttc.loop_start()  
+    
+    def run(self):
+        while (1):
+            self.data_publish()
+            time.sleep(10)
+        
+    def data_publish(self):    
+        time.sleep(10)
+        if connflag == True: 
+            json_sensor_data = convert_json.sensordatatojson(SensorData_Object)
+            mqttc.publish('update/environment/dht1', json_sensor_data, qos=1)  
+        else:
+            print("waiting for connection...")                  
+
+
+def on_publish(mqtt, userdata, result):  # create function for callback
+    '''
+    * MQTT Callback function on publishing json data to MQTT Broker
+    '''    
+    logging.info("Data Published to Ubidots ------------------------------------------------>>>>>>>> ")
 
 
 def on_connect(client, userdata, flags, rc):  
@@ -21,38 +63,5 @@ def on_connect(client, userdata, flags, rc):
  
 def on_message(client, userdata, msg): 
     print(msg.topic + " " + str(msg.payload))
- 
- 
-mqttc = paho.Client() 
-mqttc.on_connect = on_connect 
-mqttc.on_message = on_message  
 
-awshost = "a1ztbtn0iha3oc-ats.iot.us-west-2.amazonaws.com"  
-awsport = 8883  
-clientId = "Publisher"  
-thingName = "Publisher" 
-caPath = "root-ca-cert.pem" 
-certPath = "707349cdf2.cert.pem"  
-keyPath = "707349cdf2.private.key" 
- 
-mqttc.tls_set(caPath, certfile=certPath, keyfile=keyPath, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)  # pass parameters
- 
-mqttc.connect(awshost, awsport, keepalive=60) 
-
-mqttc.loop_start()  
-obj = SensorData() 
-while 1 == 1:
-    sleep(5)
-    if connflag == True:
-        value = uniform(20.0, 25.0) 
-        obj.corona = round(value / 2, 2)
-        obj.temperature = round(value / 3, 2)
-        obj.humidity = round(value / 4, 2)
-        obj.resistence = round(value, 2)
-        obj.magflux = round(value * 0.5, 2)
-        obj.device_id = 1001
-        json_data = json.dumps(obj.__dict__)        
-        mqttc.publish('update/environment/dht1', json_data, qos=1)  
-        print("msg sent" + json_data)  
-    else:
-        print("waiting for connection...")                  
+# mqttc.on_message = on_message  

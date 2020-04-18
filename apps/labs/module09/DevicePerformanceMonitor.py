@@ -8,11 +8,15 @@ from labs.module09.ArduinoDataReceiver import DeviceData_Object
 import time
 import logging
 import threading
-
+"""
+Python class module which polls CPU (RAM Memory & Process) utilization repetitively using psutil library
+"""
 class DevicePerformanceMonitor(threading.Thread):
     
-    def __init__(self, count=1000):
-        
+    def __init__(self, count=100000):
+        """
+        * Class constructor Function which creates seperate instances for CPU % & RAM % Data Polling
+        """
         threading.Thread.__init__(self)  # initializing thread function
         self.count = count
         self.x = memutil()  # creating memutil instance#
@@ -22,7 +26,9 @@ class DevicePerformanceMonitor(threading.Thread):
         logging.info("SPA Instance Created")
         
     def run(self):
-        
+        """
+        Runnable thread function to poll data continuosly
+        """
         while DevicePerformanceMonitor.is_alive(self):
             cpuData = "CPU Utilization = " + str(self.x.getSensorData()) 
             DeviceData_Object.setCpu_Util(self.x.getSensorData())
