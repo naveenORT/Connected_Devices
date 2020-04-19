@@ -5,7 +5,7 @@ Created on Apr 8, 2020
 import logging
 logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
-from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
+#from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
 from labs.module09.SensorDataManager import SensorDataManager
 from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
 from labs.module09.UbidotsCloudConnector import UbidotsCloudConnector        
@@ -35,6 +35,7 @@ class GatewayHandlerApp():
     AWS = AWS_Cloud_Connector()
     AWS.start()
     
+
     def getArduino_Receiver_Obj(self):
         """
         Getter function to return Sensor_Data Object
