@@ -64,25 +64,33 @@ class UbidotsCloudConnector(threading.Thread):
             topic = "{}{}".format(self.TOPIC, self.DEVICE_LABEL)
             sensor_payload = convert_json.sensordatatojson(SensorData_Object)
             device_payload = convert_json.sensordatatojson(DeviceData_Object)
-            logging.info(sensor_payload + "\n" + device_payload)
-            self.publish(mqtt_client, topic, sensor_payload)
+            logging.info(sensor_payload)
+            logging.info(device_payload)
+            self.publish(mqtt_client, topic, sensor_payload)         
             self.publish(mqtt_client, topic, device_payload)
-        
-            mqtt_client.subscribe("/v1.6/devices/substation-gateway/relay")
-            mqtt_client.on_message = on_message
+            
+            
+            self.subscribe("/v1.6/devices/substation-gateway/relay")
             time.sleep(10)
         
     def publish(self, mqtt_client, topic, payload): 
         
         """
-        Publish data to ubidots cloud service
+        Publish SensorData to Ubidots cloud service
         """
         try:
             mqtt_client.publish(topic, payload)
             mqtt_client.on_publish = on_publish
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
-
+    
+    def subscribe(self, topic):
+        """
+        Subscribe ActuatorData from Ubidots cloud service
+        """
+        mqtt_client.subscribe(topic)
+        mqtt_client.on_message = on_message
+    
     def get_connected_flag(self):
         """
         Function which returns status of connected_flag
