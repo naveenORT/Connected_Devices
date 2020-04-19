@@ -5,10 +5,10 @@ Created on Apr 8, 2020
 import logging
 logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
-#from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
+from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
 from labs.module09.SensorDataManager import SensorDataManager
 from labs.module09.DevicePerformanceMonitor import DevicePerformanceMonitor
-#from labs.module09.UbidotsCloudConnector import UbidotsCloudConnector        
+from labs.module09.UbidotsCloudConnector import UbidotsCloudConnector        
 from labs.module09.AWS_Cloud_Connector import AWS_Cloud_Connector
 import time
 
@@ -23,14 +23,14 @@ class GatewayHandlerApp():
     
     time.sleep(10)
     
-    SDM = SensorDataManager()  # Publish SensorData to Ubidots Cloud & Trigger Notification
+    SDM = SensorDataManager()  # Publish SensorData to ubidots Cloud & Trigger Notification
     SDM.start()
     
     DPM = DevicePerformanceMonitor()  # Compute Device Performance
     DPM.start()
 
-#    UCC = UbidotsCloudConnector()  # Publish & Subscribe Data from Ubidots  Cloud
-#    UCC.start()
+    UCC = UbidotsCloudConnector()  # Publish & Subscribe Data from Ubidots  Cloud
+    UCC.start()
 
     AWS = AWS_Cloud_Connector()
     AWS.start()
