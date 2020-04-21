@@ -1,6 +1,6 @@
 2020-04-19 16:01:22 INFO     Creating Sensor Data Object
 2020-04-19 16:01:22 INFO     Using Data Utilities
-2020-04-19 16:01:22 INFO     Configuration data...
+2020-04-19 16:01:22 INFO     Configuration data..
 
 ['smtp.cloud', 'mqtt.gateway', 'device', 'ubidots.cloud', 'aws.cloud']
 2020-04-19 16:01:22 INFO     Using Data Utilities
