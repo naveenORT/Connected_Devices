@@ -39,9 +39,9 @@ class OPC_Client_Rpi(threading.Thread):
         """
         * Runnable thread which sends the data collected from constrained device to OPC Server
         """
-        time.sleep(5)
+        time.sleep(2)
         while(1):
-            time.sleep(5)
+            
             temperature = SensorData_Object.getTemperature()
             self.temp_value.set_value(temperature)  # Publish Temperature Sensor Data
         
