@@ -7,7 +7,6 @@ import threading
 import time
 from labs.module09.ArduinoDataReceiver import SensorData_Object
 import logging
-from labs.Project_Gateway.OPC_Client_PC import opc_client
 
 """
 A widely used IIoT protocol for industrial data communication. This class tracks the data from Sensor Data & sends the parameter
