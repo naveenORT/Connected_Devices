@@ -2,6 +2,7 @@
 Created on Apr 10, 2020
 @author: Naveen Rajendran
 '''
+import logging
 import paho.mqtt.client as paho
 from labs.module09.ArduinoDataReceiver import SensorData_Object
 from labs.common.DataUtil import DataUtil
@@ -9,7 +10,7 @@ import ssl
 import time 
 from labs.common.ConfigUtil import ConfigUtil
 import threading
-import logging
+
 
 connflag = False
 load_prop = ConfigUtil("/home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
@@ -28,6 +29,7 @@ class AWS_Cloud_Connector(threading.Thread):
     
     def __init__(self):
         threading.Thread.__init__(self)
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         mqttc.tls_set(caPath, certfile=certPath, keyfile=keyPath, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)  # pass parameters 
         mqttc.connect(awshost, awsport, keepalive=60) 
         mqttc.on_connect = on_connect 

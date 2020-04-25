@@ -2,11 +2,11 @@
 Created on Apr 9, 2020
 @author: Naveen Rajendran
 '''
+import logging
 from labs.module01.SystemMemUtilTask import memutil
 from labs.module01.SystemCpuUtilTask import cpuutil
 from labs.module09.ArduinoDataReceiver import DeviceData_Object
 import time
-import logging
 import threading
 """
 Python class module which polls CPU (RAM Memory & Process) utilization repetitively using psutil library
@@ -17,6 +17,7 @@ class DevicePerformanceMonitor(threading.Thread):
         """
         * Class constructor Function which creates seperate instances for CPU % & RAM % Data Polling
         """
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         threading.Thread.__init__(self)  # initializing thread function
         self.count = count
         self.x = memutil()  # creating memutil instance#

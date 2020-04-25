@@ -2,6 +2,7 @@
 Created on Apr 15, 2020
 @author: Naveen Rajendran
 '''
+import logging
 import paho.mqtt.client as mqttClient
 import time
 import ssl
@@ -32,6 +33,7 @@ class UbidotsCloudConnector(threading.Thread):
         """
         Class constructor which initializes all required parameters for connecting ubidots cloud service
         """
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         threading.Thread.__init__(self)
         self.load_prop = ConfigUtil(r"/home/pi/workspace/iot-device/apps/labs/common/ConnectedDevicesConfig.props")
         self.BROKER_ENDPOINT = self.load_prop.getValues('ubidots.cloud', 'host')

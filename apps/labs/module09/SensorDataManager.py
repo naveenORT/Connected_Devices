@@ -3,9 +3,9 @@ Created on Apr 9, 2020
 
 @author: Naveen Rajendran
 '''
+import logging
 import threading
 import time
-import logging
 from labs.module09.lib_nrf24 import NRF24
 import spidev
 import RPi.GPIO as GPIO
@@ -13,7 +13,6 @@ from labs.module09.ArduinoDataReceiver import SensorData_Object
 from labs.module09.SmtpClientConnector import smtpconnect
 from labs.module09.UbidotsCloudConnector import act_obj
 SMTP = smtpconnect()
-logging = logging.getLogger("Main")
 radio = NRF24(GPIO, spidev.SpiDev())
 """
 Python class module which helps to perform triggering & actuation of an event based on received SensorData 
@@ -26,6 +25,7 @@ class SensorDataManager(threading.Thread):
         """
         Class constructor 
         """        
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         threading.Thread.__init__(self)
         
     def send_notification(self):

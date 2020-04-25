@@ -29,6 +29,7 @@ class ArduinoDataReceiver(threading.Thread):
         """
         * Class constructor which configures the RF parameters as per the requirement
         """
+        logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
         threading.Thread.__init__(self)
         radio.begin(0, 17)  # Selecting CS Pin
         radio.setPayloadSize(32)  # Fixing the sizeofPayload

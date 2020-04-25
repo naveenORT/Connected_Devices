@@ -57,4 +57,4 @@ class OPC_Client_Rpi(threading.Thread):
             Resistence = SensorData_Object.getResistence()
             self.resistance.set_value(Resistence)  # Publish Resistence Data
             
-            logging.info("All Data Published to OPC Server")
+            #logging.info("All Data Published to OPC Server")
