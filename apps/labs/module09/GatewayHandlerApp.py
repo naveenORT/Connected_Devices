@@ -2,6 +2,7 @@
 Created on Apr 8, 2020
 @author: Naveen Rajendran
 '''
+import logging
 from labs.module09.ArduinoDataReceiver import ArduinoDataReceiver
 from labs.module09.OPC_Client_Rpi import OPC_Client_Rpi
 from labs.module09.SensorDataManager import SensorDataManager
@@ -16,7 +17,8 @@ performs particular dedicated function
 """    
 class GatewayHandlerApp():       
 
-
+    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+    
     SensorData_Object = ArduinoDataReceiver()  # Get Data from Constrained Device
     SensorData_Object.start()
     
